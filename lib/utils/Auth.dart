@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:rishtaaunty/models/user.dart';
 import 'package:flutter/services.dart';
 
@@ -15,7 +14,7 @@ class Auth {
     return user.uid;
   }
 
-  static Future<String> signInWithFacebok(String accessToken) async {
+  static Future<String> signInWithFacebook(String accessToken) async {
     AuthCredential credential = FacebookAuthProvider.getCredential(accessToken: accessToken);
     AuthResult authResult = await FirebaseAuth.instance.signInWithCredential(credential);
     FirebaseUser user = authResult.user;
