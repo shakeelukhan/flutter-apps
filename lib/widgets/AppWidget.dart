@@ -6,7 +6,11 @@ class AppWidget extends StatefulWidget {
   final String title;
   final Menu menu;
   final FirebaseUser firebaseUser;
-  AppWidget({Key key, @required this.title, @required this.menu, @required this.firebaseUser})
+  AppWidget(
+      {Key key,
+      @required this.title,
+      @required this.menu,
+      @required this.firebaseUser})
       : super(key: key);
 
   @override

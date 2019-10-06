@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:rishtaaunty/screens/WelcomeScreen.dart';
+import 'package:rishtaaunty/screens/SignInScreen.dart';
 import 'package:rishtaaunty/widgets/AppWidget.dart';
 import 'package:rishtaaunty/utils/Menu.dart';
 import 'package:rishtaaunty/widgets/TextWidget.dart';
 import 'package:rishtaaunty/screens/profile/ProfileEditScreen.dart';
 import 'package:rishtaaunty/screens/profile/ProfileViewScreen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_remote_config/firebase_remote_config.dart';
 
 class AppScreen extends StatefulWidget {
   final String title;
@@ -49,7 +50,8 @@ class _AppScreenState extends State<AppScreen>
           );
         } else {
           if (!snapshot.hasData) {
-            return WelcomeScreen();
+//            return AppWidget(title: widget.title, menu: menu, firebaseUser: snapshot.data);
+            return SignInScreen();
           } else {
             return AppWidget(title: widget.title, menu: menu, firebaseUser: snapshot.data);
           }

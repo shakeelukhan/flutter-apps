@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:rishtaaunty/screens/WelcomeScreen.dart';
+import 'package:rishtaaunty/screens/SignInScreen.dart';
 
 class ProfileViewScreen extends StatefulWidget {
   @override
@@ -16,7 +16,7 @@ class _ProfileViewScreenState extends State<ProfileViewScreen> {
         if (snapshot.connectionState == ConnectionState.active) {
           FirebaseUser user = snapshot.data;
           if (user == null) {
-            return WelcomeScreen();
+            return SignInScreen();
           }
           return Center(child: Text("View Screen..."));
         } else {
