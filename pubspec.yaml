@@ -20,22 +20,25 @@ dependencies:
   flutter:
     sdk: flutter
 
+  auth: ^4.0.0
+  cloud_firestore: ^0.12.9+4
   firebase_analytics: ^4.0.2
   firebase_auth: ^0.14.0+5
-  cloud_firestore: ^0.12.9+4
-  auth: ^4.0.0
+  flutter_bloc: ^0.21.0
   flutter_signin_button: ^0.3.0
+  json_serializable: ^3.2.3
   package_info: ^0.4.0+6
+
+#  objectdb: ^1.0.7+1
+  sembast: ^2.1.0
 
 #  provider: ^3.0.0
 #  firebase_dynamic_links: ^0.5.0
 #  rxdart: ^0.22.1
 #  flutter_secure_storage: ^3.3.1+1
-#  package_info: ^0.4.0+6
 #  random_string: ^0.0.2
 
   fluro: ^1.5.1
-  moor_flutter: ^2.0.0
 
   firebase_remote_config: ^0.2.0+7
   country_pickers: ^1.1.0
@@ -48,6 +51,12 @@ dependencies:
   flutter_cache_store: ^0.6.0
   flash: ^1.1.0+2
   location: ^2.3.5
+  equatable: ^0.6.1
+  intro_views_flutter: ^2.8.0
+  fl_chart: ^0.3.3
+#  flutter_tts: ^0.6.0
+  dropdownfield: ^1.0.3
+  json_table: ^1.1.0
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -57,7 +66,11 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   moor_generator: ^2.0.0
-  build_runner:
+
+  # JSON SERIALIZABLE
+  build_runner: ^1.7.1
+  json_serializable: ^3.2.3
+  # JSON SERIALIZABLE
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

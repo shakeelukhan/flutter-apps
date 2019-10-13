@@ -1,42 +1,70 @@
-import 'package:moor_flutter/moor_flutter.dart';
-import 'package:package_info/package_info.dart';
-import 'package:firebase_remote_config/firebase_remote_config.dart';
-import 'package:rishtaaunty/data/app_db.dart';
-import 'package:rishtaaunty/utils/Firebase.dart';
 import 'dart:convert';
+import 'package:fluro/fluro.dart';
+import 'package:package_info/package_info.dart';
+import 'AppRoutes.dart';
+import 'firebase_remote_config.dart';
+import '../data/app_db.dart';
+import 'AppDatabase.dart';
 
-class App {
+class AppConfig {
   static String appKey;
+  static bool debugMode;
   static AppDb appDb;
-  static Firebase firebase;
+  static AppDatabase appDatabase;
+  static String appConfig;
+  static FirebaseRemoteConfig firebase;
+  static Router router;
 
-  static init(String key) {
+  AppConfig._();
+  static final AppConfig app = AppConfig._();
+
+  static init(String key, {bool isDebugMode = false}) async {
     appKey = key;
+    debugMode = isDebugMode;
     appDb = new AppDb();
-    firebase = new Firebase();
+    appDatabase = new AppDatabase();
+    await appDatabase.init();
+    firebase = new FirebaseRemoteConfig();
+    router = new Router();
+    updateAppIfMismatch();
+    AppRoutes.configureRoutes(router);
+  }
+
+  @override
+  static Future<void> terminate() async {
+    await appDatabase.terminate();
   }
 
   static Future<String> localAppVersion() async {
     return (await PackageInfo.fromPlatform()).version;
   }
 
-  static Future<String> serverAppConfig() async {
-    return firebase.getRemoteConfigString(appKey);
+  static Future<String> getServerAppConfig() async {
+    appConfig = await firebase.getString(key: appKey);
+    return appConfig;
   }
 
   static Future<String> serverAppVersion() async {
-    String config = await serverAppConfig();
-    return config == '' ? '' : jsonDecode(config)['app']['version'].toString();
+    appConfig ??= await getServerAppConfig();
+    return appConfig == ''
+        ? ''
+        : jsonDecode(appConfig)['app']['version'].toString();
   }
 
   static Future<bool> isSynced() async {
     return (await localAppVersion()) == (await serverAppVersion());
   }
 
-  static void updateApp() async {
+  static void updateAppIfMismatch() async {
     if (await isSynced() == false) {
-      print('NEEDS_UPDATE:' + (await serverAppConfig()));
+      String config = await getServerAppConfig();
+      String appTitle = (config) == ''
+          ? ''
+          : jsonDecode(await config)['app']['title'].toString();
+      print('UPDATING CONFIG: ${config}');
+      print(appTitle);
     }
-    print(appDb);
+
+    appDatabase.test();
   }
 }

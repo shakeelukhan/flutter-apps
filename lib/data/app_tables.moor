@@ -1,7 +1,0 @@
-
-CREATE TABLE appData (
-    name TEXT NOT NULL PRIMARY KEY,
-    version TEXT
-) AS AppData;
-
-getAllAppData: SELECT * FROM appData;
