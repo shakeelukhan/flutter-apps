@@ -1,19 +1,14 @@
 import 'dart:convert';
-import 'package:fluro/fluro.dart';
 import 'package:package_info/package_info.dart';
-import 'AppRoutes.dart';
-import 'firebase_remote_config.dart';
-import '../data/app_db.dart';
+import '../utils/firebase_utils.dart';
 import 'AppDatabase.dart';
 
 class AppConfig {
   static String appKey;
   static bool debugMode;
-  static AppDb appDb;
   static AppDatabase appDatabase;
   static String appConfig;
-  static FirebaseRemoteConfig firebase;
-  static Router router;
+  static FirebaseUtils firebase;
 
   AppConfig._();
   static final AppConfig app = AppConfig._();
@@ -21,13 +16,10 @@ class AppConfig {
   static init(String key, {bool isDebugMode = false}) async {
     appKey = key;
     debugMode = isDebugMode;
-    appDb = new AppDb();
     appDatabase = new AppDatabase();
     await appDatabase.init();
-    firebase = new FirebaseRemoteConfig();
-    router = new Router();
+    firebase = new FirebaseUtils();
     updateAppIfMismatch();
-    AppRoutes.configureRoutes(router);
   }
 
   @override
@@ -40,7 +32,7 @@ class AppConfig {
   }
 
   static Future<String> getServerAppConfig() async {
-    appConfig = await firebase.getString(key: appKey);
+    appConfig = await FirebaseUtils.getString(key: appKey);
     return appConfig;
   }
 

@@ -8,7 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class UpdateDialogWidget extends StatelessWidget {
   final String text;
-  TextWidget({Key key, @required this.text}) : super(key: key);
+  UpdateDialogWidget({Key key, @required this.text}) : super(key: key);
 
   @override
   void initState() {

@@ -38,6 +38,8 @@ dependencies:
 #  flutter_secure_storage: ^3.3.1+1
 #  random_string: ^0.0.2
 
+  progress_dialog: ^1.2.0
+
   fluro: ^1.5.1
 
   firebase_remote_config: ^0.2.0+7
@@ -57,6 +59,8 @@ dependencies:
 #  flutter_tts: ^0.6.0
   dropdownfield: ^1.0.3
   json_table: ^1.1.0
+
+  # expandable: ^3.0.0+1
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -84,8 +88,8 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-#  assets:
-#    - lib/images/google_logo.png
+  assets:
+    - assets/app.json
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

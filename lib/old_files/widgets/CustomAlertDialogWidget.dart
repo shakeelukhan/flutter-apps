@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:rishtaaunty/widgets/CustomButtonWidget.dart';
+import 'package:rishtaaunty/old_files/widgets/CustomButtonWidget.dart';
 
 class CustomAlertDialog extends StatelessWidget {
   final String title;

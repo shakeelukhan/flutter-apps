@@ -1,4 +1,4 @@
-part of '../blocs/app_bloc.dart';
+part of 'package:rishtaaunty/blocs/app/app_bloc.dart';
 
 abstract class AppState extends Equatable {
   @override

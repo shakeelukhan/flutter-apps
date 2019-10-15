@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:rishtaaunty/widgets/SignInScreenWidget.dart';
+import 'package:rishtaaunty/old_files/widgets/SignInScreenWidget.dart';
 
 class ProfileEditScreen extends StatefulWidget {
   @override

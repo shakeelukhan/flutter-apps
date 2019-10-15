@@ -1,0 +1,18 @@
+
+{
+  "app": {
+    "version": 1,
+    "remoteConfig_debug": true,
+    "title": "Rishta Aunty",
+    "debugPaintSizeEnabled": false,
+    "debugPaintPointersEnabled": false,
+    "debugShowCheckedModeBanner": false,
+    "showPerformanceOverlay": false,
+    "showSemanticsDebugger": false,
+    "menu": [
+      {
+
+      }
+    ]
+  }
+}

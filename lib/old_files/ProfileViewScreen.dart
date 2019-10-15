@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:rishtaaunty/screens/SignInScreen.dart';
+import 'package:rishtaaunty/old_files/SignInScreen.dart';
 
 class ProfileViewScreen extends StatefulWidget {
   @override
