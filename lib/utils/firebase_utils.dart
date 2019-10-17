@@ -1,5 +1,5 @@
 import 'package:firebase_remote_config/firebase_remote_config.dart';
-import 'dart:convert';
+import 'package:rishtaaunty/utils/json_utils.dart';
 
 class FirebaseUtils {
   FirebaseUtils._();
@@ -27,9 +27,9 @@ class FirebaseUtils {
     }
   }
 
-  static Future<String> getString({String key}) async =>
-      (await remoteConfig).getString(key);
+  static Future<String> getString({String remoteConfigKey}) async =>
+      (await remoteConfig).getString(remoteConfigKey);
 
-  static Future<dynamic> getJson({String key}) async =>
-      jsonDecode(await getString(key: key));
+  static Future<dynamic> getJson({String remoteConfigKey}) async =>
+      JsonUtils.stringToJson(await getString(remoteConfigKey: remoteConfigKey));
 }

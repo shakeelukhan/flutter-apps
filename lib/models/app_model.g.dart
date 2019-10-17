@@ -7,19 +7,8 @@ part of 'app_model.dart';
 // **************************************************************************
 
 AppModel _$AppModelFromJson(Map<String, dynamic> json) {
-  $checkKeys(json, requiredKeys: const [
-    'title'
-  ], disallowNullValues: const [
-    'title',
-    'debugPaintSizeEnabled',
-    'debugPaintPointersEnabled',
-    'debugShowCheckedModeBanner',
-    'showPerformanceOverlay',
-    'showSemanticsDebugger',
-    'remoteConfigDebugMode'
-  ]);
   return AppModel(
-    title: json['title'] as String,
+    title: json['title'] as String ?? 'NULL_TITLE',
     debugPaintSizeEnabled: json['debugPaintSizeEnabled'] as bool ?? false,
     debugPaintPointersEnabled:
         json['debugPaintPointersEnabled'] as bool ?? false,
@@ -28,26 +17,20 @@ AppModel _$AppModelFromJson(Map<String, dynamic> json) {
     showPerformanceOverlay: json['showPerformanceOverlay'] as bool ?? false,
     showSemanticsDebugger: json['showSemanticsDebugger'] as bool ?? false,
     remoteConfigDebugMode: json['remoteConfigDebugMode'] as bool ?? false,
+    menuList: (json['menuList'] as List)
+        ?.map((e) =>
+            e == null ? null : MenuModel.fromJson(e as Map<String, dynamic>))
+        ?.toList(),
   );
 }
 
-Map<String, dynamic> _$AppModelToJson(AppModel instance) {
-  final val = <String, dynamic>{
-    'title': instance.title,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('debugPaintSizeEnabled', instance.debugPaintSizeEnabled);
-  writeNotNull('debugPaintPointersEnabled', instance.debugPaintPointersEnabled);
-  writeNotNull(
-      'debugShowCheckedModeBanner', instance.debugShowCheckedModeBanner);
-  writeNotNull('showPerformanceOverlay', instance.showPerformanceOverlay);
-  writeNotNull('showSemanticsDebugger', instance.showSemanticsDebugger);
-  writeNotNull('remoteConfigDebugMode', instance.remoteConfigDebugMode);
-  return val;
-}
+Map<String, dynamic> _$AppModelToJson(AppModel instance) => <String, dynamic>{
+      'title': instance.title,
+      'debugPaintSizeEnabled': instance.debugPaintSizeEnabled,
+      'debugPaintPointersEnabled': instance.debugPaintPointersEnabled,
+      'debugShowCheckedModeBanner': instance.debugShowCheckedModeBanner,
+      'showPerformanceOverlay': instance.showPerformanceOverlay,
+      'showSemanticsDebugger': instance.showSemanticsDebugger,
+      'remoteConfigDebugMode': instance.remoteConfigDebugMode,
+      'menuList': instance.menuList,
+    };

@@ -1,62 +1,20 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:rishtaaunty/models/base_model.dart';
 
 part 'menu_model.g.dart';
 
 @JsonSerializable(nullable: false)
-class MenuModel {
-  @JsonKey(disallowNullValue: true, required: true, nullable: false)
+class MenuModel extends BaseModel {
+  @JsonKey(defaultValue: 'TAB', nullable: true)
   final String title;
 
-  @JsonKey(
-      defaultValue: false,
-      disallowNullValue: true,
-      required: false,
-      nullable: true)
-  final bool debugPaintSizeEnabled;
+  @JsonKey(defaultValue: 0xe87d, nullable: true)
+  final int codePoint;
 
-  @JsonKey(
-      defaultValue: false,
-      disallowNullValue: true,
-      required: false,
-      nullable: true)
-  final bool debugPaintPointersEnabled;
+  @JsonKey(defaultValue: 'MaterialIcons', nullable: true)
+  String fontFamily;
 
-  @JsonKey(
-      defaultValue: false,
-      disallowNullValue: true,
-      required: false,
-      nullable: true)
-  final bool debugShowCheckedModeBanner;
-
-  @JsonKey(
-      defaultValue: false,
-      disallowNullValue: true,
-      required: false,
-      nullable: true)
-  final bool showPerformanceOverlay;
-
-  @JsonKey(
-      defaultValue: false,
-      disallowNullValue: true,
-      required: false,
-      nullable: true)
-  final bool showSemanticsDebugger;
-
-  @JsonKey(
-      defaultValue: false,
-      disallowNullValue: true,
-      required: false,
-      nullable: true)
-  final bool remoteConfigDebugMode;
-
-  MenuModel(
-      {this.title,
-        this.debugPaintSizeEnabled,
-        this.debugPaintPointersEnabled,
-        this.debugShowCheckedModeBanner,
-        this.showPerformanceOverlay,
-        this.showSemanticsDebugger,
-        this.remoteConfigDebugMode});
+  MenuModel({this.title, this.codePoint, this.fontFamily});
 
   factory MenuModel.fromJson(Map<String, dynamic> json) =>
       _$MenuModelFromJson(json);

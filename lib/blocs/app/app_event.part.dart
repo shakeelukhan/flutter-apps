@@ -1,10 +1,25 @@
 part of 'package:rishtaaunty/blocs/app/app_bloc.dart';
 
-abstract class AppEvent extends Equatable {
+mixin AppEvent on EquatableMixin, BaseEvent<AppEvent> {
+  initAppEvent() {
+    LoggerUtils.logger.i('E1');
+    initBaseEvent();
+  }
+
   @override
-  List<Object> get props => [];
+  List<Object> get props => super.props..addAll([]);
 }
 
-class AppEventStartup extends AppEvent {}
-
-class AppEventUpdate extends AppEvent {}
+class AppEventStartup extends BaseEventStartup<AppEvent>
+    with EquatableMixin, AppEvent {
+  AppEventStartup() {
+    LoggerUtils.logger.i('F1');
+    initAppEvent();
+//    LoggerUtils.logger.i(this.props.toList().toString());
+    LoggerUtils.logger.i('F2');
+  }
+}
+/*
+class AppEventUpdate extends BaseEventUpdate<AppEvent>
+    with EquatableMixin, AppEvent {}
+*/

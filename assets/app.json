@@ -9,9 +9,26 @@
     "debugShowCheckedModeBanner": false,
     "showPerformanceOverlay": false,
     "showSemanticsDebugger": false,
-    "menu": [
+    "menuList": [
       {
-
+        "title": "Home",
+        "codePoint": 59530
+      },
+      {
+        "title": "Profile",
+        "codePoint": 59475
+      },
+      {
+        "title": "Search",
+        "codePoint": 59574
+      },
+      {
+        "title": "Rishtas",
+        "codePoint": 59517
+      },
+      {
+        "title": "About",
+        "codePoint": 59534
       }
     ]
   }

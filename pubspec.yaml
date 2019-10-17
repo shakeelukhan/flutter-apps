@@ -20,6 +20,8 @@ dependencies:
   flutter:
     sdk: flutter
 
+  logger: ^0.7.0+2
+
   auth: ^4.0.0
   cloud_firestore: ^0.12.9+4
   firebase_analytics: ^4.0.2
@@ -39,7 +41,6 @@ dependencies:
 #  random_string: ^0.0.2
 
   progress_dialog: ^1.2.0
-
   fluro: ^1.5.1
 
   firebase_remote_config: ^0.2.0+7
@@ -69,7 +70,6 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  moor_generator: ^2.0.0
 
   # JSON SERIALIZABLE
   build_runner: ^1.7.1

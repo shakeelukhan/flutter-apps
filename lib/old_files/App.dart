@@ -32,7 +32,7 @@ class AppConfig {
   }
 
   static Future<String> getServerAppConfig() async {
-    appConfig = await FirebaseUtils.getString(key: appKey);
+    appConfig = await FirebaseUtils.getString(remoteConfigKey: appKey);
     return appConfig;
   }
 

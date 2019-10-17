@@ -1,9 +1,10 @@
+/*
 import 'package:flutter/material.dart';
 import 'dart:io';
 import 'package:package_info/package_info.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
 
-import 'package:bloc/bloc.dart';
+import 'package:bloc/base_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class UpdateDialogWidget extends StatelessWidget {
@@ -69,3 +70,4 @@ class UpdateDialogWidget extends StatelessWidget {
   }
   }
 }
+*/

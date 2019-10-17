@@ -5,6 +5,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:rishtaaunty/blocs/app/app_bloc.dart';
+import 'package:rishtaaunty/blocs/menu/menu_bloc.dart';
+import 'package:rishtaaunty/models/menu_model.dart';
 import 'package:rishtaaunty/old_files/AppScreen.dart';
 import 'package:rishtaaunty/old_files/widgets/HomeWidget.dart';
 import 'package:rishtaaunty/utils/test.dart';
@@ -16,6 +18,7 @@ class AppPage extends StatefulWidget with Test {
   AppPage({Key key, @required this.appBloc}) : super(key: key);
 
   final AppBloc appBloc;
+
   _AppPageState get appPageState => this.appPageState;
 
   @override
@@ -25,6 +28,8 @@ class AppPage extends StatefulWidget with Test {
 }
 
 class _AppPageState extends State<AppPage> {
+  MenuBloc menuBloc;
+
   @override
   void initState() {
     super.initState();
@@ -34,6 +39,7 @@ class _AppPageState extends State<AppPage> {
 
   @override
   void dispose() {
+    menuBloc.dispose();
     widget.appBloc.dispose();
     super.dispose();
   }
@@ -43,26 +49,23 @@ class _AppPageState extends State<AppPage> {
     return BlocBuilder<AppBloc, AppState>(
         bloc: widget.appBloc,
         builder: (context, state) {
-          if (state is AppStateNew || state is AppStateUpdating) {
+          print('APP: STATE=${widget.appBloc?.currentState}');
+          print('MENU: STATE=${widget.appBloc.menuBloc?.currentState}');
+          if (widget.appBloc == null ||
+              widget.appBloc.menuBloc == null ||
+              widget.appBloc.currentState is! AppStateUpdated) {
             return Center(child: CircularProgressIndicator());
           }
+          /*   if (widget.appBloc == null ||
+              widget.appBloc.menuBloc == null ||
+              widget.appBloc.state is! AppStateUpdated ||
+              widget.appBloc.menuBloc.state is! MenuStateUpdated) {
+            return Center(child: CircularProgressIndicator());
+          } */
           debugPaintSizeEnabled = widget.appBloc.appData.debugPaintSizeEnabled;
           debugPaintPointersEnabled =
               widget.appBloc.appData.debugPaintPointersEnabled;
-
-          List<BottomNavigationBarItem> items2 = <BottomNavigationBarItem>[
-            BottomNavigationBarItem(
-                icon: const Icon(Icons.home), title: Text("Home")),
-            BottomNavigationBarItem(
-                icon: const Icon(Icons.account_circle), title: Text("Profile")),
-            BottomNavigationBarItem(
-                icon: const Icon(Icons.search), title: Text("Search")),
-            BottomNavigationBarItem(
-                icon: const Icon(Icons.favorite), title: Text("Rishtas")),
-            BottomNavigationBarItem(
-                icon: const Icon(Icons.info), title: Text("About"))
-          ];
-//print(jsonEncode(items2[0].toString()));
+          widget.parserMain();
           return MaterialApp(
             title: widget.appBloc.appData.title,
             debugShowCheckedModeBanner:
@@ -82,17 +85,26 @@ class _AppPageState extends State<AppPage> {
                   ),
                 ],
               ),
-              body: Home2(),
-              bottomNavigationBar: BottomNavigationBar(
-                items: items2,
-                currentIndex: index2,
-                type: BottomNavigationBarType.fixed,
-                fixedColor: Theme.of(context).primaryColor,
-                onTap: (int i) {
-                  setState(() {
-                    widget.appBloc.dispatch(AppEventStartup());
-                    index2 = i;
-                  });
+              body: Container(
+                  alignment: Alignment.center,
+                  child: Scaffold(
+                    body: Home2(),
+                  )),
+              bottomNavigationBar: BlocBuilder<MenuBloc, MenuState>(
+                bloc: widget.appBloc.menuBloc,
+                builder: (BuildContext context, MenuState state) {
+                  return BottomNavigationBar(
+                    items: widget.appBloc.menuBloc.menuNavigation,
+                    currentIndex: index2,
+                    type: BottomNavigationBarType.fixed,
+                    fixedColor: Theme.of(context).primaryColor,
+                    onTap: (int i) {
+                      setState(() {
+                        widget.appBloc.dispatch(AppEventStartup());
+                        index2 = i;
+                      });
+                    },
+                  );
                 },
               ),
             ),
@@ -116,7 +128,7 @@ var homeHandler2 = new Handler(
 
 var appHandler = new Handler(
     handlerFunc: (BuildContext context, Map<String, List<String>> params) {
-  return AppScreen();
+  return AppScreen(title: 'dummy');
 });
 
 class AppRoutes {

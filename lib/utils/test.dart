@@ -9,8 +9,8 @@ class Parser {
 
   Map<Symbol, dynamic> parser(
       List<dynamic> positionalArguments, Map<Symbol, dynamic> namedArguments) {
-    print(namedArguments);
-    printMap(namedArguments);
+//    print(namedArguments);
+    //   printMap(namedArguments);
     return namedArguments;
   }
 
@@ -25,16 +25,18 @@ class Parser {
 
 mixin Test {
   void temp({int a = 1, int b}) {
-    print("A=${a}");
-    print("B=${b}");
+    print("A=${a} B=${b}");
   }
 
   void parserMain() {
     dynamic person = new Parser();
+
     Map<Symbol, dynamic> blah = person.parser(a: 3, b: 3);
-    Function.apply(temp, [], blah);
+    //  Function.apply(temp, [], blah);
+
     blah = person.parser(icon: const Icon(Icons.home), title: Text("Home"));
-//    Function.apply(() => BottomNavigationBarItem, null, blah);
-    BottomNavigationBarItem blah2 = BottomNavigationBarItem(icon: const Icon(Icons.home), title: Text("Home"));
+    BottomNavigationBarItem blah2 = BottomNavigationBarItem(
+        icon: const Icon(Icons.home), title: Text("Home"));
+    //  Function.apply(() => BottomNavigationBarItem(), null, blah);
   }
 }
