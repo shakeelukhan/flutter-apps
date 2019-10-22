@@ -5,6 +5,6 @@ export 'blocs/widget_bloc.dart';
 
 class B {
   B._();
-  static widgetBloc<T extends ModelWidget>(BaseRepository repository) =>
+  static widgetBloc<T extends WidgetModel>(BaseRepository repository) =>
       WidgetBloc<T>(repository: repository);
 }

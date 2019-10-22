@@ -7,7 +7,7 @@ import 'package:rishtaaunty/models.dart';
 import 'package:rishtaaunty/utils.dart';
 import 'package:rishtaaunty/widgets.dart';
 
-class BlocWidget<T extends ModelWidget> extends StatefulWidget {
+class BlocWidget<T extends WidgetModel> extends StatefulWidget {
   BlocWidget({Key key, @required this.bloc, @required this.widget})
       : super(key: key);
 
@@ -17,7 +17,7 @@ class BlocWidget<T extends ModelWidget> extends StatefulWidget {
   _BlocWidgetState<T> createState() => _BlocWidgetState<T>();
 }
 
-class _BlocWidgetState<T extends ModelWidget> extends State<BlocWidget<T>> {
+class _BlocWidgetState<T extends WidgetModel> extends State<BlocWidget<T>> {
   Completer<void> _refreshCompleter;
 
   @override

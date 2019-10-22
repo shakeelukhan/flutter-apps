@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
-import 'package:rishtaaunty/models/base_model.dart';
+import 'package:rishtaaunty/models/widget_model.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter/foundation.dart';
-import 'package:rishtaaunty/models/model_widget.dart';
+import 'package:rishtaaunty/models/widget_model.dart';
 import 'package:rishtaaunty/utils.dart';
 
 part 'package:rishtaaunty/blocs/widget_bloc.state.dart';

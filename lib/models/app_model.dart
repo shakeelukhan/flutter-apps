@@ -1,9 +1,9 @@
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
-import './model_widget.dart';
+import './widget_model.dart';
 part 'app_model.g.dart';
 
-abstract class AppModel extends ModelWidget
+abstract class AppModel extends WidgetModel
     implements Built<AppModel, AppModelBuilder> {
   static Serializer<AppModel> get serializer => _$appModelSerializer;
 

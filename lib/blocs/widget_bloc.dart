@@ -10,7 +10,7 @@ import 'package:rishtaaunty/widgets.dart';
 part './widget_bloc.event.dart';
 part './widget_bloc.state.dart';
 
-class WidgetBloc<T extends ModelWidget>
+class WidgetBloc<T extends WidgetModel>
     extends Bloc<WidgetEvent, WidgetState<T>> {
   WidgetBloc({@required this.repository});
 
@@ -23,6 +23,7 @@ class WidgetBloc<T extends ModelWidget>
 
   @override
   Stream<WidgetState<T>> mapEventToState(WidgetEvent event) async* {
+    print(this.toString());
     U.log.logger.i(
         'mapEventToState START: event=${event?.runtimeType} currentState=${currentState?.runtimeType}');
     if (event is WidgetStartupEvent) {

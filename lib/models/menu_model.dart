@@ -1,10 +1,10 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:rishtaaunty/models/base_model.dart';
+import 'package:rishtaaunty/models/widget_model.dart';
 
 part 'menu_model.g.dart';
 
 @JsonSerializable(nullable: false)
-class MenuModel extends BaseModel {
+class MenuModel extends WidgetModel {
   @JsonKey(defaultValue: 'TAB', nullable: true)
   final String title;
 

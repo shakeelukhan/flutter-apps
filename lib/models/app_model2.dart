@@ -1,11 +1,11 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:rishtaaunty/models/menu_model.dart';
-import 'package:rishtaaunty/models/base_model.dart';
+import 'package:rishtaaunty/models/widget_model.dart';
 
 part 'app_model2.g.dart';
 
 @JsonSerializable(nullable: false)
-class AppModel2 extends BaseModel {
+class AppModel2 extends WidgetModel {
   @JsonKey(defaultValue: 'NULL_TITLE', nullable: true)
   final String title;
 

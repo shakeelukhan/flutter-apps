@@ -9,7 +9,7 @@ import 'package:meta/meta.dart';
 import 'package:rishtaaunty/blocs/widget_bloc.dart';
 import 'package:rishtaaunty/blocs/menu/menu_bloc.dart';
 import 'package:rishtaaunty/models/app_model2.dart';
-import 'package:rishtaaunty/models/base_model.dart';
+import 'package:rishtaaunty/models/widget_model.dart';
 import 'package:rishtaaunty/pages/app_page2.dart';
 import 'package:rishtaaunty/utils.dart';
 import 'package:flutter/services.dart';
