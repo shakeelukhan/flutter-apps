@@ -1,8 +1,9 @@
-part of 'package:rishtaaunty/blocs/app/app_bloc.dart';
+part of 'package:rishtaaunty/blocs/app/app_widget.dart';
 
-mixin AppEvent on EquatableMixin, BaseEvent<AppEvent> {
+//  on EquatableMixin,
+mixin AppEvent on BaseEvent<AppEvent> {
   initAppEvent() {
-    LoggerUtils.logger.i('E1');
+    LoggerUtils.Logger.i('E1');
     initBaseEvent();
   }
 
@@ -10,13 +11,12 @@ mixin AppEvent on EquatableMixin, BaseEvent<AppEvent> {
   List<Object> get props => super.props..addAll([]);
 }
 
-class AppEventStartup extends BaseEventStartup<AppEvent>
-    with EquatableMixin, AppEvent {
+class AppEventStartup extends BaseEventStartup<AppEvent> with AppEvent {
   AppEventStartup() {
-    LoggerUtils.logger.i('F1');
+    LoggerUtils.Logger.i('F1');
     initAppEvent();
 //    LoggerUtils.logger.i(this.props.toList().toString());
-    LoggerUtils.logger.i('F2');
+    LoggerUtils.Logger.i('F2');
   }
 }
 /*

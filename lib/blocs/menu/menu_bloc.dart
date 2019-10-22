@@ -3,7 +3,7 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:rishtaaunty/blocs/app/app_bloc.dart';
-import 'package:rishtaaunty/models/app_model.dart';
+import 'package:rishtaaunty/models/app_model2.dart';
 import 'package:rishtaaunty/models/menu_model.dart';
 import 'package:meta/meta.dart';
 import 'dart:convert';

@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:rishtaaunty/blocs/app/app_bloc.dart';
-import 'package:rishtaaunty/utils/logger_utils.dart';
+import 'package:rishtaaunty/blocs.dart';
+import 'package:rishtaaunty/models.dart';
+import 'package:rishtaaunty/repositories.dart';
+import 'package:rishtaaunty/utils.dart';
 
 void main() async {
-  LoggerUtils.setLoggerLevelInfo();
+  U.log.setSimplePrinter();
+  U.log.setLoggerLevelWarning();
 
   try {
-    AppBloc appBloc = AppBloc();
- //   AppBloc appBloc = AppBloc(remoteConfigKey: 'rishtaaunty_dev', jsonKey: 'app');
-  //  return runApp(appBloc.page);
+    runApp(WidgetBloc<AppModel>(repository: R.defaultAssetAppRepository)
+        .getWidget(Text('abc')));
   } catch (err) {
-    LoggerUtils.logger.e(err.toString());
+    U.log.logger.e(err.toString());
   }
 }

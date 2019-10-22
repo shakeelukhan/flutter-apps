@@ -2,39 +2,38 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'dart:convert';
 import 'package:equatable/equatable.dart';
-//import 'package:fluro/fluro.dart';
+import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
-import 'package:rishtaaunty/blocs/base_bloc.dart';
-//import 'package:rishtaaunty/blocs/menu/menu_bloc.dart';
-//import 'package:rishtaaunty/models/app_model.dart';
+import 'package:rishtaaunty/blocs/widget_bloc.dart';
+import 'package:rishtaaunty/blocs/menu/menu_bloc.dart';
+import 'package:rishtaaunty/models/app_model2.dart';
 import 'package:rishtaaunty/models/base_model.dart';
-//import 'package:rishtaaunty/pages/app_page.dart';
-import 'package:rishtaaunty/utils/firebase_utils.dart';
+import 'package:rishtaaunty/pages/app_page2.dart';
+import 'package:rishtaaunty/utils.dart';
 import 'package:flutter/services.dart';
-import 'package:rishtaaunty/repositories/app_repository.dart';
-import 'package:rishtaaunty/utils/json_utils.dart';
-import 'package:rishtaaunty/utils/logger_utils.dart';
+import 'package:rishtaaunty/repositories/base_repository.dart';
 
 part 'package:rishtaaunty/blocs/app/app_event.part.dart';
 part 'package:rishtaaunty/blocs/app/app_state.part.dart';
 
-class AppBloc extends BaseBloc<AppEvent,AppState> {
-  String remoteConfigKey, jsonKey;
- // AppModel appData;
-//  MenuBloc menuBloc;
-//  Router router;
+class BaseBloc extends Bloc<BaseEvent,BaseState> {
+  BaseBloc({this.repositories});
+  List<RepositoryBase> repositories;
+  //AppModel appData;
+  MenuBloc menuBloc;
+  Router router;
 
   @override
-  AppState get initialState => AppStateNew();
+  BaseState get initialState => BaseStateNew();
 
   @override
-  Stream<AppState> mapEventToState(BaseEvent event) async* {
-    if (event is AppEventStartup) {
-      yield AppStateNew();
+  Stream<BaseState> mapEventToState(BaseEvent<BaseEvent> event) async* {
+ /*   if (event is BaseEventStartup) {
+      yield BaseStateNew();
     }
-  }
+  }*/
 }
 
 /*

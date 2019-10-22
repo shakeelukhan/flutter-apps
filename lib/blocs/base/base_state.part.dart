@@ -1,9 +1,9 @@
-part of 'base_bloc.dart';
+part of 'widget_bloc.dart';
 
 mixin BaseState<T> {
   int baseStateInt;
   initBaseState() {
-    LoggerUtils.logger.i('A1');
+    LoggerUtils.Logger.i('A1');
   }
 
   @override
@@ -12,12 +12,12 @@ mixin BaseState<T> {
 
 class BaseStateNew<T> with BaseState<T> {
   int baseStateNewInt;
-  initBaseStateNew() {
-    LoggerUtils.logger.i('B1');
+  initBaseStateNew<T>() {
+    LoggerUtils.Logger.i('B1');
   }
 
   BaseStateNew() {
-    LoggerUtils.logger.i('B2');
+    LoggerUtils.Logger.i('B2');
   }
 
   @override

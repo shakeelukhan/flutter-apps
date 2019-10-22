@@ -1,15 +1,20 @@
 import 'package:logger/logger.dart';
 
-class LoggerUtils {
-  LoggerUtils._();
-  static final LoggerUtils _loggerUtils = LoggerUtils._();
-  factory LoggerUtils() => _loggerUtils;
+class LogUtils {
+  LogUtils._() {
+    _logger = setPrettyPrinter();
+  }
+  static final LogUtils _loggerUtils = LogUtils._();
+  factory LogUtils() => _loggerUtils;
 
-  static Logger _logger = Logger(printer: PrettyPrinter(methodCount: 8));
-//  static Logger _logger = Logger(printer: PrettyPrinter());
-  static get logger => _logger;
+  Logger _logger;
+  get logger => _logger = _logger ?? setPrettyPrinter();
 
-  static setLoggerLevelError() => Logger.level = Level.error;
-  static setLoggerLevelWarning() => Logger.level = Level.warning;
-  static setLoggerLevelInfo() => Logger.level = Level.info;
+  setLoggerLevelError() => Logger.level = Level.error;
+  setLoggerLevelWarning() => Logger.level = Level.warning;
+  setLoggerLevelInfo() => Logger.level = Level.info;
+
+  setSimplePrinter() => _logger = Logger(printer: SimplePrinter());
+  setPrettyPrinter() =>
+      _logger = Logger(printer: PrettyPrinter(methodCount: 2));
 }

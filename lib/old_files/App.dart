@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:package_info/package_info.dart';
-import '../utils/firebase_utils.dart';
+import 'package:rishtaaunty/utils.dart';
 import 'AppDatabase.dart';
 
 class AppConfig {

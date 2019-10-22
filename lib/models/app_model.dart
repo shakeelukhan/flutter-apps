@@ -1,47 +1,35 @@
-import 'package:json_annotation/json_annotation.dart';
-import 'package:rishtaaunty/models/menu_model.dart';
-import 'package:rishtaaunty/models/base_model.dart';
-
+import 'package:built_value/built_value.dart';
+import 'package:built_value/serializer.dart';
+import './model_widget.dart';
 part 'app_model.g.dart';
 
-@JsonSerializable(nullable: false)
-class AppModel extends BaseModel {
-  @JsonKey(defaultValue: 'NULL_TITLE', nullable: true)
-  final String title;
+abstract class AppModel extends ModelWidget
+    implements Built<AppModel, AppModelBuilder> {
+  static Serializer<AppModel> get serializer => _$appModelSerializer;
 
-  @JsonKey(defaultValue: false, nullable: true)
-  final bool debugPaintSizeEnabled;
+  String get title;
 
-  @JsonKey(defaultValue: false, nullable: true)
-  final bool debugPaintPointersEnabled;
+  @nullable
+  bool get debugPaintSizeEnabled;
 
-  @JsonKey(defaultValue: false, nullable: true)
-  final bool debugShowCheckedModeBanner;
+  @nullable
+  bool get debugPaintPointersEnabled;
 
-  @JsonKey(defaultValue: false, nullable: true)
-  final bool showPerformanceOverlay;
+  @nullable
+  bool get debugShowCheckedModeBanner;
 
-  @JsonKey(defaultValue: false, nullable: true)
-  final bool showSemanticsDebugger;
+  @nullable
+  bool get showPerformanceOverlay;
 
-  @JsonKey(defaultValue: false, nullable: true)
-  final bool remoteConfigDebugMode;
+  @nullable
+  bool get showSemanticsDebugger;
 
-  @JsonKey(nullable: true)
-  final List<MenuModel> menuList;
+  @nullable
+  bool get remoteConfigDebugMode;
 
-  AppModel(
-      {this.title,
-      this.debugPaintSizeEnabled,
-      this.debugPaintPointersEnabled,
-      this.debugShowCheckedModeBanner,
-      this.showPerformanceOverlay,
-      this.showSemanticsDebugger,
-      this.remoteConfigDebugMode,
-      this.menuList});
-
-  factory AppModel.fromJson(Map<String, dynamic> json) =>
-      _$AppModelFromJson(json);
-
-  Map<String, dynamic> toJson() => _$AppModelToJson(this);
+  AppModel._();
+  // factory ModelApp([updates(ModelAppBuilder b)]) = _$ModelApp;
+  factory AppModel([updates(AppModelBuilder b)]) => _$AppModel((b) => b
+    ..debugPaintSizeEnabled = true
+    ..update(updates));
 }
