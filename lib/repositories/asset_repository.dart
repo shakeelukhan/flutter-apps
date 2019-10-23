@@ -15,6 +15,6 @@ class AssetRepository<T> extends BaseRepository<T> {
   Future<T> _read() async {
     Map assetMap = await u.JsonUtils.assetToJson(assetKey);
     Map dataMap = assetMap[jsonKey];
-    return u.SerializerUtils.deserialize<T>(dataMap);
+    return u.SerializerUtils.deserializeJson(dataMap);
   }
 }

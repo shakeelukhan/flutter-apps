@@ -3,15 +3,13 @@ import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter/foundation.dart';
-import 'package:rishtaaunty/models/models.dart' as m;
 import 'package:rishtaaunty/repositories/repositories.dart' as r;
 import 'package:rishtaaunty/utils/utils.dart' as u;
 import 'package:rishtaaunty/widgets/widgets.dart' as w;
 part './widget_bloc.event.dart';
 part './widget_bloc.state.dart';
 
-class WidgetBloc<T extends m.WidgetModel>
-    extends Bloc<WidgetEvent, WidgetState<T>> {
+class WidgetBloc<T> extends Bloc<WidgetEvent, WidgetState<T>> {
   WidgetBloc({@required this.repository});
 
   w.BlocWidget<T> _widget;

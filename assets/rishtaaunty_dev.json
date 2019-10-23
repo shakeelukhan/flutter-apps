@@ -1,6 +1,7 @@
 
 {
   "app": {
+    "$": "AppWidgetModel",
     "version": 1,
     "remoteConfig_debug": true,
     "title": "Rishta Aunty",

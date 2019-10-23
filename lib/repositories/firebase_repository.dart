@@ -21,6 +21,6 @@ class FirebaseRepository<T> extends BaseRepository<T> {
     Map assetMap = await u.FirebaseUtils.getJson(remoteConfigKey);
     Map dataMap = assetMap[jsonKey];
     await u.FirebaseUtils.setDebugMode(this.remoteConfigDebugMode);
-    return u.SerializerUtils.deserialize<T>(dataMap);
+    return u.SerializerUtils.deserializeJson(dataMap);
   }
 }

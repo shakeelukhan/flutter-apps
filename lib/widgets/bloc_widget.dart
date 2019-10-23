@@ -3,11 +3,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:rishtaaunty/blocs/blocs.dart' as b;
-import 'package:rishtaaunty/models/models.dart' as m;
 import 'package:rishtaaunty/utils/utils.dart' as u;
 import 'package:rishtaaunty/widgets/widgets.dart' as w;
 
-class BlocWidget<T extends m.WidgetModel> extends StatefulWidget {
+class BlocWidget<T> extends StatefulWidget {
   BlocWidget({Key key, @required this.bloc, @required this.widget})
       : super(key: key);
 
@@ -17,7 +16,7 @@ class BlocWidget<T extends m.WidgetModel> extends StatefulWidget {
   _BlocWidgetState<T> createState() => _BlocWidgetState<T>();
 }
 
-class _BlocWidgetState<T extends m.WidgetModel> extends State<BlocWidget<T>> {
+class _BlocWidgetState<T> extends State<BlocWidget<T>> {
   Completer<void> _refreshCompleter;
 
   @override
@@ -68,7 +67,6 @@ class _BlocWidgetState<T extends m.WidgetModel> extends State<BlocWidget<T>> {
                     w.StatelessWidgets.center(widget.widget),
                   ),
                 );
-                print(state.data);
                 //print(utilSerializer.serializers.deserialize(data));
                 /*
     var serialized = serializers.serialize(object);
@@ -77,6 +75,7 @@ class _BlocWidgetState<T extends m.WidgetModel> extends State<BlocWidget<T>> {
   }
             * */
               }
+              //   _widget = AppWidget(appData: state.data);
               return BlocProvider(
                   builder: (BuildContext context) => widget.bloc,
                   child: _widget);

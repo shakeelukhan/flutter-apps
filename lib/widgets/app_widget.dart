@@ -3,13 +3,13 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:rishtaaunty/blocs/blocs.dart';
-import 'package:rishtaaunty/models/models.dart';
+import 'package:rishtaaunty/blocs/blocs.dart' as b;
+import 'package:rishtaaunty/models/models.dart' as m;
 
 class AppWidget extends StatefulWidget {
-  AppWidget({Key key, this.appData}) : super(key: key);
+  AppWidget({Key key, @required this.appData}) : super(key: key);
 
-  final AppWidgetModel appData;
+  final m.AppWidgetModel appData;
 
   @override
   _AppWidgetState createState() {
