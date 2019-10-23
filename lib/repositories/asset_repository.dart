@@ -1,9 +1,9 @@
 import 'package:meta/meta.dart';
-import 'package:rishtaaunty/utils.dart';
+import 'package:rishtaaunty/utils/utils.dart' as u;
 import './base_repository.dart';
 
 class AssetRepository<T> extends BaseRepository<T> {
-  AssetRepository({@required this.assetKey, this.jsonKey}) {
+  AssetRepository({@required this.assetKey, @required this.jsonKey}) {
     _data = read();
   }
 
@@ -13,8 +13,8 @@ class AssetRepository<T> extends BaseRepository<T> {
 
   Future<T> read() async => _data = _read();
   Future<T> _read() async {
-    Map assetMap = await U.json.assetToJson(assetKey);
-    Map dataMap = jsonKey == null ? assetMap : assetMap[jsonKey];
-    return U.serializer.deserialize<T>(dataMap);
+    Map assetMap = await u.JsonUtils.assetToJson(assetKey);
+    Map dataMap = assetMap[jsonKey];
+    return u.SerializerUtils.deserialize<T>(dataMap);
   }
 }

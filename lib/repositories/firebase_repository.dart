@@ -1,11 +1,11 @@
 import 'package:meta/meta.dart';
-import 'package:rishtaaunty/utils.dart';
+import 'package:rishtaaunty/utils/utils.dart' as u;
 import './base_repository.dart';
 
 class FirebaseRepository<T> extends BaseRepository<T> {
   FirebaseRepository(
       {@required this.remoteConfigKey,
-      this.jsonKey,
+      @required this.jsonKey,
       this.remoteConfigDebugMode = false}) {
     _data = read();
   }
@@ -17,10 +17,10 @@ class FirebaseRepository<T> extends BaseRepository<T> {
 
   Future<T> read() async => _data = _read();
   Future<T> _read() async {
-    await U.firebase.activateThenFetch();
-    Map assetMap = await U.firebase.getJson(remoteConfigKey);
-    Map dataMap = jsonKey == null ? assetMap : assetMap[jsonKey];
-    await U.firebase.setDebugMode(this.remoteConfigDebugMode);
-    return U.serializer.deserialize<T>(dataMap);
+    await u.FirebaseUtils.activateThenFetch();
+    Map assetMap = await u.FirebaseUtils.getJson(remoteConfigKey);
+    Map dataMap = assetMap[jsonKey];
+    await u.FirebaseUtils.setDebugMode(this.remoteConfigDebugMode);
+    return u.SerializerUtils.deserialize<T>(dataMap);
   }
 }

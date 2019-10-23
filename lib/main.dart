@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:rishtaaunty/blocs.dart';
-import 'package:rishtaaunty/models.dart';
-import 'package:rishtaaunty/repositories.dart';
-import 'package:rishtaaunty/utils.dart';
+import 'package:rishtaaunty/blocs/blocs.dart' as b;
+import 'package:rishtaaunty/models/models.dart' as m;
+import 'package:rishtaaunty/repositories/repositories.dart' as r;
+import 'package:rishtaaunty/utils/utils.dart' as u;
 
 void main() async {
-  U.log.setSimplePrinter();
-  U.log.setLoggerLevelWarning();
+  u.LogUtils.setSimplePrinter();
+  u.LogUtils.setLoggerLevelWarning();
 
   try {
-    runApp(WidgetBloc<AppModel>(repository: R.defaultAssetAppRepository)
+    r.BaseRepository appRepository = r.AssetRepository<m.AppWidgetModel>(
+        assetKey: r.defaultAssetKey, jsonKey: r.defaultAppJsonKey);
+    runApp(b.WidgetBloc<m.AppWidgetModel>(repository: appRepository)
         .getWidget(Text('abc')));
   } catch (err) {
-    U.log.logger.e(err.toString());
+    u.LogUtils.logger.e(err.toString());
   }
 }

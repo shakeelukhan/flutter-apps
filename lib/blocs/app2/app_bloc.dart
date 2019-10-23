@@ -11,7 +11,7 @@ import 'package:rishtaaunty/blocs/menu/menu_bloc.dart';
 import 'package:rishtaaunty/models/app_model2.dart';
 import 'package:rishtaaunty/models/widget_model.dart';
 import 'package:rishtaaunty/pages/app_page2.dart';
-import 'package:rishtaaunty/utils.dart';
+import 'package:rishtaaunty/utils/utils.dart';
 import 'package:flutter/services.dart';
 import 'package:rishtaaunty/repositories/base_repository.dart';
 
@@ -65,7 +65,7 @@ class AppBloc extends Bloc<AppEvent, AppState> {
       yield AppStateUpdating();
       try {
 /*        AssetRepository assetRepository = AssetRepository(
-            jsonAssetFilename: 'assets/app.json', jsonKey: jsonKey);
+            jsonAssetFilename: 'assets/rishtaaunty_dev.json', jsonKey: jsonKey);
         appData = await assetRepository.read();
         menuBloc.dispatch(MenuEventUpdate()); */
 
@@ -82,7 +82,7 @@ print(firebaseRepository.data);
         FirebaseUtils.setDebugMode(appData.remoteConfigDebugMode);
 */
         Map configJson =
-            jsonDecode(await rootBundle.loadString('assets/app.json'));
+            jsonDecode(await rootBundle.loadString('assets/rishtaaunty_dev.json'));
         appData = AppModel.fromJson(await configJson[jsonKey]);
 
         yield AppStateUpdated();

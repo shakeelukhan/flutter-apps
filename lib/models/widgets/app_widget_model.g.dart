@@ -1,21 +1,23 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'app_model.dart';
+part of 'app_widget_model.dart';
 
 // **************************************************************************
 // BuiltValueGenerator
 // **************************************************************************
 
-Serializer<AppModel> _$appModelSerializer = new _$AppModelSerializer();
+Serializer<AppWidgetModel> _$appWidgetModelSerializer =
+    new _$AppWidgetModelSerializer();
 
-class _$AppModelSerializer implements StructuredSerializer<AppModel> {
+class _$AppWidgetModelSerializer
+    implements StructuredSerializer<AppWidgetModel> {
   @override
-  final Iterable<Type> types = const [AppModel, _$AppModel];
+  final Iterable<Type> types = const [AppWidgetModel, _$AppWidgetModel];
   @override
-  final String wireName = 'AppModel';
+  final String wireName = 'AppWidgetModel';
 
   @override
-  Iterable<Object> serialize(Serializers serializers, AppModel object,
+  Iterable<Object> serialize(Serializers serializers, AppWidgetModel object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object>[
       'title',
@@ -62,9 +64,10 @@ class _$AppModelSerializer implements StructuredSerializer<AppModel> {
   }
 
   @override
-  AppModel deserialize(Serializers serializers, Iterable<Object> serialized,
+  AppWidgetModel deserialize(
+      Serializers serializers, Iterable<Object> serialized,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = new AppModelBuilder();
+    final result = new AppWidgetModelBuilder();
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
@@ -107,7 +110,7 @@ class _$AppModelSerializer implements StructuredSerializer<AppModel> {
   }
 }
 
-class _$AppModel extends AppModel {
+class _$AppWidgetModel extends AppWidgetModel {
   @override
   final String title;
   @override
@@ -123,10 +126,10 @@ class _$AppModel extends AppModel {
   @override
   final bool remoteConfigDebugMode;
 
-  factory _$AppModel([void Function(AppModelBuilder) updates]) =>
-      (new AppModelBuilder()..update(updates)).build();
+  factory _$AppWidgetModel([void Function(AppWidgetModelBuilder) updates]) =>
+      (new AppWidgetModelBuilder()..update(updates)).build();
 
-  _$AppModel._(
+  _$AppWidgetModel._(
       {this.title,
       this.debugPaintSizeEnabled,
       this.debugPaintPointersEnabled,
@@ -136,21 +139,22 @@ class _$AppModel extends AppModel {
       this.remoteConfigDebugMode})
       : super._() {
     if (title == null) {
-      throw new BuiltValueNullFieldError('AppModel', 'title');
+      throw new BuiltValueNullFieldError('AppWidgetModel', 'title');
     }
   }
 
   @override
-  AppModel rebuild(void Function(AppModelBuilder) updates) =>
+  AppWidgetModel rebuild(void Function(AppWidgetModelBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
-  AppModelBuilder toBuilder() => new AppModelBuilder()..replace(this);
+  AppWidgetModelBuilder toBuilder() =>
+      new AppWidgetModelBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    return other is AppModel &&
+    return other is AppWidgetModel &&
         title == other.title &&
         debugPaintSizeEnabled == other.debugPaintSizeEnabled &&
         debugPaintPointersEnabled == other.debugPaintPointersEnabled &&
@@ -178,7 +182,7 @@ class _$AppModel extends AppModel {
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper('AppModel')
+    return (newBuiltValueToStringHelper('AppWidgetModel')
           ..add('title', title)
           ..add('debugPaintSizeEnabled', debugPaintSizeEnabled)
           ..add('debugPaintPointersEnabled', debugPaintPointersEnabled)
@@ -190,8 +194,9 @@ class _$AppModel extends AppModel {
   }
 }
 
-class AppModelBuilder implements Builder<AppModel, AppModelBuilder> {
-  _$AppModel _$v;
+class AppWidgetModelBuilder
+    implements Builder<AppWidgetModel, AppWidgetModelBuilder> {
+  _$AppWidgetModel _$v;
 
   String _title;
   String get title => _$this._title;
@@ -227,9 +232,9 @@ class AppModelBuilder implements Builder<AppModel, AppModelBuilder> {
   set remoteConfigDebugMode(bool remoteConfigDebugMode) =>
       _$this._remoteConfigDebugMode = remoteConfigDebugMode;
 
-  AppModelBuilder();
+  AppWidgetModelBuilder();
 
-  AppModelBuilder get _$this {
+  AppWidgetModelBuilder get _$this {
     if (_$v != null) {
       _title = _$v.title;
       _debugPaintSizeEnabled = _$v.debugPaintSizeEnabled;
@@ -244,22 +249,22 @@ class AppModelBuilder implements Builder<AppModel, AppModelBuilder> {
   }
 
   @override
-  void replace(AppModel other) {
+  void replace(AppWidgetModel other) {
     if (other == null) {
       throw new ArgumentError.notNull('other');
     }
-    _$v = other as _$AppModel;
+    _$v = other as _$AppWidgetModel;
   }
 
   @override
-  void update(void Function(AppModelBuilder) updates) {
+  void update(void Function(AppWidgetModelBuilder) updates) {
     if (updates != null) updates(this);
   }
 
   @override
-  _$AppModel build() {
+  _$AppWidgetModel build() {
     final _$result = _$v ??
-        new _$AppModel._(
+        new _$AppWidgetModel._(
             title: title,
             debugPaintSizeEnabled: debugPaintSizeEnabled,
             debugPaintPointersEnabled: debugPaintPointersEnabled,

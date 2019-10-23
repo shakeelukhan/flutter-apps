@@ -4,27 +4,25 @@ import './json_utils.dart';
 
 class FirebaseUtils {
   FirebaseUtils._();
-  static final FirebaseUtils _firebaseUtils = FirebaseUtils._();
-  factory FirebaseUtils() => _firebaseUtils;
 
   static Future<RemoteConfig> _remoteConfig = RemoteConfig.instance;
-  get remoteConfig => _remoteConfig;
-  bool _debugMode = false;
+  static get remoteConfig async => await _remoteConfig;
+  static bool _debugMode = false;
 
-  Future<void> setDebugMode(bool debugMode) async =>
-      (await _remoteConfig).setConfigSettings(
+  static Future<void> setDebugMode(bool debugMode) async =>
+      remoteConfig.setConfigSettings(
           RemoteConfigSettings(debugMode: _debugMode = debugMode));
 
-  Future<void> activateThenFetch() async {
-    (await _remoteConfig).activateFetched();
+  static Future<void> activateThenFetch() async {
+    remoteConfig.activateFetched();
     _debugMode == true
-        ? (await _remoteConfig).fetch(expiration: Duration(seconds: 0))
-        : (await _remoteConfig).fetch();
+        ? remoteConfig.fetch(expiration: Duration(seconds: 0))
+        : remoteConfig.fetch();
   }
 
-  Future<String> getString(String remoteConfigKey) async =>
-      (await _remoteConfig).getString(remoteConfigKey);
+  static Future<String> getString(String remoteConfigKey) async =>
+      remoteConfig.getString(remoteConfigKey);
 
-  dynamic getJson(String remoteConfigKey) async =>
-      JsonUtils().stringToJson(await getString(remoteConfigKey));
+  static dynamic getJson(String remoteConfigKey) async =>
+      JsonUtils.stringToJson(await getString(remoteConfigKey));
 }

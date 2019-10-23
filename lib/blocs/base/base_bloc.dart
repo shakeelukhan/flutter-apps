@@ -6,7 +6,7 @@ import 'package:rishtaaunty/models/widget_model.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter/foundation.dart';
 import 'package:rishtaaunty/models/widget_model.dart';
-import 'package:rishtaaunty/utils.dart';
+import 'package:rishtaaunty/utils/utils.dart';
 
 part 'package:rishtaaunty/blocs/widget_bloc.state.dart';
 part 'package:rishtaaunty/events/widget_bloc.event.dart';
