@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:rishtaaunty/blocs/blocs.dart' as b;
-import 'package:rishtaaunty/utils/utils.dart' as u;
+import 'package:rishtaaunty/utils/utils.dart';
 import 'package:rishtaaunty/widgets/widgets.dart' as w;
 
 class BlocWidget<T> extends StatefulWidget {
@@ -43,12 +43,12 @@ class _BlocWidgetState<T> extends State<BlocWidget<T>> {
               bool condition =
                   state?.runtimeType != previousState?.runtimeType ||
                       previousState?.data != state?.data;
-              u.LogUtils.logger.i(
+              u.log.logger.i(
                   'BlocBuilder: C=$condition previousState=${previousState?.runtimeType} state=${state?.runtimeType}');
               return condition;
             },
             builder: (context, state) {
-              u.LogUtils.logger.i('BlocBuilder: S=${state?.runtimeType}');
+              u.log.logger.i('BlocBuilder: S=${state?.runtimeType}');
               Widget _widget;
               if (state is b.WidgetNewState<T>) {
                 _widget = w.StatefulWidgets.app(w.StatefulWidgets.scaffold(
@@ -62,23 +62,12 @@ class _BlocWidgetState<T> extends State<BlocWidget<T>> {
                   ),
                 );
               } else if (state is b.WidgetReadyState<T>) {
-                _widget = w.StatefulWidgets.app(
-                  w.StatefulWidgets.scaffold(
-                    w.StatelessWidgets.center(widget.widget),
-                  ),
-                );
-                //print(utilSerializer.serializers.deserialize(data));
-                /*
-    var serialized = serializers.serialize(object);
-    print(serialized);
-    assert(serializers.deserialize(serialized) == object);
-  }
-            * */
+                _widget = BlocProvider(
+                    builder: (BuildContext context) => widget.bloc,
+                    child: widget.widget);
               }
               //   _widget = AppWidget(appData: state.data);
-              return BlocProvider(
-                  builder: (BuildContext context) => widget.bloc,
-                  child: _widget);
+              return _widget;
             }));
   }
 }

@@ -1,13 +1,13 @@
+import 'dart:convert';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
+import '../serializers.dart';
 import '../widget_model.dart';
+
 part 'app_widget_model.g.dart';
 
 abstract class AppWidgetModel extends WidgetModel
     implements Built<AppWidgetModel, AppWidgetModelBuilder> {
-  static Serializer<AppWidgetModel> get serializer =>
-      _$appWidgetModelSerializer;
-
   String get title;
 
   @nullable
@@ -29,9 +29,18 @@ abstract class AppWidgetModel extends WidgetModel
   bool get remoteConfigDebugMode;
 
   AppWidgetModel._();
-  // factory ModelApp([updates(ModelAppBuilder b)]) = _$ModelApp;
-  factory AppWidgetModel([updates(AppWidgetModelBuilder b)]) =>
-      _$AppWidgetModel((b) => b
-        ..debugPaintSizeEnabled = true
-        ..update(updates));
+  factory AppWidgetModel([updates(AppWidgetModelBuilder b)]) = _$AppWidgetModel;
+
+  static Serializer<AppWidgetModel> get serializer =>
+      _$appWidgetModelSerializer;
+
+  String toJson() {
+    return json.encode(
+        modelSerializers.serializeWith(AppWidgetModel.serializer, this));
+  }
+
+  static AppWidgetModel fromJson(String jsonString) {
+    return modelSerializers.deserializeWith(
+        AppWidgetModel.serializer, json.decode(jsonString));
+  }
 }

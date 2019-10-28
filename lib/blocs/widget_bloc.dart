@@ -4,7 +4,7 @@ import 'package:meta/meta.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter/foundation.dart';
 import 'package:rishtaaunty/repositories/repositories.dart' as r;
-import 'package:rishtaaunty/utils/utils.dart' as u;
+import 'package:rishtaaunty/utils/utils.dart';
 import 'package:rishtaaunty/widgets/widgets.dart' as w;
 part './widget_bloc.event.dart';
 part './widget_bloc.state.dart';
@@ -32,10 +32,10 @@ class WidgetBloc<T> extends Bloc<WidgetEvent, WidgetState<T>> {
         yield WidgetReadyState<T>(await this.repository.read());
       } on Exception catch (error) {
         yield WidgetErrorState<T>(error);
-        u.LogUtils.logger.e('mapEventToState EXCEPTION: $error');
+        u.log.logger.e('mapEventToState EXCEPTION: $error');
       }
     }
-    u.LogUtils.logger.w(
+    u.log.logger.w(
         '${event?.runtimeType}: ${oldState?.runtimeType} -> ${currentState?.runtimeType}');
   }
 

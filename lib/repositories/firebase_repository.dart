@@ -1,26 +1,20 @@
-import 'package:meta/meta.dart';
-import 'package:rishtaaunty/utils/utils.dart' as u;
-import './base_repository.dart';
+part of './repositories.dart';
 
 class FirebaseRepository<T> extends BaseRepository<T> {
   FirebaseRepository(
       {@required this.remoteConfigKey,
       @required this.jsonKey,
-      this.remoteConfigDebugMode = false}) {
-    _data = read();
-  }
+      this.remoteConfigDebugMode = false});
 
   final String remoteConfigKey, jsonKey;
   final bool remoteConfigDebugMode;
-  Future<T> _data;
-  Future<T> get data async => _data;
 
-  Future<T> read() async => _data = _read();
   Future<T> _read() async {
-    await u.FirebaseUtils.activateThenFetch();
-    Map assetMap = await u.FirebaseUtils.getJson(remoteConfigKey);
+    await u.firebase.activateThenFetch();
+    Map assetMap = await u.firebase.getJson(remoteConfigKey);
     Map dataMap = assetMap[jsonKey];
-    await u.FirebaseUtils.setDebugMode(this.remoteConfigDebugMode);
-    return u.SerializerUtils.deserializeJson(dataMap);
+    await u.firebase.setDebugMode(this.remoteConfigDebugMode);
+    _data = u.serializer.deserializeJson(dataMap);
+    return u.serializer.deserializeJson(dataMap);
   }
 }

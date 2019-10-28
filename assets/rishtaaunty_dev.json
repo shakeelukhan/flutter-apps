@@ -1,4 +1,3 @@
-
 {
   "app": {
     "$": "AppWidgetModel",
@@ -11,6 +10,31 @@
     "showPerformanceOverlay": false,
     "showSemanticsDebugger": false,
     "menuList": [
+      {
+        "title": "Home",
+        "codePoint": 59530
+      },
+      {
+        "title": "Profile",
+        "codePoint": 59475
+      },
+      {
+        "title": "Search",
+        "codePoint": 59574
+      },
+      {
+        "title": "Rishtas",
+        "codePoint": 59517
+      },
+      {
+        "title": "About",
+        "codePoint": 59534
+      }
+    ]
+  },
+  "menu": {
+    "$": "MenuWidgetModel",
+    "list": [
       {
         "title": "Home",
         "codePoint": 59530

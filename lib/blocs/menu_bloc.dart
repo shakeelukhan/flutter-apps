@@ -9,8 +9,8 @@ import 'package:meta/meta.dart';
 import 'dart:convert';
 import 'package:flutter/services.dart';
 
-part 'menu_event.dart';
-part 'menu_state.dart';
+part 'menu/menu_event.dart';
+part 'menu/menu_state.dart';
 
 class MenuBloc extends Bloc<MenuEvent, MenuState> {
   MenuBloc({@required this.appBloc}) {
@@ -44,7 +44,7 @@ class MenuBloc extends Bloc<MenuEvent, MenuState> {
   }
 
   List<BottomNavigationBarItem> getMenu() =>
-      _menuNavigation = appBloc.appData.menuList
+      _menuNavigation = appBloc.data.menuList
           .map((menuTab) => BottomNavigationBarItem(
               title: Text(menuTab.title),
               icon: Icon(

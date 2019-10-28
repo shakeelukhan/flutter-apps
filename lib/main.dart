@@ -1,29 +1,32 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rishtaaunty/blocs/blocs.dart' as b;
 import 'package:rishtaaunty/models/models.dart' as m;
+import 'package:rishtaaunty/pages/pages.dart' as p;
 import 'package:rishtaaunty/repositories/repositories.dart' as r;
-import 'package:rishtaaunty/utils/utils.dart' as u;
-import 'package:rishtaaunty/widgets/widgets.dart' as w;
+import 'package:rishtaaunty/utils/utils.dart';
 
 void main() async {
-  r.BaseRepository rApp;
+  r.BaseRepository rAppL, rAppR;
   b.WidgetBloc bApp;
   Widget wApp;
 
   try {
-    u.LogUtils.setSimplePrinter();
-    u.LogUtils.setLoggerLevelWarning();
-
-    rApp = r.AssetRepository<m.AppWidgetModel>(
+    rAppL = r.AssetRepository<m.AppWidgetModel>(
         assetKey: r.defaultAssetKey, jsonKey: r.defaultAppJsonKey);
-    bApp = b.WidgetBloc<m.AppWidgetModel>(repository: rApp);
-    wApp = w.AppWidget(appData: await rApp.data);
-    m.AppWidgetModel data = await rApp.data;
-    print(data.runtimeType);
-    print(data);
+    /*  rAppR = r.FirebaseRepository<m.AppWidgetModel>(
+        remoteConfigKey: r.defaultRemoteConfigKey,
+        jsonKey: r.defaultAppJsonKey);*/
+    /*   bApp = b.WidgetBloc<m.AppWidgetModel>(repository: rAppL);
+    await rAppL.read();
+    wApp = p.AppPage(data: rAppL.data);
 
-    runApp(bApp.getWidget(wApp));
+    runApp(bApp.getWidget(wApp)); */
+
+    r.Repository rApp;
+    rApp = await r.Repository.fromAssetJson(assetKey: r.defaultAssetKey);
+    print(await rApp.deserialize('app'));
   } catch (err) {
-    u.LogUtils.logger.e(err.toString());
+    u.log.logger.e(err.toString());
   }
 }
