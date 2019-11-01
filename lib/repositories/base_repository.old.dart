@@ -1,14 +1,8 @@
-import 'dart:async';
-import 'package:flutter/cupertino.dart';
-import 'package:meta/meta.dart';
-import 'package:rishtaaunty/clients/clients.dart' as c;
-import 'package:rishtaaunty/models/models.dart' as m;
-import 'package:rishtaaunty/utils/utils.dart' as u;
+part of './repositories.dart';
 
 abstract class BaseRepository<T> {
   T _data;
   T get data => _data;
-
   Completer<T> _readCompleter;
   Completer<T> get readCompleter => _readCompleter;
 

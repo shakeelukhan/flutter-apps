@@ -1,10 +1,13 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rishtaaunty/blocs/blocs.dart' as b;
 import 'package:rishtaaunty/models/models.dart' as m;
+import 'package:rishtaaunty/models/models.dart';
 import 'package:rishtaaunty/pages/pages.dart' as p;
 import 'package:rishtaaunty/repositories/repositories.dart' as r;
-import 'package:rishtaaunty/utils/utils.dart';
+import 'package:rishtaaunty/utils/asset_utils.dart';
+import 'package:rishtaaunty/utils/utils.dart' as u;
 
 void main() async {
   r.BaseRepository rAppL, rAppR;
@@ -22,11 +25,19 @@ void main() async {
     wApp = p.AppPage(data: rAppL.data);
 
     runApp(bApp.getWidget(wApp)); */
+    r.Repository2 rApp2;
+    rApp2 = r.Repository2<m.AppWidgetModel>(
+        sourceKey: r.defaultAssetKey, jsonKey: 'app');
+    m.BaseWidgetModel dataMap = await rApp2.read();
+    print(dataMap);
 
     r.Repository rApp;
-    rApp = await r.Repository.fromAssetJson(assetKey: r.defaultAssetKey);
-    print(await rApp.deserialize('app'));
+    rApp = r.AssetRepository2<m.AppWidgetModel>(
+        assetKey: r.defaultAssetKey, jsonKey: 'app');
+    m.AppWidgetModel jsonMap = await rApp.read();
+    print(jsonMap);
+    // print(rApp.deserialize(jsonMap, 'app'));
   } catch (err) {
-    u.log.logger.e(err.toString());
+    u.log.logger.e(err);
   }
 }

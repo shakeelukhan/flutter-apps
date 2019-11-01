@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:rishtaaunty/blocs/blocs.dart' as b;
-import 'package:rishtaaunty/utils/utils.dart';
+import 'package:rishtaaunty/utils/utils.dart' as u;
 import 'package:rishtaaunty/widgets/widgets.dart' as w;
 
 class BlocWidget<T> extends StatefulWidget {

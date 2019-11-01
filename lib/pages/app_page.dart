@@ -5,7 +5,7 @@ import 'package:flutter/rendering.dart';
 import 'package:rishtaaunty/blocs/blocs.dart' as b;
 import 'package:rishtaaunty/models/models.dart' as m;
 import 'package:rishtaaunty/repositories/repositories.dart' as r;
-import 'package:rishtaaunty/utils/utils.dart';
+import 'package:rishtaaunty/utils/utils.dart' as u;
 import 'package:rishtaaunty/old_files/widgets/HomeWidget.dart';
 
 r.BaseRepository rMenu;

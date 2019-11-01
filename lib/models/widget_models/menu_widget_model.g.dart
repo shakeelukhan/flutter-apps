@@ -19,18 +19,25 @@ class _$MenuWidgetModelSerializer
   @override
   Iterable<Object> serialize(Serializers serializers, MenuWidgetModel object,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = <Object>[
-      'title',
-      serializers.serialize(object.title,
-          specifiedType: const FullType(String)),
-      'codePoint',
-      serializers.serialize(object.codePoint,
-          specifiedType: const FullType(int)),
-      'fontFamily',
-      serializers.serialize(object.fontFamily,
-          specifiedType: const FullType(String)),
-    ];
-
+    final result = <Object>[];
+    if (object.title != null) {
+      result
+        ..add('title')
+        ..add(serializers.serialize(object.title,
+            specifiedType: const FullType(String)));
+    }
+    if (object.codePoint != null) {
+      result
+        ..add('codePoint')
+        ..add(serializers.serialize(object.codePoint,
+            specifiedType: const FullType(int)));
+    }
+    if (object.fontFamily != null) {
+      result
+        ..add('fontFamily')
+        ..add(serializers.serialize(object.fontFamily,
+            specifiedType: const FullType(String)));
+    }
     return result;
   }
 
@@ -77,17 +84,7 @@ class _$MenuWidgetModel extends MenuWidgetModel {
       (new MenuWidgetModelBuilder()..update(updates)).build();
 
   _$MenuWidgetModel._({this.title, this.codePoint, this.fontFamily})
-      : super._() {
-    if (title == null) {
-      throw new BuiltValueNullFieldError('MenuWidgetModel', 'title');
-    }
-    if (codePoint == null) {
-      throw new BuiltValueNullFieldError('MenuWidgetModel', 'codePoint');
-    }
-    if (fontFamily == null) {
-      throw new BuiltValueNullFieldError('MenuWidgetModel', 'fontFamily');
-    }
-  }
+      : super._();
 
   @override
   MenuWidgetModel rebuild(void Function(MenuWidgetModelBuilder) updates) =>

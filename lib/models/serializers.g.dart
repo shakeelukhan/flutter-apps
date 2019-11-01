@@ -6,7 +6,7 @@ part of 'serializers.dart';
 // BuiltValueGenerator
 // **************************************************************************
 
-Serializers _$modelSerializers = (new Serializers().toBuilder()
+Serializers _$serializers = (new Serializers().toBuilder()
       ..add(AppWidgetModel.serializer)
       ..add(MenuWidgetModel.serializer))
     .build();

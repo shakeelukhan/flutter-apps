@@ -1,12 +1,10 @@
-import 'dart:convert';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
-import '../serializers.dart';
-import '../widget_model.dart';
+import './base_widget_model.dart';
 
 part 'app_widget_model.g.dart';
 
-abstract class AppWidgetModel extends WidgetModel
+abstract class AppWidgetModel extends BaseWidgetModel
     implements Built<AppWidgetModel, AppWidgetModelBuilder> {
   String get title;
 
@@ -33,14 +31,4 @@ abstract class AppWidgetModel extends WidgetModel
 
   static Serializer<AppWidgetModel> get serializer =>
       _$appWidgetModelSerializer;
-
-  String toJson() {
-    return json.encode(
-        modelSerializers.serializeWith(AppWidgetModel.serializer, this));
-  }
-
-  static AppWidgetModel fromJson(String jsonString) {
-    return modelSerializers.deserializeWith(
-        AppWidgetModel.serializer, json.decode(jsonString));
-  }
 }

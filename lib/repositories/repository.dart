@@ -1,31 +1,56 @@
 part of './repositories.dart';
 
-class Repository<T> {
-  final Map _dataMap;
-  T _data;
+enum RepositorySourceType { AssetRepository, RemoteConfigRepository }
+
+abstract class Repository<T extends m.BaseWidgetModel> {
+  final String sourceKey, jsonKey;
+  final RepositorySourceType repositorySourceType;
+
   Completer<T> _readCompleter;
-  Map get dataMap => _dataMap;
-  T get data => _data;
-  Completer<T> get readCompleter => _readCompleter;
 
-  Repository(this._dataMap);
-
-  static Future<Repository> fromAssetJson({@required String assetKey}) async =>
-      Repository(await u.asset.assetToJson(assetKey));
-
-  static Future<Map> getRemoteConfigJson(
-      {@required String remoteConfigKey, bool debugMode}) async {
-    await u.firebase.setDebugMode(debugMode);
-    return await u.firebase.remoteConfigToJson(remoteConfigKey);
-  }
+  Repository(
+      {@required this.repositorySourceType,
+      @required this.sourceKey,
+      @required this.jsonKey});
 
   Future<T> read() async {
     if (_readCompleter?.isCompleted != false) {
       _readCompleter = Completer<T>();
+      _readCompleter.complete(await _read());
     }
     return _readCompleter.future;
   }
 
-  T deserialize(String jsonKey) =>
-      u.serializer.deserializeJson(_dataMap[jsonKey]);
+  Future<T> _read() async {
+    print(await c.asset.loadJson(sourceKey));
+    Map jsonMap = await getJson();
+    Map dataMap = jsonKey == null ? jsonMap : jsonMap[jsonKey];
+    m.BaseWidgetModel data = m.BaseWidgetModel.fromJson(dataMap);
+    return data;
+  }
+
+  Future<Map> getJson();
+
+  Future<Map> getJsonFromAsset({@required String assetKey}) async =>
+      await u.asset.assetToJson(assetKey);
+
+  static Future<Map> getJsonFromRemoteConfig(
+      {@required String remoteConfigKey, bool debugMode}) async {
+    debugMode ?? await u.firebase.setDebugMode(debugMode);
+    return await u.firebase.remoteConfigToJson(remoteConfigKey);
+  }
+}
+
+class Repository2<T extends m.BaseWidgetModel> {
+  final String sourceKey, jsonKey;
+
+  Repository2({@required this.sourceKey, @required this.jsonKey});
+
+  Future<T> read() async {
+    Map sourceJson = await c.asset.loadJson(sourceKey);
+    Map dataJson = jsonKey == null ? sourceJson : sourceJson[jsonKey];
+    m.BaseWidgetModel data = m.BaseWidgetModel.fromJson(dataJson);
+    print(data.toJsonString());
+    return data;
+  }
 }

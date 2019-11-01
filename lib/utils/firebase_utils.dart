@@ -2,11 +2,10 @@ import 'dart:async';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
 import './json_utils.dart';
 
-final FirebaseUtils firebaseUtils = FirebaseUtils();
-
 class FirebaseUtils {
   Future<RemoteConfig> _remoteConfig;
   bool _debugMode;
+
   Future<RemoteConfig> get remoteConfig => _remoteConfig;
   bool get debugMode => _debugMode;
 
@@ -26,14 +25,16 @@ class FirebaseUtils {
         : (await _remoteConfig).fetch();
   }
 
-  Future<String> getString(String remoteConfigKey) async =>
-      (await _remoteConfig).getString(remoteConfigKey);
+  Future<String> getString(String key) async =>
+      (await _remoteConfig).getString(key);
 
-  dynamic getJson(String remoteConfigKey) async =>
-      jsonUtils.stringToJson(await getString(remoteConfigKey));
+  dynamic getJson(String key) async =>
+      jsonUtils.stringToJson(await getString(key));
 
-  dynamic remoteConfigToJson(String remoteConfigKey) async {
+  dynamic remoteConfigToJson(String key) async {
     await activateThenFetch();
-    return getJson(remoteConfigKey);
+    return getJson(key);
   }
 }
+
+final FirebaseUtils firebaseUtils = FirebaseUtils();

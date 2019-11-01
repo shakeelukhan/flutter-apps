@@ -1,7 +1,5 @@
 import 'package:logger/logger.dart';
 
-final LogUtils logUtils = LogUtils();
-
 class LogUtils {
   Logger _logger;
   Logger get logger => _logger;
@@ -19,3 +17,5 @@ class LogUtils {
   Level setLoggerLevelInfo() => Logger.level = Level.info;
   Level setLoggerLevelWarning() => Logger.level = Level.warning;
 }
+
+final LogUtils logUtils = LogUtils();
