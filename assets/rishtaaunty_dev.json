@@ -1,7 +1,7 @@
 {
   "app": {
     "$": "AppWidgetModel",
-    "version": 1,
+    "version": 0,
     "remoteConfig_debug": true,
     "title": "Rishta Aunty",
     "debugPaintSizeEnabled": false,

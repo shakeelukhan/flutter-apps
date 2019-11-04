@@ -16,8 +16,8 @@ List<BottomNavigationBarItem> get menuNavigation => _menuNavigation;
 Router router = Router();
 
 Future<List<BottomNavigationBarItem>> getMenu() async {
-  Map assetMap = await u.asset.assetToJson(r.defaultAssetKey);
-  Map dataMap = assetMap['menu'];
+//  Map assetMap = await u.asset.getJson(r.defaultAssetKey);
+//  Map dataMap = assetMap['menu'];
   // menuList = u.SerializerUtils.deserializeJsonWith<List<m.MenuWidgetModel>>(dataMap['list']);
 
 //  BuiltList<T> deserializeListOf<T>(dynamic value) =>

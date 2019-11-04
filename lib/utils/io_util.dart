@@ -1,8 +1,8 @@
 import 'dart:convert';
 
-class JsonUtils {
+class IoUtil {
   dynamic stringToJson(String source) => jsonDecode(source);
   String jsonToString(Object object) => jsonEncode(object);
 }
 
-final JsonUtils jsonUtils = JsonUtils();
+final IoUtil ioUtil = IoUtil();

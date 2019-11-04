@@ -3,10 +3,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:rishtaaunty/blocs/blocs.dart' as b;
+import 'package:rishtaaunty/models/models.dart' as m;
 import 'package:rishtaaunty/utils/utils.dart' as u;
 import 'package:rishtaaunty/widgets/widgets.dart' as w;
 
-class BlocWidget<T> extends StatefulWidget {
+class BlocWidget<T extends m.BaseWidgetModel> extends StatefulWidget {
   BlocWidget({Key key, @required this.bloc, @required this.widget})
       : super(key: key);
 
@@ -16,7 +17,8 @@ class BlocWidget<T> extends StatefulWidget {
   _BlocWidgetState<T> createState() => _BlocWidgetState<T>();
 }
 
-class _BlocWidgetState<T> extends State<BlocWidget<T>> {
+class _BlocWidgetState<T extends m.BaseWidgetModel>
+    extends State<BlocWidget<T>> {
   Completer<void> _refreshCompleter;
 
   @override

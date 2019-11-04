@@ -1,6 +1,12 @@
-part of './repositories.dart';
+import 'dart:async';
+import 'package:flutter/cupertino.dart';
+import 'package:meta/meta.dart';
+import 'package:rishtaaunty/models/models.dart' as m;
+import 'package:rishtaaunty/utils/utils.dart' as u;
+import './base_repository.dart';
 
-class FirebaseRepository<T> extends BaseRepository<T> {
+class FirebaseRepository<T extends m.BaseWidgetModel>
+    extends BaseRepository<T> {
   FirebaseRepository(
       {@required this.remoteConfigKey,
       @required this.jsonKey,
@@ -13,8 +19,8 @@ class FirebaseRepository<T> extends BaseRepository<T> {
     await u.firebase.activateThenFetch();
     Map assetMap = await u.firebase.getJson(remoteConfigKey);
     Map dataMap = assetMap[jsonKey];
-    await u.firebase.setDebugMode(this.remoteConfigDebugMode);
-    _data = m.BaseWidgetModel.fromJson(dataMap);
+    await u.firebase.setDebug(this.remoteConfigDebugMode);
+    T _data = m.BaseWidgetModel.fromJson(dataMap);
     return _data;
   }
 }

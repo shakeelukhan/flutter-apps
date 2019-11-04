@@ -1,24 +1,32 @@
 import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:meta/meta.dart';
-import 'package:rishtaaunty/clients/clients.dart' as c;
 import 'package:rishtaaunty/models/models.dart' as m;
 import 'package:rishtaaunty/utils/utils.dart' as u;
 
-abstract class BaseRepository<T> {
-  T _data;
-  T get data => _data;
+class BaseRepository<T extends m.BaseWidgetModel> {
+  final String sourceKey, jsonKey;
 
-  Completer<T> _readCompleter;
-  Completer<T> get readCompleter => _readCompleter;
+  BaseRepository(
+      {@required this.sourceKey,
+      @required this.jsonKey});
 
-  Future<T> read() async {
-    if (_readCompleter?.isCompleted != false) {
-      _readCompleter = Completer<T>();
-       _readCompleter.complete(_data = await _read());
-    }
-    return _readCompleter.future;
+  String sourceKeyToName(
+      {@required String key}) {
+    return 'a';
   }
 
-  Future<T> _read();
+  Future<T> read() async {
+    Map sourceJson ;//= await c.asset.loadJson(sourceKey);
+    Map dataJson = jsonKey == null ? sourceJson : sourceJson[jsonKey];
+    m.BaseWidgetModel data = m.BaseWidgetModel.fromJson(dataJson);
+   // print(data.toJsonString());
+    return data;
+  }
+
+  static Future<Map> getJsonFromRemoteConfig(
+      {@required String remoteConfigKey, bool debugMode}) async {
+    debugMode ?? await u.firebase.setDebug(debugMode);
+    return await u.firebase.getSyncedJson(remoteConfigKey);
+  }
 }

@@ -5,11 +5,11 @@ import '../serializers.dart';
 abstract class BaseWidgetModel {
   Map toJson<T>() => serializers.serialize(this, specifiedType: FullType(T));
 
-  String toJsonString<T>() => u.json.jsonToString(toJson<T>());
+  String toJsonString<T>() => u.io.jsonToString(toJson<T>());
 
   static T fromJson<T>(Map json) =>
       serializers.deserialize(json, specifiedType: FullType(T));
 
   static T fromJsonString<T>(String jsonString) =>
-      fromJson<T>(u.json.stringToJson(jsonString));
+      fromJson<T>(u.io.stringToJson(jsonString));
 }

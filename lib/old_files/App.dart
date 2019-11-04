@@ -8,7 +8,7 @@ class AppConfig {
   static bool debugMode;
   static AppDatabase appDatabase;
   static String appConfig;
-  static FirebaseUtils firebase;
+  static FirebaseUtil firebase;
 
   AppConfig._();
   static final AppConfig app = AppConfig._();
@@ -18,7 +18,7 @@ class AppConfig {
     debugMode = isDebugMode;
     appDatabase = new AppDatabase();
     await appDatabase.init();
-    firebase = new FirebaseUtils();
+    firebase = new FirebaseUtil();
     updateAppIfMismatch();
   }
 
@@ -32,7 +32,7 @@ class AppConfig {
   }
 
   static Future<String> getServerAppConfig() async {
-    appConfig = await FirebaseUtils.getString(remoteConfigKey: appKey);
+    appConfig = await FirebaseUtil.getString(remoteConfigKey: appKey);
     return appConfig;
   }
 
