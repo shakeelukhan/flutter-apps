@@ -7,8 +7,7 @@ class AssetDatasource extends BaseDatasource {
   bool _cache;
   Completer _ioCompleter;
 
-  AssetDatasource({@required String assetKey, bool cache})
-      : super(key: assetKey) {
+  AssetDatasource({@required String key, bool cache}) : super(key: key) {
     _cache = cache ?? true;
   }
 

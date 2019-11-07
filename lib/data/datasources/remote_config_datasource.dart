@@ -9,8 +9,8 @@ class RemoteConfigDatasource extends BaseDatasource {
   Completer _ioCompleter;
 
   RemoteConfigDatasource(
-      {RemoteConfig remoteConfig, @required String remoteConfigKey, bool cache})
-      : super(key: remoteConfigKey) {
+      {RemoteConfig remoteConfig, @required String key, bool cache})
+      : super(key: key) {
     _remoteConfig = remoteConfig ?? RemoteConfig.instance;
     _cache = cache ?? true;
     setDebug(_cache == false ? true : false);

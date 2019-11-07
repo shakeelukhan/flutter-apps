@@ -1,23 +1,22 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'app_widget_model.dart';
+part of 'app_page_model.dart';
 
 // **************************************************************************
 // BuiltValueGenerator
 // **************************************************************************
 
-Serializer<AppWidgetModel> _$appWidgetModelSerializer =
-    new _$AppWidgetModelSerializer();
+Serializer<AppPageModel> _$appPageModelSerializer =
+    new _$AppPageModelSerializer();
 
-class _$AppWidgetModelSerializer
-    implements StructuredSerializer<AppWidgetModel> {
+class _$AppPageModelSerializer implements StructuredSerializer<AppPageModel> {
   @override
-  final Iterable<Type> types = const [AppWidgetModel, _$AppWidgetModel];
+  final Iterable<Type> types = const [AppPageModel, _$AppPageModel];
   @override
-  final String wireName = 'AppWidgetModel';
+  final String wireName = 'AppPageModel';
 
   @override
-  Iterable<Object> serialize(Serializers serializers, AppWidgetModel object,
+  Iterable<Object> serialize(Serializers serializers, AppPageModel object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object>[
       'title',
@@ -64,10 +63,9 @@ class _$AppWidgetModelSerializer
   }
 
   @override
-  AppWidgetModel deserialize(
-      Serializers serializers, Iterable<Object> serialized,
+  AppPageModel deserialize(Serializers serializers, Iterable<Object> serialized,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = new AppWidgetModelBuilder();
+    final result = new AppPageModelBuilder();
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
@@ -110,7 +108,7 @@ class _$AppWidgetModelSerializer
   }
 }
 
-class _$AppWidgetModel extends AppWidgetModel {
+class _$AppPageModel extends AppPageModel {
   @override
   final String title;
   @override
@@ -126,10 +124,10 @@ class _$AppWidgetModel extends AppWidgetModel {
   @override
   final bool remoteConfigDebugMode;
 
-  factory _$AppWidgetModel([void Function(AppWidgetModelBuilder) updates]) =>
-      (new AppWidgetModelBuilder()..update(updates)).build();
+  factory _$AppPageModel([void Function(AppPageModelBuilder) updates]) =>
+      (new AppPageModelBuilder()..update(updates)).build();
 
-  _$AppWidgetModel._(
+  _$AppPageModel._(
       {this.title,
       this.debugPaintSizeEnabled,
       this.debugPaintPointersEnabled,
@@ -139,22 +137,21 @@ class _$AppWidgetModel extends AppWidgetModel {
       this.remoteConfigDebugMode})
       : super._() {
     if (title == null) {
-      throw new BuiltValueNullFieldError('AppWidgetModel', 'title');
+      throw new BuiltValueNullFieldError('AppPageModel', 'title');
     }
   }
 
   @override
-  AppWidgetModel rebuild(void Function(AppWidgetModelBuilder) updates) =>
+  AppPageModel rebuild(void Function(AppPageModelBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
-  AppWidgetModelBuilder toBuilder() =>
-      new AppWidgetModelBuilder()..replace(this);
+  AppPageModelBuilder toBuilder() => new AppPageModelBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    return other is AppWidgetModel &&
+    return other is AppPageModel &&
         title == other.title &&
         debugPaintSizeEnabled == other.debugPaintSizeEnabled &&
         debugPaintPointersEnabled == other.debugPaintPointersEnabled &&
@@ -182,7 +179,7 @@ class _$AppWidgetModel extends AppWidgetModel {
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper('AppWidgetModel')
+    return (newBuiltValueToStringHelper('AppPageModel')
           ..add('title', title)
           ..add('debugPaintSizeEnabled', debugPaintSizeEnabled)
           ..add('debugPaintPointersEnabled', debugPaintPointersEnabled)
@@ -194,9 +191,9 @@ class _$AppWidgetModel extends AppWidgetModel {
   }
 }
 
-class AppWidgetModelBuilder
-    implements Builder<AppWidgetModel, AppWidgetModelBuilder> {
-  _$AppWidgetModel _$v;
+class AppPageModelBuilder
+    implements Builder<AppPageModel, AppPageModelBuilder> {
+  _$AppPageModel _$v;
 
   String _title;
   String get title => _$this._title;
@@ -232,9 +229,9 @@ class AppWidgetModelBuilder
   set remoteConfigDebugMode(bool remoteConfigDebugMode) =>
       _$this._remoteConfigDebugMode = remoteConfigDebugMode;
 
-  AppWidgetModelBuilder();
+  AppPageModelBuilder();
 
-  AppWidgetModelBuilder get _$this {
+  AppPageModelBuilder get _$this {
     if (_$v != null) {
       _title = _$v.title;
       _debugPaintSizeEnabled = _$v.debugPaintSizeEnabled;
@@ -249,22 +246,22 @@ class AppWidgetModelBuilder
   }
 
   @override
-  void replace(AppWidgetModel other) {
+  void replace(AppPageModel other) {
     if (other == null) {
       throw new ArgumentError.notNull('other');
     }
-    _$v = other as _$AppWidgetModel;
+    _$v = other as _$AppPageModel;
   }
 
   @override
-  void update(void Function(AppWidgetModelBuilder) updates) {
+  void update(void Function(AppPageModelBuilder) updates) {
     if (updates != null) updates(this);
   }
 
   @override
-  _$AppWidgetModel build() {
+  _$AppPageModel build() {
     final _$result = _$v ??
-        new _$AppWidgetModel._(
+        new _$AppPageModel._(
             title: title,
             debugPaintSizeEnabled: debugPaintSizeEnabled,
             debugPaintPointersEnabled: debugPaintPointersEnabled,

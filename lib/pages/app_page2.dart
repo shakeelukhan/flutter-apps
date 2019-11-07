@@ -3,28 +3,56 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:rishtaaunty/blocs/blocs.dart' as b;
-import 'package:rishtaaunty/data/data.dart' as d;
+import 'package:rishtaaunty/models/models.dart' as m;
+import 'package:rishtaaunty/utils/utils.dart' as u;
 import 'package:rishtaaunty/old_files/widgets/HomeWidget.dart';
 
-//  print(await _appPageRepository.getData());
+b.PageBloc bMenu;
+List<m.MenuWidgetModel> menuList;
+List<BottomNavigationBarItem> _menuNavigation;
+List<BottomNavigationBarItem> get menuNavigation => _menuNavigation;
+Router router = Router();
 
-class AppPage extends StatefulWidget {
-  final d.AppPageRepository repository;
-  AppPage({Key key, @required this.repository}) : super(key: key);
+Future<List<BottomNavigationBarItem>> getMenu() async {
+//  Map assetMap = await u.asset.getJson(r.defaultAssetKey);
+//x  Map dataMap = assetMap['menu'];
+  // menuList = u.SerializerUtils.deserializeJsonWith<List<m.MenuWidgetModel>>(dataMap['list']);
+
+//  BuiltList<T> deserializeListOf<T>(dynamic value) =>
+  //    BuiltList.from(value.map((value) => deserialize<T>(value)).toList(growable: false));
+  print(menuList);
+  print('a');
+  // print((await rMenu.data)["list"]);
+  print('b');
+  // bMenu = await b.WidgetBloc<m.MenuWidgetModel>(repository: rMenu);
+  // print(await rMenu.data);
+
+  _menuNavigation = menuList
+      .map((menuTab) => BottomNavigationBarItem(
+          title: Text(menuTab.title),
+          icon: Icon(
+              IconData(menuTab.codePoint, fontFamily: menuTab.fontFamily))))
+      .toList();
+}
+
+class AppPage2 extends StatefulWidget {
+  AppPage2({Key key, @required this.data}) : super(key: key);
+
+  final m.AppWidgetModel data;
 
   @override
-  _AppPageState createState() {
-    return _AppPageState();
+  _AppPage2State createState() {
+    return _AppPage2State();
   }
 }
 
-class _AppPageState extends State<AppPage> {
-  d.AppPageRepository _appPageRepository;
-
+class _AppPage2State extends State<AppPage2> {
   @override
   void initState() {
     super.initState();
-    _appPageRepository = ;
+    router = Router();
+    AppRoutes.configureRoutes(router);
+    //  getMenu();
   }
 
   @override

@@ -1,28 +1,34 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rishtaaunty/blocs/blocs.dart' as b;
-import 'package:rishtaaunty/repositories/repositories.dart' as r;
+import 'package:rishtaaunty/data/data.dart' as d;
+import 'package:rishtaaunty/widgets/widgets.dart' as w;
 
-class MyApp extends StatelessWidget {
-  final r.BaseRepository _repository;
-  final Widget _child;
+class App extends StatefulWidget {
+  final b.AppBloc appBloc;
 
-  const MyApp({
-    Key key,
-    @required r.BaseRepository repository,
-    @required Widget child,
-  })  : _repository = repository,
-        _child = child,
-        super(key: key);
+  App(this.appBloc, [Key key]) : super(key: key);
+
+  @override
+  _AppState createState() => _AppState();
+}
+
+class _AppState extends State<App> {
+  d.AppPageRepository _appPageRepository;
+
+  @override
+  void initState() {
+    super.initState();
+    _appPageRepository = d.AppPageRepository.fromRepository(
+        repository: widget.appBloc.repository);
+  }
 
   @override
   Widget build(BuildContext context) {
-      return MaterialApp(
-        home: RepositoryProvider<r.BaseRepository>.value(
-          value: _repository,
-          child: _child,
-        ),
-      );
-
+    return BlocProvider.value(
+        value: widget.appBloc,
+        child: MaterialApp(
+            home: w.BlocWidget<b.AppBloc>(
+                widget: Scaffold(body: Center(child: Text('New...'))))));
   }
 }

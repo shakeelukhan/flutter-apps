@@ -1,9 +1,9 @@
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
-import 'base_widget_model.dart';
+import '../data/models/base_model.dart';
 part 'menu_widget_model.g.dart';
 
-abstract class MenuWidgetModel extends BaseWidgetModel
+abstract class MenuWidgetModel extends BaseModel
     implements Built<MenuWidgetModel, MenuWidgetModelBuilder> {
   // default: TAB
   @nullable

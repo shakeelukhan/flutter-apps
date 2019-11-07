@@ -1,75 +1,72 @@
-import 'dart:async';
+import 'package:bloc/bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:rishtaaunty/blocs/blocs.dart' as b;
-import 'package:rishtaaunty/models/models.dart' as m;
-import 'package:rishtaaunty/utils/utils.dart' as u;
-import 'package:rishtaaunty/widgets/widgets.dart' as w;
 
-class BlocWidget<T extends m.BaseWidgetModel> extends StatefulWidget {
-  BlocWidget({Key key, @required this.bloc, @required this.widget})
+class BlocWidget<T extends Bloc<dynamic, b.PageState>> extends StatefulWidget {
+  final T bloc;
+  final Widget widget, newStateWidget, updatingStateWidget;
+
+  BlocWidget(
+      {Key key,
+      this.bloc,
+      @required this.widget,
+      this.newStateWidget,
+      this.updatingStateWidget})
       : super(key: key);
 
-  final b.WidgetBloc<T> bloc;
-  final Widget widget;
   @override
-  _BlocWidgetState<T> createState() => _BlocWidgetState<T>();
+  _BlocWidgetState createState() => _BlocWidgetState<T>();
 }
 
-class _BlocWidgetState<T extends m.BaseWidgetModel>
+class _BlocWidgetState<T extends Bloc<dynamic, b.PageState>>
     extends State<BlocWidget<T>> {
-  Completer<void> _refreshCompleter;
+  T _bloc;
+  Widget _widget;
 
   @override
   void initState() {
     super.initState();
-    widget?.bloc?.dispatch(b.WidgetStartupEvent());
+    _bloc = widget.bloc ?? BlocProvider.of<T>(context);
+    _bloc?.dispatch(b.PageEvent.update);
   }
 
   @override
   void dispose() {
-    widget?.bloc?.dispose();
+    _bloc?.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    _refreshCompleter?.complete();
-    _refreshCompleter = Completer();
-    return BlocProvider.value(
-        value: widget.bloc,
-        child: BlocBuilder<b.WidgetBloc<T>, b.WidgetState<T>>(
-            bloc: widget.bloc,
-            condition: (previousState, state) {
-              bool condition =
-                  state?.runtimeType != previousState?.runtimeType ||
-                      previousState?.data != state?.data;
-              u.log.logger.i(
-                  'BlocBuilder: C=$condition previousState=${previousState?.runtimeType} state=${state?.runtimeType}');
-              return condition;
-            },
-            builder: (context, state) {
-              u.log.logger.i('BlocBuilder: S=${state?.runtimeType}');
-              Widget _widget;
-              if (state is b.WidgetNewState<T>) {
-                _widget = w.StatefulWidgets.app(w.StatefulWidgets.scaffold(
-                    w.StatelessWidgets.center(
-                        w.StatefulWidgets.circularProgress())));
-              } else if (state is b.WidgetUpdatingState<T>) {
-                _widget = w.StatefulWidgets.app(
-                  w.StatefulWidgets.scaffold(
-                    w.StatelessWidgets.center(
-                        w.StatelessWidgets.text('Updating...')),
-                  ),
-                );
-              } else if (state is b.WidgetReadyState<T>) {
-                _widget = BlocProvider(
-                    builder: (BuildContext context) => widget.bloc,
-                    child: widget.widget);
+    return BlocBuilder<T, b.PageState>(
+        bloc: _bloc,
+        condition: (previousState, state) => previousState != state,
+        builder: (context, state) {
+          if (state is b.PageStateNew) {
+            _widget = widget.newStateWidget ??
+                Scaffold(body: Center(child: CircularProgressIndicator()));
+          } else if (state is b.PageStateUpdating) {
+            _widget = widget.updatingStateWidget ??
+                Scaffold(body: Center(child: Text('Updating...')));
+          } else if (state is b.PageStateReady) {
+            if (state.data != null) {
+              if (state.data.containsKey('debugPaintSizeEnabled')) {
+                debugPaintSizeEnabled = state.data['debugPaintSizeEnabled'];
+                print('HERE_A');
               }
-              //   _widget = AppWidget(appData: state.data);
-              return _widget;
-            }));
+              if (state.data.containsKey('debugPaintPointersEnabled')) {
+                debugPaintSizeEnabled = state.data['debugPaintPointersEnabled'];
+                print('HERE_B');
+              }
+              print(debugPaintSizeEnabled);
+              print(debugPaintPointersEnabled);
+            }
+            _widget = widget.widget;
+          }
+          return _widget;
+        });
   }
 }
