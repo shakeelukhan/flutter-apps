@@ -1,16 +1,11 @@
-import 'package:fluro/fluro.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:rishtaaunty/blocs/blocs.dart' as b;
 import 'package:rishtaaunty/data/data.dart' as d;
-import 'package:rishtaaunty/old_files/widgets/HomeWidget.dart';
-
-//  print(await _appPageRepository.getData());
 
 class AppPage extends StatefulWidget {
-  final d.AppPageRepository repository;
-  AppPage({Key key, @required this.repository}) : super(key: key);
+  final d.AppPageModel data;
+  AppPage(this.data, {Key key}) : super(key: key);
 
   @override
   _AppPageState createState() {
@@ -19,86 +14,42 @@ class AppPage extends StatefulWidget {
 }
 
 class _AppPageState extends State<AppPage> {
-  d.AppPageRepository _appPageRepository;
-
   @override
   void initState() {
     super.initState();
-    _appPageRepository = ;
   }
 
   @override
   void dispose() {
-    bMenu.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    debugPaintSizeEnabled = widget.data.debugPaintSizeEnabled;
-    debugPaintPointersEnabled = widget.data.debugPaintPointersEnabled;
+    debugPaintSizeEnabled = widget.data?.debugPaintSizeEnabled ?? false;
+    debugPaintPointersEnabled = widget.data?.debugPaintPointersEnabled ?? false;
     return MaterialApp(
-      title: widget.data.title,
-      debugShowCheckedModeBanner: widget.data.debugShowCheckedModeBanner,
-      showPerformanceOverlay: widget.data.showPerformanceOverlay,
-      showSemanticsDebugger: widget.data.showSemanticsDebugger,
-      theme: ThemeData(primarySwatch: Colors.orange),
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text(widget.data.title),
-          centerTitle: true,
-          actions: <Widget>[
-            Padding(
-              padding: const EdgeInsets.only(right: 16.0),
-              child: Icon(Icons.more_vert),
-            ),
-          ],
-        ),
-        body: Container(
-          alignment: Alignment.center,
-          child: Scaffold(body: Text('abc')),
-        ),
-        /*   bottomNavigationBar: BottomNavigationBar(
-              items: null,
-              currentIndex: 0,
-              type: BottomNavigationBarType.fixed,
-              fixedColor: Theme.of(context).primaryColor,
-              onTap: (int i) {
-                setState(() {});
-              })*/
-      ),
-      onGenerateRoute: router.generator,
-    );
-  }
-}
-
-var homeHandler = new Handler(
-    handlerFunc: (BuildContext context, Map<String, List<String>> params) {
-  //   print('PARAMS = ${params["id"][0]}');
-  return Home();
-});
-
-var homeHandler2 = new Handler(
-    handlerFunc: (BuildContext context, Map<String, List<String>> params) {
-  //   print('PARAMS = ${params["id"][0]}');
-  return Home2();
-});
-
-var appHandler = new Handler(
-    handlerFunc: (BuildContext context, Map<String, List<String>> params) {
-  // return AppScreen(title: 'dummy');
-});
-
-class AppRoutes {
-  static void configureRoutes(Router router) {
-    router.notFoundHandler = new Handler(
-        handlerFunc: (BuildContext context, Map<String, List<String>> params) {
-      print('ROUTE WAS NOT FOUND !!!');
-      print('${params.toString()}');
-    });
-    //   router.define(AppScreen.PATH, handler: appHandler);
-    //  router.define(Home.PATH, handler: homeHandler);
-    // router.define(Home2.PATH, handler: homeHandler2);
-    //router.define('/', handler: appHandler);
+        title: widget.data?.title ?? '<TITLE>',
+        debugShowCheckedModeBanner:
+            widget.data?.debugShowCheckedModeBanner ?? false,
+        showPerformanceOverlay: widget.data.showPerformanceOverlay ?? false,
+        showSemanticsDebugger: widget.data.showSemanticsDebugger ?? false,
+        theme: ThemeData(primarySwatch: Colors.orange),
+        home: Scaffold(
+          appBar: AppBar(
+            title: Text(widget.data.title),
+            centerTitle: true,
+            actions: <Widget>[
+              Padding(
+                padding: const EdgeInsets.only(right: 16.0),
+                child: Icon(Icons.more_vert),
+              ),
+            ],
+          ),
+          body: Container(
+            alignment: Alignment.center,
+            child: Scaffold(body: Text('abc')),
+          ),
+        ));
   }
 }

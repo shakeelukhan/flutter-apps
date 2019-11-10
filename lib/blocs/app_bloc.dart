@@ -1,10 +1,13 @@
 import 'package:rishtaaunty/data/data.dart' as d;
-import './page_bloc.dart';
+import './base_bloc.dart';
 
-class AppBloc extends PageBloc<d.AppRepository> {
-  AppBloc.fromRepository(d.AppRepository repository)
-      : super.fromRepository(repository);
-  AppBloc.fromConfig(String name, [bool local = true, bool cache = true])
-      : super.fromRepository(
-            d.AppRepository(name: name, local: local, cache: cache));
+class AppBloc extends BaseBloc<d.AppModel> {
+  final d.AppRepository repository;
+
+  AppBloc.fromRepository(this.repository);
+
+  AppBloc.fromConfig(String name, {bool local = true, bool cache = true})
+      : repository = d.AppRepository(name, local: local, cache: cache);
+
+  Future<d.AppModel> getData() async => repository.getData();
 }

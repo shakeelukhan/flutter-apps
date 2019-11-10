@@ -1,11 +1,10 @@
-import 'package:flutter/cupertino.dart';
-import 'package:meta/meta.dart';
+import 'package:rishtaaunty/data/data.dart' as d;
 
-abstract class BaseRepository {
+abstract class BaseRepository<M extends d.BaseModel> {
   final String name;
   final bool cache;
 
-  BaseRepository({@required this.name, this.cache = true});
+  BaseRepository(this.name, {this.cache = true});
 
-  dynamic getData();
+  Future<M> getData();
 }

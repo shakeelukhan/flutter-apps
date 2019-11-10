@@ -1,39 +1,19 @@
 {
-  "app": {
-    "$": "AppWidgetModel",
+  "$": "AppModel",
+  "debugPaintSizeEnabled": true,
+  "debugPaintPointersEnabled": false,
+  "appPage": {
+    "$": "AppPageModel",
     "version": 0,
-    "remoteConfig_debug": true,
     "title": "Rishta Aunty",
     "debugPaintSizeEnabled": false,
     "debugPaintPointersEnabled": false,
     "debugShowCheckedModeBanner": false,
     "showPerformanceOverlay": false,
-    "showSemanticsDebugger": false,
-    "menuList": [
-      {
-        "title": "Home",
-        "codePoint": 59530
-      },
-      {
-        "title": "Profile",
-        "codePoint": 59475
-      },
-      {
-        "title": "Search",
-        "codePoint": 59574
-      },
-      {
-        "title": "Rishtas",
-        "codePoint": 59517
-      },
-      {
-        "title": "About",
-        "codePoint": 59534
-      }
-    ]
+    "showSemanticsDebugger": false
   },
-  "menu": {
-    "$": "MenuWidgetModel",
+  "menuPage": {
+    "$": "MenuPageModel",
     "list": [
       {
         "title": "Home",

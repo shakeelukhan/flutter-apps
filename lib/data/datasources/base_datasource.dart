@@ -1,11 +1,11 @@
 import 'dart:async';
-import 'package:meta/meta.dart';
 import 'package:rishtaaunty/utils/io_util.dart';
 
 abstract class BaseDatasource {
   final String key;
+  final bool cache;
 
-  BaseDatasource({@required this.key});
+  BaseDatasource(this.key, {this.cache = true});
 
   Future<String> getString();
 

@@ -1,0 +1,14 @@
+{
+  "sources": {
+    "rishta_aunty_local": {
+      "key": "assets/rishtaaunty_dev.json",
+      "local": true,
+      "cache": false
+    },
+    "rishta_aunty_remote": {
+      "key": "assets/rishtaaunty_dev.json",
+      "local": false,
+      "cache": false
+    }
+  }
+}

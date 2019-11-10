@@ -7,7 +7,7 @@ import 'package:rishtaaunty/models/models.dart' as m;
 import 'package:rishtaaunty/utils/utils.dart' as u;
 import 'package:rishtaaunty/old_files/widgets/HomeWidget.dart';
 
-b.PageBloc bMenu;
+b.BaseBloc bMenu;
 List<m.MenuWidgetModel> menuList;
 List<BottomNavigationBarItem> _menuNavigation;
 List<BottomNavigationBarItem> get menuNavigation => _menuNavigation;
