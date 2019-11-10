@@ -1,9 +1,8 @@
 {
-  "$": "AppSourcesModel",
   "sources": {
     "rishta_aunty_local": {
       "key": "assets/rishta_aunty_dev.json",
-      "local": true,
+      "local": false,
       "cache": false
     },
     "rishta_aunty_cloud": {

@@ -7,7 +7,10 @@ part 'app_sources_model.g.dart';
 
 abstract class AppSourcesModel extends BaseModel<AppSourcesModel>
     implements Built<AppSourcesModel, AppSourcesModelBuilder> {
-  static const FullType specifiedType = FullType(AppSourcesModel);
+  static const FullType _specifiedType = FullType(AppSourcesModel);
+
+  @override
+  FullType getSpecifiedType() => _specifiedType;
   static Serializer<AppSourcesModel> get serializer =>
       _$appSourcesModelSerializer;
 
@@ -17,5 +20,5 @@ abstract class AppSourcesModel extends BaseModel<AppSourcesModel>
   factory AppSourcesModel([updates(AppSourcesModelBuilder b)]) =
       _$AppSourcesModel;
   static AppSourcesModel fromJson(Map json) =>
-      BaseModel.fromJson(json, specifiedType);
+      BaseModel.fromJson(json, _specifiedType);
 }
