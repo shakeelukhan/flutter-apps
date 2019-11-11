@@ -22,43 +22,26 @@ class _$AppPageModelSerializer implements StructuredSerializer<AppPageModel> {
       'title',
       serializers.serialize(object.title,
           specifiedType: const FullType(String)),
+      'debugPaintSizeEnabled',
+      serializers.serialize(object.debugPaintSizeEnabled,
+          specifiedType: const FullType(bool)),
+      'debugPaintPointersEnabled',
+      serializers.serialize(object.debugPaintPointersEnabled,
+          specifiedType: const FullType(bool)),
+      'debugShowCheckedModeBanner',
+      serializers.serialize(object.debugShowCheckedModeBanner,
+          specifiedType: const FullType(bool)),
+      'showPerformanceOverlay',
+      serializers.serialize(object.showPerformanceOverlay,
+          specifiedType: const FullType(bool)),
+      'showSemanticsDebugger',
+      serializers.serialize(object.showSemanticsDebugger,
+          specifiedType: const FullType(bool)),
+      'remoteConfigDebugMode',
+      serializers.serialize(object.remoteConfigDebugMode,
+          specifiedType: const FullType(bool)),
     ];
-    if (object.debugPaintSizeEnabled != null) {
-      result
-        ..add('debugPaintSizeEnabled')
-        ..add(serializers.serialize(object.debugPaintSizeEnabled,
-            specifiedType: const FullType(bool)));
-    }
-    if (object.debugPaintPointersEnabled != null) {
-      result
-        ..add('debugPaintPointersEnabled')
-        ..add(serializers.serialize(object.debugPaintPointersEnabled,
-            specifiedType: const FullType(bool)));
-    }
-    if (object.debugShowCheckedModeBanner != null) {
-      result
-        ..add('debugShowCheckedModeBanner')
-        ..add(serializers.serialize(object.debugShowCheckedModeBanner,
-            specifiedType: const FullType(bool)));
-    }
-    if (object.showPerformanceOverlay != null) {
-      result
-        ..add('showPerformanceOverlay')
-        ..add(serializers.serialize(object.showPerformanceOverlay,
-            specifiedType: const FullType(bool)));
-    }
-    if (object.showSemanticsDebugger != null) {
-      result
-        ..add('showSemanticsDebugger')
-        ..add(serializers.serialize(object.showSemanticsDebugger,
-            specifiedType: const FullType(bool)));
-    }
-    if (object.remoteConfigDebugMode != null) {
-      result
-        ..add('remoteConfigDebugMode')
-        ..add(serializers.serialize(object.remoteConfigDebugMode,
-            specifiedType: const FullType(bool)));
-    }
+
     return result;
   }
 
@@ -138,6 +121,30 @@ class _$AppPageModel extends AppPageModel {
       : super._() {
     if (title == null) {
       throw new BuiltValueNullFieldError('AppPageModel', 'title');
+    }
+    if (debugPaintSizeEnabled == null) {
+      throw new BuiltValueNullFieldError(
+          'AppPageModel', 'debugPaintSizeEnabled');
+    }
+    if (debugPaintPointersEnabled == null) {
+      throw new BuiltValueNullFieldError(
+          'AppPageModel', 'debugPaintPointersEnabled');
+    }
+    if (debugShowCheckedModeBanner == null) {
+      throw new BuiltValueNullFieldError(
+          'AppPageModel', 'debugShowCheckedModeBanner');
+    }
+    if (showPerformanceOverlay == null) {
+      throw new BuiltValueNullFieldError(
+          'AppPageModel', 'showPerformanceOverlay');
+    }
+    if (showSemanticsDebugger == null) {
+      throw new BuiltValueNullFieldError(
+          'AppPageModel', 'showSemanticsDebugger');
+    }
+    if (remoteConfigDebugMode == null) {
+      throw new BuiltValueNullFieldError(
+          'AppPageModel', 'remoteConfigDebugMode');
     }
   }
 
@@ -229,7 +236,9 @@ class AppPageModelBuilder
   set remoteConfigDebugMode(bool remoteConfigDebugMode) =>
       _$this._remoteConfigDebugMode = remoteConfigDebugMode;
 
-  AppPageModelBuilder();
+  AppPageModelBuilder() {
+    AppPageModel._initializeBuilder(this);
+  }
 
   AppPageModelBuilder get _$this {
     if (_$v != null) {

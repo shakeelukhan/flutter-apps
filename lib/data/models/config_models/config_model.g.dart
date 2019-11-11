@@ -1,39 +1,38 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'app_sources_model.dart';
+part of 'config_model.dart';
 
 // **************************************************************************
 // BuiltValueGenerator
 // **************************************************************************
 
-Serializer<AppSourcesModel> _$appSourcesModelSerializer =
-    new _$AppSourcesModelSerializer();
+Serializer<ConfigModel> _$configModelSerializer = new _$ConfigModelSerializer();
 
-class _$AppSourcesModelSerializer
-    implements StructuredSerializer<AppSourcesModel> {
+class _$ConfigModelSerializer implements StructuredSerializer<ConfigModel> {
   @override
-  final Iterable<Type> types = const [AppSourcesModel, _$AppSourcesModel];
+  final Iterable<Type> types = const [ConfigModel, _$ConfigModel];
   @override
-  final String wireName = 'AppSourcesModel';
+  final String wireName = 'ConfigModel';
 
   @override
-  Iterable<Object> serialize(Serializers serializers, AppSourcesModel object,
+  Iterable<Object> serialize(Serializers serializers, ConfigModel object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object>[
       'sources',
       serializers.serialize(object.sources,
-          specifiedType: const FullType(BuiltMap,
-              const [const FullType(String), const FullType(AppSourceModel)])),
+          specifiedType: const FullType(BuiltMap, const [
+            const FullType(String),
+            const FullType(ConfigSourceModel)
+          ])),
     ];
 
     return result;
   }
 
   @override
-  AppSourcesModel deserialize(
-      Serializers serializers, Iterable<Object> serialized,
+  ConfigModel deserialize(Serializers serializers, Iterable<Object> serialized,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = new AppSourcesModelBuilder();
+    final result = new ConfigModelBuilder();
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
@@ -45,7 +44,7 @@ class _$AppSourcesModelSerializer
           result.sources.replace(serializers.deserialize(value,
               specifiedType: const FullType(BuiltMap, const [
                 const FullType(String),
-                const FullType(AppSourceModel)
+                const FullType(ConfigSourceModel)
               ])) as BuiltMap<dynamic, dynamic>);
           break;
       }
@@ -55,31 +54,30 @@ class _$AppSourcesModelSerializer
   }
 }
 
-class _$AppSourcesModel extends AppSourcesModel {
+class _$ConfigModel extends ConfigModel {
   @override
-  final BuiltMap<String, AppSourceModel> sources;
+  final BuiltMap<String, ConfigSourceModel> sources;
 
-  factory _$AppSourcesModel([void Function(AppSourcesModelBuilder) updates]) =>
-      (new AppSourcesModelBuilder()..update(updates)).build();
+  factory _$ConfigModel([void Function(ConfigModelBuilder) updates]) =>
+      (new ConfigModelBuilder()..update(updates)).build();
 
-  _$AppSourcesModel._({this.sources}) : super._() {
+  _$ConfigModel._({this.sources}) : super._() {
     if (sources == null) {
-      throw new BuiltValueNullFieldError('AppSourcesModel', 'sources');
+      throw new BuiltValueNullFieldError('ConfigModel', 'sources');
     }
   }
 
   @override
-  AppSourcesModel rebuild(void Function(AppSourcesModelBuilder) updates) =>
+  ConfigModel rebuild(void Function(ConfigModelBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
-  AppSourcesModelBuilder toBuilder() =>
-      new AppSourcesModelBuilder()..replace(this);
+  ConfigModelBuilder toBuilder() => new ConfigModelBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    return other is AppSourcesModel && sources == other.sources;
+    return other is ConfigModel && sources == other.sources;
   }
 
   @override
@@ -89,25 +87,23 @@ class _$AppSourcesModel extends AppSourcesModel {
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper('AppSourcesModel')
-          ..add('sources', sources))
+    return (newBuiltValueToStringHelper('ConfigModel')..add('sources', sources))
         .toString();
   }
 }
 
-class AppSourcesModelBuilder
-    implements Builder<AppSourcesModel, AppSourcesModelBuilder> {
-  _$AppSourcesModel _$v;
+class ConfigModelBuilder implements Builder<ConfigModel, ConfigModelBuilder> {
+  _$ConfigModel _$v;
 
-  MapBuilder<String, AppSourceModel> _sources;
-  MapBuilder<String, AppSourceModel> get sources =>
-      _$this._sources ??= new MapBuilder<String, AppSourceModel>();
-  set sources(MapBuilder<String, AppSourceModel> sources) =>
+  MapBuilder<String, ConfigSourceModel> _sources;
+  MapBuilder<String, ConfigSourceModel> get sources =>
+      _$this._sources ??= new MapBuilder<String, ConfigSourceModel>();
+  set sources(MapBuilder<String, ConfigSourceModel> sources) =>
       _$this._sources = sources;
 
-  AppSourcesModelBuilder();
+  ConfigModelBuilder();
 
-  AppSourcesModelBuilder get _$this {
+  ConfigModelBuilder get _$this {
     if (_$v != null) {
       _sources = _$v.sources?.toBuilder();
       _$v = null;
@@ -116,23 +112,23 @@ class AppSourcesModelBuilder
   }
 
   @override
-  void replace(AppSourcesModel other) {
+  void replace(ConfigModel other) {
     if (other == null) {
       throw new ArgumentError.notNull('other');
     }
-    _$v = other as _$AppSourcesModel;
+    _$v = other as _$ConfigModel;
   }
 
   @override
-  void update(void Function(AppSourcesModelBuilder) updates) {
+  void update(void Function(ConfigModelBuilder) updates) {
     if (updates != null) updates(this);
   }
 
   @override
-  _$AppSourcesModel build() {
-    _$AppSourcesModel _$result;
+  _$ConfigModel build() {
+    _$ConfigModel _$result;
     try {
-      _$result = _$v ?? new _$AppSourcesModel._(sources: sources.build());
+      _$result = _$v ?? new _$ConfigModel._(sources: sources.build());
     } catch (_) {
       String _$failedField;
       try {
@@ -140,7 +136,7 @@ class AppSourcesModelBuilder
         sources.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
-            'AppSourcesModel', _$failedField, e.toString());
+            'ConfigModel', _$failedField, e.toString());
       }
       rethrow;
     }

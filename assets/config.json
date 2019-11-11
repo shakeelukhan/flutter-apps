@@ -1,5 +1,5 @@
 {
-  "$": "AppSourcesModel",
+  "$": "ConfigModel",
   "sources": {
     "rishta_aunty_local": {
       "key": "assets/rishta_aunty_dev.json",
