@@ -1,23 +1,23 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'config_source_model.dart';
+part of 'app_source_model.dart';
 
 // **************************************************************************
 // BuiltValueGenerator
 // **************************************************************************
 
-Serializer<ConfigSourceModel> _$configSourceModelSerializer =
-    new _$ConfigSourceModelSerializer();
+Serializer<AppSourceModel> _$appSourceModelSerializer =
+    new _$AppSourceModelSerializer();
 
-class _$ConfigSourceModelSerializer
-    implements StructuredSerializer<ConfigSourceModel> {
+class _$AppSourceModelSerializer
+    implements StructuredSerializer<AppSourceModel> {
   @override
-  final Iterable<Type> types = const [ConfigSourceModel, _$ConfigSourceModel];
+  final Iterable<Type> types = const [AppSourceModel, _$AppSourceModel];
   @override
-  final String wireName = 'ConfigSourceModel';
+  final String wireName = 'AppSourceModel';
 
   @override
-  Iterable<Object> serialize(Serializers serializers, ConfigSourceModel object,
+  Iterable<Object> serialize(Serializers serializers, AppSourceModel object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object>[
       'key',
@@ -32,10 +32,10 @@ class _$ConfigSourceModelSerializer
   }
 
   @override
-  ConfigSourceModel deserialize(
+  AppSourceModel deserialize(
       Serializers serializers, Iterable<Object> serialized,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = new ConfigSourceModelBuilder();
+    final result = new AppSourceModelBuilder();
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
@@ -62,7 +62,7 @@ class _$ConfigSourceModelSerializer
   }
 }
 
-class _$ConfigSourceModel extends ConfigSourceModel {
+class _$AppSourceModel extends AppSourceModel {
   @override
   final String key;
   @override
@@ -70,34 +70,33 @@ class _$ConfigSourceModel extends ConfigSourceModel {
   @override
   final bool cache;
 
-  factory _$ConfigSourceModel(
-          [void Function(ConfigSourceModelBuilder) updates]) =>
-      (new ConfigSourceModelBuilder()..update(updates)).build();
+  factory _$AppSourceModel([void Function(AppSourceModelBuilder) updates]) =>
+      (new AppSourceModelBuilder()..update(updates)).build();
 
-  _$ConfigSourceModel._({this.key, this.local, this.cache}) : super._() {
+  _$AppSourceModel._({this.key, this.local, this.cache}) : super._() {
     if (key == null) {
-      throw new BuiltValueNullFieldError('ConfigSourceModel', 'key');
+      throw new BuiltValueNullFieldError('AppSourceModel', 'key');
     }
     if (local == null) {
-      throw new BuiltValueNullFieldError('ConfigSourceModel', 'local');
+      throw new BuiltValueNullFieldError('AppSourceModel', 'local');
     }
     if (cache == null) {
-      throw new BuiltValueNullFieldError('ConfigSourceModel', 'cache');
+      throw new BuiltValueNullFieldError('AppSourceModel', 'cache');
     }
   }
 
   @override
-  ConfigSourceModel rebuild(void Function(ConfigSourceModelBuilder) updates) =>
+  AppSourceModel rebuild(void Function(AppSourceModelBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
-  ConfigSourceModelBuilder toBuilder() =>
-      new ConfigSourceModelBuilder()..replace(this);
+  AppSourceModelBuilder toBuilder() =>
+      new AppSourceModelBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    return other is ConfigSourceModel &&
+    return other is AppSourceModel &&
         key == other.key &&
         local == other.local &&
         cache == other.cache;
@@ -110,7 +109,7 @@ class _$ConfigSourceModel extends ConfigSourceModel {
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper('ConfigSourceModel')
+    return (newBuiltValueToStringHelper('AppSourceModel')
           ..add('key', key)
           ..add('local', local)
           ..add('cache', cache))
@@ -118,9 +117,9 @@ class _$ConfigSourceModel extends ConfigSourceModel {
   }
 }
 
-class ConfigSourceModelBuilder
-    implements Builder<ConfigSourceModel, ConfigSourceModelBuilder> {
-  _$ConfigSourceModel _$v;
+class AppSourceModelBuilder
+    implements Builder<AppSourceModel, AppSourceModelBuilder> {
+  _$AppSourceModel _$v;
 
   String _key;
   String get key => _$this._key;
@@ -134,11 +133,11 @@ class ConfigSourceModelBuilder
   bool get cache => _$this._cache;
   set cache(bool cache) => _$this._cache = cache;
 
-  ConfigSourceModelBuilder() {
-    ConfigSourceModel._initializeBuilder(this);
+  AppSourceModelBuilder() {
+    AppSourceModel._initializeBuilder(this);
   }
 
-  ConfigSourceModelBuilder get _$this {
+  AppSourceModelBuilder get _$this {
     if (_$v != null) {
       _key = _$v.key;
       _local = _$v.local;
@@ -149,22 +148,22 @@ class ConfigSourceModelBuilder
   }
 
   @override
-  void replace(ConfigSourceModel other) {
+  void replace(AppSourceModel other) {
     if (other == null) {
       throw new ArgumentError.notNull('other');
     }
-    _$v = other as _$ConfigSourceModel;
+    _$v = other as _$AppSourceModel;
   }
 
   @override
-  void update(void Function(ConfigSourceModelBuilder) updates) {
+  void update(void Function(AppSourceModelBuilder) updates) {
     if (updates != null) updates(this);
   }
 
   @override
-  _$ConfigSourceModel build() {
+  _$AppSourceModel build() {
     final _$result =
-        _$v ?? new _$ConfigSourceModel._(key: key, local: local, cache: cache);
+        _$v ?? new _$AppSourceModel._(key: key, local: local, cache: cache);
     replace(_$result);
     return _$result;
   }

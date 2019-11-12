@@ -1,14 +1,14 @@
 {
   "$": "ConfigModel",
-  "sources": {
+  "appDatasources": {
     "rishta_aunty_local": {
+      "$": "AssetDatasource",
       "key": "assets/rishta_aunty_dev.json",
-      "local": true,
       "cache": false
     },
     "rishta_aunty_cloud": {
+      "$": "RemoteConfigDatasource2",
       "key": "rishta_aunty_dev",
-      "local": false,
       "cache": false
     }
   }

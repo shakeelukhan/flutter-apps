@@ -18,12 +18,10 @@ class _$ConfigModelSerializer implements StructuredSerializer<ConfigModel> {
   Iterable<Object> serialize(Serializers serializers, ConfigModel object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object>[
-      'sources',
-      serializers.serialize(object.sources,
-          specifiedType: const FullType(BuiltMap, const [
-            const FullType(String),
-            const FullType(ConfigSourceModel)
-          ])),
+      'appDatasources',
+      serializers.serialize(object.appDatasources,
+          specifiedType: const FullType(BuiltMap,
+              const [const FullType(String), const FullType(BaseDatasource)])),
     ];
 
     return result;
@@ -40,11 +38,11 @@ class _$ConfigModelSerializer implements StructuredSerializer<ConfigModel> {
       iterator.moveNext();
       final dynamic value = iterator.current;
       switch (key) {
-        case 'sources':
-          result.sources.replace(serializers.deserialize(value,
+        case 'appDatasources':
+          result.appDatasources.replace(serializers.deserialize(value,
               specifiedType: const FullType(BuiltMap, const [
                 const FullType(String),
-                const FullType(ConfigSourceModel)
+                const FullType(BaseDatasource)
               ])) as BuiltMap<dynamic, dynamic>);
           break;
       }
@@ -56,14 +54,14 @@ class _$ConfigModelSerializer implements StructuredSerializer<ConfigModel> {
 
 class _$ConfigModel extends ConfigModel {
   @override
-  final BuiltMap<String, ConfigSourceModel> sources;
+  final BuiltMap<String, BaseDatasource> appDatasources;
 
   factory _$ConfigModel([void Function(ConfigModelBuilder) updates]) =>
       (new ConfigModelBuilder()..update(updates)).build();
 
-  _$ConfigModel._({this.sources}) : super._() {
-    if (sources == null) {
-      throw new BuiltValueNullFieldError('ConfigModel', 'sources');
+  _$ConfigModel._({this.appDatasources}) : super._() {
+    if (appDatasources == null) {
+      throw new BuiltValueNullFieldError('ConfigModel', 'appDatasources');
     }
   }
 
@@ -77,17 +75,18 @@ class _$ConfigModel extends ConfigModel {
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    return other is ConfigModel && sources == other.sources;
+    return other is ConfigModel && appDatasources == other.appDatasources;
   }
 
   @override
   int get hashCode {
-    return $jf($jc(0, sources.hashCode));
+    return $jf($jc(0, appDatasources.hashCode));
   }
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper('ConfigModel')..add('sources', sources))
+    return (newBuiltValueToStringHelper('ConfigModel')
+          ..add('appDatasources', appDatasources))
         .toString();
   }
 }
@@ -95,17 +94,17 @@ class _$ConfigModel extends ConfigModel {
 class ConfigModelBuilder implements Builder<ConfigModel, ConfigModelBuilder> {
   _$ConfigModel _$v;
 
-  MapBuilder<String, ConfigSourceModel> _sources;
-  MapBuilder<String, ConfigSourceModel> get sources =>
-      _$this._sources ??= new MapBuilder<String, ConfigSourceModel>();
-  set sources(MapBuilder<String, ConfigSourceModel> sources) =>
-      _$this._sources = sources;
+  MapBuilder<String, BaseDatasource> _appDatasources;
+  MapBuilder<String, BaseDatasource> get appDatasources =>
+      _$this._appDatasources ??= new MapBuilder<String, BaseDatasource>();
+  set appDatasources(MapBuilder<String, BaseDatasource> appDatasources) =>
+      _$this._appDatasources = appDatasources;
 
   ConfigModelBuilder();
 
   ConfigModelBuilder get _$this {
     if (_$v != null) {
-      _sources = _$v.sources?.toBuilder();
+      _appDatasources = _$v.appDatasources?.toBuilder();
       _$v = null;
     }
     return this;
@@ -128,12 +127,13 @@ class ConfigModelBuilder implements Builder<ConfigModel, ConfigModelBuilder> {
   _$ConfigModel build() {
     _$ConfigModel _$result;
     try {
-      _$result = _$v ?? new _$ConfigModel._(sources: sources.build());
+      _$result =
+          _$v ?? new _$ConfigModel._(appDatasources: appDatasources.build());
     } catch (_) {
       String _$failedField;
       try {
-        _$failedField = 'sources';
-        sources.build();
+        _$failedField = 'appDatasources';
+        appDatasources.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
             'ConfigModel', _$failedField, e.toString());

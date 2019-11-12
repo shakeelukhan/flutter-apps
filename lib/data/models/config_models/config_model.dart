@@ -3,15 +3,14 @@ import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
 import 'package:rishtaaunty/utils/utils.dart' as u;
 import '../base_model.dart';
-import 'config_source_model.dart';
+import '../../datasources/base_datasource.dart';
 part 'config_model.g.dart';
 
 abstract class ConfigModel extends BaseModel<ConfigModel>
     implements Built<ConfigModel, ConfigModelBuilder> {
-  static Serializer<ConfigModel> get serializer =>
-      _$configModelSerializer;
+  static Serializer<ConfigModel> get serializer => _$configModelSerializer;
 
-  BuiltMap<String, ConfigSourceModel> get sources;
+  BuiltMap<String, BaseDatasource> get appDatasources;
 
   ConfigModel._();
   factory ConfigModel([void Function(ConfigModelBuilder) updates]) =

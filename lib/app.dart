@@ -6,13 +6,11 @@ import 'package:rishtaaunty/pages/pages.dart' as p;
 import 'package:rishtaaunty/widgets/widgets.dart' as w;
 
 class App extends w.BlocWidget<d.AppModel> {
-  App.fromBloc(b.BaseBloc<d.AppModel> bloc, {Key key})
-      : super.fromBloc(bloc, key: key);
+  App.fromBloc(b.AppBloc bloc, {Key key}) : super.fromBloc(bloc, key: key);
   App.fromRepository(d.AppRepository repository, {Key key})
       : super.fromBloc(b.AppBloc.fromRepository(repository), key: key);
-  App.fromConfig(String name, {bool local = true, bool cache = true, Key key})
-      : super.fromBloc(b.AppBloc.fromConfig(name, local: local, cache: cache),
-            key: key);
+  App.fromConfig(String name, {Key key})
+      : super.fromBloc(b.AppBloc.fromConfig(name), key: key);
 
   Widget newStateWidget() => MaterialApp(home: super.newStateWidget());
 

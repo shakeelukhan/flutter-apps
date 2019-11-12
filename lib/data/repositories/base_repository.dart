@@ -1,10 +1,9 @@
-import 'package:rishtaaunty/data/data.dart' as d;
+import '../models/base_model.dart';
 
-abstract class BaseRepository<M extends d.BaseModel> {
+abstract class BaseRepository<M extends BaseModel> {
   final String name;
-  final bool cache;
 
-  BaseRepository(this.name, {this.cache = true});
+  BaseRepository(this.name);
 
   Future<M> getData();
 }

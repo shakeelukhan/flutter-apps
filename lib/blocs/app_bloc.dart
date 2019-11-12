@@ -6,8 +6,7 @@ class AppBloc extends BaseBloc<d.AppModel> {
 
   AppBloc.fromRepository(this.repository);
 
-  AppBloc.fromConfig(String name, {bool local = true, bool cache = true})
-      : repository = d.AppRepository(name, local: local, cache: cache);
+  AppBloc.fromConfig(String name) : this.repository = d.AppRepository(name);
 
   Future<d.AppModel> getData() async => repository.getData();
 }
