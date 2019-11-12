@@ -37,9 +37,6 @@ class _$AppPageModelSerializer implements StructuredSerializer<AppPageModel> {
       'showSemanticsDebugger',
       serializers.serialize(object.showSemanticsDebugger,
           specifiedType: const FullType(bool)),
-      'remoteConfigDebugMode',
-      serializers.serialize(object.remoteConfigDebugMode,
-          specifiedType: const FullType(bool)),
     ];
 
     return result;
@@ -80,10 +77,6 @@ class _$AppPageModelSerializer implements StructuredSerializer<AppPageModel> {
           result.showSemanticsDebugger = serializers.deserialize(value,
               specifiedType: const FullType(bool)) as bool;
           break;
-        case 'remoteConfigDebugMode':
-          result.remoteConfigDebugMode = serializers.deserialize(value,
-              specifiedType: const FullType(bool)) as bool;
-          break;
       }
     }
 
@@ -104,8 +97,6 @@ class _$AppPageModel extends AppPageModel {
   final bool showPerformanceOverlay;
   @override
   final bool showSemanticsDebugger;
-  @override
-  final bool remoteConfigDebugMode;
 
   factory _$AppPageModel([void Function(AppPageModelBuilder) updates]) =>
       (new AppPageModelBuilder()..update(updates)).build();
@@ -116,8 +107,7 @@ class _$AppPageModel extends AppPageModel {
       this.debugPaintPointersEnabled,
       this.debugShowCheckedModeBanner,
       this.showPerformanceOverlay,
-      this.showSemanticsDebugger,
-      this.remoteConfigDebugMode})
+      this.showSemanticsDebugger})
       : super._() {
     if (title == null) {
       throw new BuiltValueNullFieldError('AppPageModel', 'title');
@@ -142,10 +132,6 @@ class _$AppPageModel extends AppPageModel {
       throw new BuiltValueNullFieldError(
           'AppPageModel', 'showSemanticsDebugger');
     }
-    if (remoteConfigDebugMode == null) {
-      throw new BuiltValueNullFieldError(
-          'AppPageModel', 'remoteConfigDebugMode');
-    }
   }
 
   @override
@@ -164,8 +150,7 @@ class _$AppPageModel extends AppPageModel {
         debugPaintPointersEnabled == other.debugPaintPointersEnabled &&
         debugShowCheckedModeBanner == other.debugShowCheckedModeBanner &&
         showPerformanceOverlay == other.showPerformanceOverlay &&
-        showSemanticsDebugger == other.showSemanticsDebugger &&
-        remoteConfigDebugMode == other.remoteConfigDebugMode;
+        showSemanticsDebugger == other.showSemanticsDebugger;
   }
 
   @override
@@ -173,15 +158,11 @@ class _$AppPageModel extends AppPageModel {
     return $jf($jc(
         $jc(
             $jc(
-                $jc(
-                    $jc(
-                        $jc($jc(0, title.hashCode),
-                            debugPaintSizeEnabled.hashCode),
-                        debugPaintPointersEnabled.hashCode),
-                    debugShowCheckedModeBanner.hashCode),
-                showPerformanceOverlay.hashCode),
-            showSemanticsDebugger.hashCode),
-        remoteConfigDebugMode.hashCode));
+                $jc($jc($jc(0, title.hashCode), debugPaintSizeEnabled.hashCode),
+                    debugPaintPointersEnabled.hashCode),
+                debugShowCheckedModeBanner.hashCode),
+            showPerformanceOverlay.hashCode),
+        showSemanticsDebugger.hashCode));
   }
 
   @override
@@ -192,8 +173,7 @@ class _$AppPageModel extends AppPageModel {
           ..add('debugPaintPointersEnabled', debugPaintPointersEnabled)
           ..add('debugShowCheckedModeBanner', debugShowCheckedModeBanner)
           ..add('showPerformanceOverlay', showPerformanceOverlay)
-          ..add('showSemanticsDebugger', showSemanticsDebugger)
-          ..add('remoteConfigDebugMode', remoteConfigDebugMode))
+          ..add('showSemanticsDebugger', showSemanticsDebugger))
         .toString();
   }
 }
@@ -231,11 +211,6 @@ class AppPageModelBuilder
   set showSemanticsDebugger(bool showSemanticsDebugger) =>
       _$this._showSemanticsDebugger = showSemanticsDebugger;
 
-  bool _remoteConfigDebugMode;
-  bool get remoteConfigDebugMode => _$this._remoteConfigDebugMode;
-  set remoteConfigDebugMode(bool remoteConfigDebugMode) =>
-      _$this._remoteConfigDebugMode = remoteConfigDebugMode;
-
   AppPageModelBuilder() {
     AppPageModel._initializeBuilder(this);
   }
@@ -248,7 +223,6 @@ class AppPageModelBuilder
       _debugShowCheckedModeBanner = _$v.debugShowCheckedModeBanner;
       _showPerformanceOverlay = _$v.showPerformanceOverlay;
       _showSemanticsDebugger = _$v.showSemanticsDebugger;
-      _remoteConfigDebugMode = _$v.remoteConfigDebugMode;
       _$v = null;
     }
     return this;
@@ -276,8 +250,7 @@ class AppPageModelBuilder
             debugPaintPointersEnabled: debugPaintPointersEnabled,
             debugShowCheckedModeBanner: debugShowCheckedModeBanner,
             showPerformanceOverlay: showPerformanceOverlay,
-            showSemanticsDebugger: showSemanticsDebugger,
-            remoteConfigDebugMode: remoteConfigDebugMode);
+            showSemanticsDebugger: showSemanticsDebugger);
     replace(_$result);
     return _$result;
   }

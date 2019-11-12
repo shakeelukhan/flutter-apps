@@ -12,8 +12,7 @@ abstract class AppPageModel extends BaseModel<AppPageModel>
     ..debugPaintPointersEnabled = false
     ..debugShowCheckedModeBanner = false
     ..showPerformanceOverlay = false
-    ..showSemanticsDebugger = false
-    ..remoteConfigDebugMode = false;
+    ..showSemanticsDebugger = false;
   static Serializer<AppPageModel> get serializer => _$appPageModelSerializer;
 
   String get title;
@@ -22,7 +21,6 @@ abstract class AppPageModel extends BaseModel<AppPageModel>
   bool get debugShowCheckedModeBanner;
   bool get showPerformanceOverlay;
   bool get showSemanticsDebugger;
-  bool get remoteConfigDebugMode;
 
   AppPageModel._();
   factory AppPageModel([void Function(AppPageModelBuilder) updates]) =

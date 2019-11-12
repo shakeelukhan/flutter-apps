@@ -26,18 +26,17 @@ class _AppPageState extends State<AppPage> {
 
   @override
   Widget build(BuildContext context) {
-    debugPaintSizeEnabled = widget.data?.debugPaintSizeEnabled ?? false;
-    debugPaintPointersEnabled = widget.data?.debugPaintPointersEnabled ?? false;
+    debugPaintSizeEnabled = widget.data?.debugPaintSizeEnabled;
+    debugPaintPointersEnabled = widget.data?.debugPaintPointersEnabled;
     return MaterialApp(
-        title: widget.data?.title ?? '<TITLE>',
         debugShowCheckedModeBanner:
-            widget.data?.debugShowCheckedModeBanner ?? false,
-        showPerformanceOverlay: widget.data.showPerformanceOverlay ?? false,
-        showSemanticsDebugger: widget.data.showSemanticsDebugger ?? false,
+            widget.data?.debugShowCheckedModeBanner ,
+        showPerformanceOverlay: widget.data?.showPerformanceOverlay,
+        showSemanticsDebugger: widget.data?.showSemanticsDebugger,
         theme: ThemeData(primarySwatch: Colors.orange),
         home: Scaffold(
           appBar: AppBar(
-            title: Text(widget.data.title),
+            title: Text(widget.data?.title),
             centerTitle: true,
             actions: <Widget>[
               Padding(

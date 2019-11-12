@@ -17,6 +17,6 @@ class App extends w.BlocWidget<d.AppModel> {
   Widget updatingStateWidget() =>
       MaterialApp(home: super.updatingStateWidget());
 
-  Widget readyStateWidget(d.AppModel app) => BlocProvider.value(
-      value: this.bloc, child: MaterialApp(home: p.AppPage(app.appPage)));
+  Widget readyStateWidget(d.AppModel app) =>
+      BlocProvider.value(value: this.bloc, child: p.AppPage(app.appPage));
 }
