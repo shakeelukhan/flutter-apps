@@ -114,7 +114,9 @@ class AssetDatasourceBuilder
   bool get cache => _$this._cache;
   set cache(bool cache) => _$this._cache = cache;
 
-  AssetDatasourceBuilder();
+  AssetDatasourceBuilder() {
+    AssetDatasource._initializeBuilder(this);
+  }
 
   AssetDatasourceBuilder get _$this {
     if (_$v != null) {

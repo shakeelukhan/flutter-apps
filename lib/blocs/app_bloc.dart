@@ -1,5 +1,5 @@
 import 'package:rishtaaunty/data/data.dart' as d;
-import './base_bloc.dart';
+import 'base_bloc.dart';
 
 class AppBloc extends BaseBloc<d.AppModel> {
   final d.AppRepository repository;

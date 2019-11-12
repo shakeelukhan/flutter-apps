@@ -1,8 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:rishtaaunty/data/data.dart' as d;
 import 'package:rishtaaunty/utils/utils.dart' as u;
-import './base_event.dart';
-import './base_state.dart';
+import 'base_event.dart';
+import 'base_state.dart';
 
 abstract class BaseBloc<M extends d.BaseModel>
     extends Bloc<BaseEvent<M>, BaseState<M>> {

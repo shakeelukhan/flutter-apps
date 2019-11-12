@@ -3,13 +3,14 @@ import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
 import 'package:flutter/services.dart';
 import 'package:rishtaaunty/utils/utils.dart' as u;
-import './base_datasource.dart';
+import 'base_datasource.dart';
 part 'asset_datasource.g.dart';
 
 abstract class AssetDatasource extends BaseDatasource
     implements Built<AssetDatasource, AssetDatasourceBuilder> {
   static Serializer<AssetDatasource> get serializer =>
       _$assetDatasourceSerializer;
+  static void _initializeBuilder(AssetDatasourceBuilder b) => b..cache = true;
 
   String get key;
   bool get cache;

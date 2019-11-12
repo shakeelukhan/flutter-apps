@@ -7,7 +7,7 @@
       "cache": false
     },
     "rishta_aunty_cloud": {
-      "$": "RemoteConfigDatasource2",
+      "$": "RemoteConfigDatasource",
       "key": "rishta_aunty_dev",
       "cache": false
     }

@@ -2,8 +2,8 @@ import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
 import 'package:rishtaaunty/utils/utils.dart' as u;
-import '../base_model.dart';
 import '../../datasources/base_datasource.dart';
+import '../base_model.dart';
 part 'config_model.g.dart';
 
 abstract class ConfigModel extends BaseModel<ConfigModel>

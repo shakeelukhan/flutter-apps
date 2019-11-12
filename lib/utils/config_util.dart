@@ -1,5 +1,5 @@
 import 'package:rishtaaunty/data/data.dart' as d;
-import './io_util.dart';
+import 'io_util.dart';
 
 class ConfigUtil {
   Future<d.ConfigModel> _config;

@@ -12,7 +12,6 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..add(AssetDatasource.serializer)
       ..add(ConfigModel.serializer)
       ..add(RemoteConfigDatasource.serializer)
-      ..add(RemoteConfigDatasource2.serializer)
       ..addBuilderFactory(
           const FullType(BuiltMap,
               const [const FullType(String), const FullType(BaseDatasource)]),
