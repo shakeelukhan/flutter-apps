@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:rishtaaunty/utils/utils.dart' as u;
-import 'app.dart';
+import 'package:rishtaaunty/tools/tools.dart' as t;
+import 'package:rishtaaunty/ui/ui.dart' as u;
 
 void main() async {
   try {
-    runApp(App.fromConfig('rishta_aunty_local'));
+    runApp(u.AppPage.fromConfig('rishta_aunty_local'));
   } catch (err) {
-    u.log.logger.e(err);
+    t.log.logger.e(err);
   }
 }

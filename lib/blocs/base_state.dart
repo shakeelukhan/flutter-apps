@@ -1,5 +1,5 @@
 import 'package:rishtaaunty/data/data.dart' as d;
-import 'package:rishtaaunty/utils/utils.dart' as u;
+import 'package:rishtaaunty/tools/tools.dart' as t;
 
 abstract class BaseState<M extends d.BaseModel> {}
 
@@ -17,6 +17,6 @@ class BaseStateError<M extends d.BaseModel> extends BaseState<M> {
   Exception error;
 
   BaseStateError(this.error) {
-    u.log.logger.e('WidgetStateError: $error');
+    t.log.logger.e('WidgetStateError: $error');
   }
 }

@@ -1,12 +1,12 @@
 import 'package:built_value/serializer.dart';
-import 'package:rishtaaunty/utils/utils.dart' as u;
+import 'package:rishtaaunty/tools/tools.dart' as t;
 
 abstract class BaseModel<M> {
   BaseModel();
 
   FullType getSpecifiedType() => FullType(M);
 
-  Map toJson() => u.io.serialize(this, getSpecifiedType());
+  Map toJson() => t.io.serialize(this, getSpecifiedType());
 
-  String toJsonString() => u.io.jsonToString(toJson());
+  String toJsonString() => t.io.jsonToString(toJson());
 }

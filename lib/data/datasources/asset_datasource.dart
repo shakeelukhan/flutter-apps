@@ -2,7 +2,7 @@ import 'dart:async';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
 import 'package:flutter/services.dart';
-import 'package:rishtaaunty/utils/utils.dart' as u;
+import 'package:rishtaaunty/tools/tools.dart' as t;
 import 'base_datasource.dart';
 part 'asset_datasource.g.dart';
 
@@ -21,12 +21,12 @@ abstract class AssetDatasource extends BaseDatasource
   factory AssetDatasource.fromArgs(String key, {bool cache = true}) =>
       _$AssetDatasource._(key: key, cache: cache);
   factory AssetDatasource.fromJson(Map json) =>
-      u.io.deserialize(json, FullType(AssetDatasource));
+      t.io.deserialize(json, FullType(AssetDatasource));
 
   @override
   Future<String> getString() async =>
       rootBundle.loadString(this.key, cache: this.cache);
 
   @override
-  Future<dynamic> getJson() async => u.io.stringToJson(await getString());
+  Future<dynamic> getJson() async => t.io.stringToJson(await getString());
 }

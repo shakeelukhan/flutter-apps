@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:json2builtvalue/json2builtvalue.dart';
-import 'package:rishtaaunty/utils/utils.dart';
+import 'io_tool.dart';
 
 class BuiltValueUtil {
   Parser _parser;
@@ -14,7 +14,7 @@ class BuiltValueUtil {
 
   Future<String> getAssetCode(String jsonAssetKey,
           [String topLevelName = 'TopLevel']) async =>
-      getStringCode(await io.getAssetString(jsonAssetKey), topLevelName);
+      getStringCode(await ioUtil.getAssetString(jsonAssetKey), topLevelName);
 
   void printAssetCode(
           [String jsonAssetKey = 'assets/built_value_temp.json']) async =>

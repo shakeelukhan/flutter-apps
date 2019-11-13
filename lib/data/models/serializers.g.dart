@@ -8,10 +8,13 @@ part of 'serializers.dart';
 
 Serializers _$serializers = (new Serializers().toBuilder()
       ..add(AppModel.serializer)
-      ..add(AppPageModel.serializer)
       ..add(AssetDatasource.serializer)
       ..add(ConfigModel.serializer)
+      ..add(MenuItemModel.serializer)
       ..add(RemoteConfigDatasource.serializer)
+      ..addBuilderFactory(
+          const FullType(BuiltList, const [const FullType(MenuItemModel)]),
+          () => new ListBuilder<MenuItemModel>())
       ..addBuilderFactory(
           const FullType(BuiltMap,
               const [const FullType(String), const FullType(BaseDatasource)]),

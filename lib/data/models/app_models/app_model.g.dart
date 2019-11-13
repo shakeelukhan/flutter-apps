@@ -1,32 +1,28 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'app_page_model.dart';
+part of 'app_model.dart';
 
 // **************************************************************************
 // BuiltValueGenerator
 // **************************************************************************
 
-Serializer<AppPageModel> _$appPageModelSerializer =
-    new _$AppPageModelSerializer();
+Serializer<AppModel> _$appModelSerializer = new _$AppModelSerializer();
 
-class _$AppPageModelSerializer implements StructuredSerializer<AppPageModel> {
+class _$AppModelSerializer implements StructuredSerializer<AppModel> {
   @override
-  final Iterable<Type> types = const [AppPageModel, _$AppPageModel];
+  final Iterable<Type> types = const [AppModel, _$AppModel];
   @override
-  final String wireName = 'AppPageModel';
+  final String wireName = 'AppModel';
 
   @override
-  Iterable<Object> serialize(Serializers serializers, AppPageModel object,
+  Iterable<Object> serialize(Serializers serializers, AppModel object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object>[
-      'title',
-      serializers.serialize(object.title,
-          specifiedType: const FullType(String)),
-      'debugPaintSizeEnabled',
-      serializers.serialize(object.debugPaintSizeEnabled,
-          specifiedType: const FullType(bool)),
       'debugPaintPointersEnabled',
       serializers.serialize(object.debugPaintPointersEnabled,
+          specifiedType: const FullType(bool)),
+      'debugPaintSizeEnabled',
+      serializers.serialize(object.debugPaintSizeEnabled,
           specifiedType: const FullType(bool)),
       'debugShowCheckedModeBanner',
       serializers.serialize(object.debugShowCheckedModeBanner,
@@ -37,15 +33,24 @@ class _$AppPageModelSerializer implements StructuredSerializer<AppPageModel> {
       'showSemanticsDebugger',
       serializers.serialize(object.showSemanticsDebugger,
           specifiedType: const FullType(bool)),
+      'title',
+      serializers.serialize(object.title,
+          specifiedType: const FullType(String)),
     ];
-
+    if (object.menu != null) {
+      result
+        ..add('menu')
+        ..add(serializers.serialize(object.menu,
+            specifiedType: const FullType(
+                BuiltList, const [const FullType(MenuItemModel)])));
+    }
     return result;
   }
 
   @override
-  AppPageModel deserialize(Serializers serializers, Iterable<Object> serialized,
+  AppModel deserialize(Serializers serializers, Iterable<Object> serialized,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = new AppPageModelBuilder();
+    final result = new AppModelBuilder();
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
@@ -53,16 +58,12 @@ class _$AppPageModelSerializer implements StructuredSerializer<AppPageModel> {
       iterator.moveNext();
       final dynamic value = iterator.current;
       switch (key) {
-        case 'title':
-          result.title = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+        case 'debugPaintPointersEnabled':
+          result.debugPaintPointersEnabled = serializers.deserialize(value,
+              specifiedType: const FullType(bool)) as bool;
           break;
         case 'debugPaintSizeEnabled':
           result.debugPaintSizeEnabled = serializers.deserialize(value,
-              specifiedType: const FullType(bool)) as bool;
-          break;
-        case 'debugPaintPointersEnabled':
-          result.debugPaintPointersEnabled = serializers.deserialize(value,
               specifiedType: const FullType(bool)) as bool;
           break;
         case 'debugShowCheckedModeBanner':
@@ -77,6 +78,16 @@ class _$AppPageModelSerializer implements StructuredSerializer<AppPageModel> {
           result.showSemanticsDebugger = serializers.deserialize(value,
               specifiedType: const FullType(bool)) as bool;
           break;
+        case 'title':
+          result.title = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String;
+          break;
+        case 'menu':
+          result.menu.replace(serializers.deserialize(value,
+                  specifiedType: const FullType(
+                      BuiltList, const [const FullType(MenuItemModel)]))
+              as BuiltList<dynamic>);
+          break;
       }
     }
 
@@ -84,73 +95,74 @@ class _$AppPageModelSerializer implements StructuredSerializer<AppPageModel> {
   }
 }
 
-class _$AppPageModel extends AppPageModel {
-  @override
-  final String title;
-  @override
-  final bool debugPaintSizeEnabled;
+class _$AppModel extends AppModel {
   @override
   final bool debugPaintPointersEnabled;
+  @override
+  final bool debugPaintSizeEnabled;
   @override
   final bool debugShowCheckedModeBanner;
   @override
   final bool showPerformanceOverlay;
   @override
   final bool showSemanticsDebugger;
+  @override
+  final String title;
+  @override
+  final BuiltList<MenuItemModel> menu;
 
-  factory _$AppPageModel([void Function(AppPageModelBuilder) updates]) =>
-      (new AppPageModelBuilder()..update(updates)).build();
+  factory _$AppModel([void Function(AppModelBuilder) updates]) =>
+      (new AppModelBuilder()..update(updates)).build();
 
-  _$AppPageModel._(
-      {this.title,
+  _$AppModel._(
+      {this.debugPaintPointersEnabled,
       this.debugPaintSizeEnabled,
-      this.debugPaintPointersEnabled,
       this.debugShowCheckedModeBanner,
       this.showPerformanceOverlay,
-      this.showSemanticsDebugger})
+      this.showSemanticsDebugger,
+      this.title,
+      this.menu})
       : super._() {
-    if (title == null) {
-      throw new BuiltValueNullFieldError('AppPageModel', 'title');
-    }
-    if (debugPaintSizeEnabled == null) {
-      throw new BuiltValueNullFieldError(
-          'AppPageModel', 'debugPaintSizeEnabled');
-    }
     if (debugPaintPointersEnabled == null) {
       throw new BuiltValueNullFieldError(
-          'AppPageModel', 'debugPaintPointersEnabled');
+          'AppModel', 'debugPaintPointersEnabled');
+    }
+    if (debugPaintSizeEnabled == null) {
+      throw new BuiltValueNullFieldError('AppModel', 'debugPaintSizeEnabled');
     }
     if (debugShowCheckedModeBanner == null) {
       throw new BuiltValueNullFieldError(
-          'AppPageModel', 'debugShowCheckedModeBanner');
+          'AppModel', 'debugShowCheckedModeBanner');
     }
     if (showPerformanceOverlay == null) {
-      throw new BuiltValueNullFieldError(
-          'AppPageModel', 'showPerformanceOverlay');
+      throw new BuiltValueNullFieldError('AppModel', 'showPerformanceOverlay');
     }
     if (showSemanticsDebugger == null) {
-      throw new BuiltValueNullFieldError(
-          'AppPageModel', 'showSemanticsDebugger');
+      throw new BuiltValueNullFieldError('AppModel', 'showSemanticsDebugger');
+    }
+    if (title == null) {
+      throw new BuiltValueNullFieldError('AppModel', 'title');
     }
   }
 
   @override
-  AppPageModel rebuild(void Function(AppPageModelBuilder) updates) =>
+  AppModel rebuild(void Function(AppModelBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
-  AppPageModelBuilder toBuilder() => new AppPageModelBuilder()..replace(this);
+  AppModelBuilder toBuilder() => new AppModelBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    return other is AppPageModel &&
-        title == other.title &&
-        debugPaintSizeEnabled == other.debugPaintSizeEnabled &&
+    return other is AppModel &&
         debugPaintPointersEnabled == other.debugPaintPointersEnabled &&
+        debugPaintSizeEnabled == other.debugPaintSizeEnabled &&
         debugShowCheckedModeBanner == other.debugShowCheckedModeBanner &&
         showPerformanceOverlay == other.showPerformanceOverlay &&
-        showSemanticsDebugger == other.showSemanticsDebugger;
+        showSemanticsDebugger == other.showSemanticsDebugger &&
+        title == other.title &&
+        menu == other.menu;
   }
 
   @override
@@ -158,43 +170,43 @@ class _$AppPageModel extends AppPageModel {
     return $jf($jc(
         $jc(
             $jc(
-                $jc($jc($jc(0, title.hashCode), debugPaintSizeEnabled.hashCode),
-                    debugPaintPointersEnabled.hashCode),
-                debugShowCheckedModeBanner.hashCode),
-            showPerformanceOverlay.hashCode),
-        showSemanticsDebugger.hashCode));
+                $jc(
+                    $jc(
+                        $jc($jc(0, debugPaintPointersEnabled.hashCode),
+                            debugPaintSizeEnabled.hashCode),
+                        debugShowCheckedModeBanner.hashCode),
+                    showPerformanceOverlay.hashCode),
+                showSemanticsDebugger.hashCode),
+            title.hashCode),
+        menu.hashCode));
   }
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper('AppPageModel')
-          ..add('title', title)
-          ..add('debugPaintSizeEnabled', debugPaintSizeEnabled)
+    return (newBuiltValueToStringHelper('AppModel')
           ..add('debugPaintPointersEnabled', debugPaintPointersEnabled)
+          ..add('debugPaintSizeEnabled', debugPaintSizeEnabled)
           ..add('debugShowCheckedModeBanner', debugShowCheckedModeBanner)
           ..add('showPerformanceOverlay', showPerformanceOverlay)
-          ..add('showSemanticsDebugger', showSemanticsDebugger))
+          ..add('showSemanticsDebugger', showSemanticsDebugger)
+          ..add('title', title)
+          ..add('menu', menu))
         .toString();
   }
 }
 
-class AppPageModelBuilder
-    implements Builder<AppPageModel, AppPageModelBuilder> {
-  _$AppPageModel _$v;
-
-  String _title;
-  String get title => _$this._title;
-  set title(String title) => _$this._title = title;
-
-  bool _debugPaintSizeEnabled;
-  bool get debugPaintSizeEnabled => _$this._debugPaintSizeEnabled;
-  set debugPaintSizeEnabled(bool debugPaintSizeEnabled) =>
-      _$this._debugPaintSizeEnabled = debugPaintSizeEnabled;
+class AppModelBuilder implements Builder<AppModel, AppModelBuilder> {
+  _$AppModel _$v;
 
   bool _debugPaintPointersEnabled;
   bool get debugPaintPointersEnabled => _$this._debugPaintPointersEnabled;
   set debugPaintPointersEnabled(bool debugPaintPointersEnabled) =>
       _$this._debugPaintPointersEnabled = debugPaintPointersEnabled;
+
+  bool _debugPaintSizeEnabled;
+  bool get debugPaintSizeEnabled => _$this._debugPaintSizeEnabled;
+  set debugPaintSizeEnabled(bool debugPaintSizeEnabled) =>
+      _$this._debugPaintSizeEnabled = debugPaintSizeEnabled;
 
   bool _debugShowCheckedModeBanner;
   bool get debugShowCheckedModeBanner => _$this._debugShowCheckedModeBanner;
@@ -211,46 +223,70 @@ class AppPageModelBuilder
   set showSemanticsDebugger(bool showSemanticsDebugger) =>
       _$this._showSemanticsDebugger = showSemanticsDebugger;
 
-  AppPageModelBuilder() {
-    AppPageModel._initializeBuilder(this);
+  String _title;
+  String get title => _$this._title;
+  set title(String title) => _$this._title = title;
+
+  ListBuilder<MenuItemModel> _menu;
+  ListBuilder<MenuItemModel> get menu =>
+      _$this._menu ??= new ListBuilder<MenuItemModel>();
+  set menu(ListBuilder<MenuItemModel> menu) => _$this._menu = menu;
+
+  AppModelBuilder() {
+    AppModel._initializeBuilder(this);
   }
 
-  AppPageModelBuilder get _$this {
+  AppModelBuilder get _$this {
     if (_$v != null) {
-      _title = _$v.title;
-      _debugPaintSizeEnabled = _$v.debugPaintSizeEnabled;
       _debugPaintPointersEnabled = _$v.debugPaintPointersEnabled;
+      _debugPaintSizeEnabled = _$v.debugPaintSizeEnabled;
       _debugShowCheckedModeBanner = _$v.debugShowCheckedModeBanner;
       _showPerformanceOverlay = _$v.showPerformanceOverlay;
       _showSemanticsDebugger = _$v.showSemanticsDebugger;
+      _title = _$v.title;
+      _menu = _$v.menu?.toBuilder();
       _$v = null;
     }
     return this;
   }
 
   @override
-  void replace(AppPageModel other) {
+  void replace(AppModel other) {
     if (other == null) {
       throw new ArgumentError.notNull('other');
     }
-    _$v = other as _$AppPageModel;
+    _$v = other as _$AppModel;
   }
 
   @override
-  void update(void Function(AppPageModelBuilder) updates) {
+  void update(void Function(AppModelBuilder) updates) {
     if (updates != null) updates(this);
   }
 
   @override
-  _$AppPageModel build() {
-    final _$result = _$v ??
-        new _$AppPageModel._(
-            title: title,
-            debugPaintSizeEnabled: debugPaintSizeEnabled,
-            debugPaintPointersEnabled: debugPaintPointersEnabled,
-            debugShowCheckedModeBanner: debugShowCheckedModeBanner,
-            showPerformanceOverlay: showPerformanceOverlay,
-            showSemanticsDebugger: showSemanticsDebugger);
+  _$AppModel build() {
+    _$AppModel _$result;
+    try {
+      _$result = _$v ??
+          new _$AppModel._(
+              debugPaintPointersEnabled: debugPaintPointersEnabled,
+              debugPaintSizeEnabled: debugPaintSizeEnabled,
+              debugShowCheckedModeBanner: debugShowCheckedModeBanner,
+              showPerformanceOverlay: showPerformanceOverlay,
+              showSemanticsDebugger: showSemanticsDebugger,
+              title: title,
+              menu: _menu?.build());
+    } catch (_) {
+      String _$failedField;
+      try {
+        _$failedField = 'menu';
+        _menu?.build();
+      } catch (e) {
+        throw new BuiltValueNestedFieldError(
+            'AppModel', _$failedField, e.toString());
+      }
+      rethrow;
+    }
     replace(_$result);
     return _$result;
   }

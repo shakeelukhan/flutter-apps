@@ -2,7 +2,7 @@ import 'dart:async';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
-import 'package:rishtaaunty/utils/utils.dart' as u;
+import 'package:rishtaaunty/tools/tools.dart' as t;
 import 'base_datasource.dart';
 part 'remote_config_datasource.g.dart';
 
@@ -26,7 +26,7 @@ abstract class RemoteConfigDatasource extends BaseDatasource
   factory RemoteConfigDatasource.fromArgs(String key, {bool cache = true}) =>
       _$RemoteConfigDatasource._(key: key, cache: cache);
   factory RemoteConfigDatasource.fromJson(Map json) =>
-      u.io.deserialize(json, FullType(RemoteConfigDatasource));
+      t.io.deserialize(json, FullType(RemoteConfigDatasource));
 
   Future<void> setDebug(bool debugMode) async => (await remoteConfig)
       .setConfigSettings(RemoteConfigSettings(debugMode: debugMode));
@@ -42,5 +42,5 @@ abstract class RemoteConfigDatasource extends BaseDatasource
   }
 
   @override
-  Future<dynamic> getJson() async => u.io.stringToJson(await getString());
+  Future<dynamic> getJson() async => t.io.stringToJson(await getString());
 }

@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:rishtaaunty/data/data.dart' as d;
-import 'package:rishtaaunty/utils/utils.dart' as u;
+import 'package:rishtaaunty/tools/tools.dart' as t;
 import 'base_event.dart';
 import 'base_state.dart';
 
@@ -20,9 +20,11 @@ abstract class BaseBloc<M extends d.BaseModel>
         yield BaseStateError<M>(error);
       }
     }
-    u.log.logger.i(
+    t.log.logger.i(
         '${event?.toString()}: ${oldState?.runtimeType} -> ${currentState?.runtimeType}');
   }
 
   Future<M> getData();
+
+  void triggerUpdate() => this.dispatch(BaseEventUpdate<M>(getData()));
 }

@@ -2,11 +2,17 @@ import 'package:rishtaaunty/data/data.dart' as d;
 import 'base_bloc.dart';
 
 class AppBloc extends BaseBloc<d.AppModel> {
-  final d.AppRepository repository;
+  d.AppRepository _repository;
+  d.AppRepository get repository => _repository;
 
-  AppBloc.fromRepository(this.repository);
+  AppBloc.fromConfig(String name) {
+    this.getConfig(name);
+  }
 
-  AppBloc.fromConfig(String name) : this.repository = d.AppRepository(name);
+  void getConfig(String name) {
+    this._repository = d.AppRepository(name);
+    this.triggerUpdate();
+  }
 
-  Future<d.AppModel> getData() async => repository.getData();
+  Future<d.AppModel> getData() => _repository.getData();
 }

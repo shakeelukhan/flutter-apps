@@ -1,6 +1,6 @@
-import 'package:rishtaaunty/utils/utils.dart' as u;
+import 'package:rishtaaunty/tools/tools.dart' as t;
 import '../datasources/base_datasource.dart';
-import '../models/file_models/app_model.dart';
+import '../models/app_models/app_model.dart';
 import 'base_repository.dart';
 
 class AppRepository extends BaseRepository<AppModel> {
@@ -12,7 +12,7 @@ class AppRepository extends BaseRepository<AppModel> {
   }
 
   Future<BaseDatasource> _getDatasource() async =>
-      _datasource = u.config.getAppDatasource(name);
+      _datasource = t.config.getAppDatasource(name);
 
   Future<AppModel> getData() async =>
       AppModel.fromJson(await (await _datasource).getJson());

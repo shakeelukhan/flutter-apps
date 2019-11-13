@@ -4,18 +4,18 @@ import 'package:built_value/standard_json_plugin.dart';
 import '../datasources/asset_datasource.dart';
 import '../datasources/base_datasource.dart';
 import '../datasources/remote_config_datasource.dart';
-import 'file_models/app_model.dart';
-import 'page_models/app_page_model.dart';
-import 'file_models/config_model.dart';
+import 'app_models/app_model.dart';
+import 'app_models/config_model.dart';
+import 'app_models/menu_item_model.dart';
 part 'serializers.g.dart';
 
 @SerializersFor(const [
   AppModel,
-  AppPageModel,
   AssetDatasource,
   BaseDatasource,
   ConfigModel,
   RemoteConfigDatasource,
+  MenuItemModel,
 ])
 final Serializers serializers =
     (_$serializers.toBuilder()..addPlugin(StandardJsonPlugin())).build();
