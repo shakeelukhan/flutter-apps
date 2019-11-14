@@ -28,6 +28,10 @@ class _$MenuItemModelSerializer implements StructuredSerializer<MenuItemModel> {
       'fontFamily',
       serializers.serialize(object.fontFamily,
           specifiedType: const FullType(String)),
+      'subMenuItems',
+      serializers.serialize(object.subMenuItems,
+          specifiedType: const FullType(BuiltMap,
+              const [const FullType(int), const FullType(SubMenuItemModel)])),
     ];
 
     return result;
@@ -57,6 +61,13 @@ class _$MenuItemModelSerializer implements StructuredSerializer<MenuItemModel> {
           result.fontFamily = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String;
           break;
+        case 'subMenuItems':
+          result.subMenuItems.replace(serializers.deserialize(value,
+              specifiedType: const FullType(BuiltMap, const [
+                const FullType(int),
+                const FullType(SubMenuItemModel)
+              ])) as BuiltMap<dynamic, dynamic>);
+          break;
       }
     }
 
@@ -71,11 +82,15 @@ class _$MenuItemModel extends MenuItemModel {
   final int codePoint;
   @override
   final String fontFamily;
+  @override
+  final BuiltMap<int, SubMenuItemModel> subMenuItems;
 
   factory _$MenuItemModel([void Function(MenuItemModelBuilder) updates]) =>
       (new MenuItemModelBuilder()..update(updates)).build();
 
-  _$MenuItemModel._({this.title, this.codePoint, this.fontFamily}) : super._() {
+  _$MenuItemModel._(
+      {this.title, this.codePoint, this.fontFamily, this.subMenuItems})
+      : super._() {
     if (title == null) {
       throw new BuiltValueNullFieldError('MenuItemModel', 'title');
     }
@@ -84,6 +99,9 @@ class _$MenuItemModel extends MenuItemModel {
     }
     if (fontFamily == null) {
       throw new BuiltValueNullFieldError('MenuItemModel', 'fontFamily');
+    }
+    if (subMenuItems == null) {
+      throw new BuiltValueNullFieldError('MenuItemModel', 'subMenuItems');
     }
   }
 
@@ -100,13 +118,16 @@ class _$MenuItemModel extends MenuItemModel {
     return other is MenuItemModel &&
         title == other.title &&
         codePoint == other.codePoint &&
-        fontFamily == other.fontFamily;
+        fontFamily == other.fontFamily &&
+        subMenuItems == other.subMenuItems;
   }
 
   @override
   int get hashCode {
     return $jf($jc(
-        $jc($jc(0, title.hashCode), codePoint.hashCode), fontFamily.hashCode));
+        $jc($jc($jc(0, title.hashCode), codePoint.hashCode),
+            fontFamily.hashCode),
+        subMenuItems.hashCode));
   }
 
   @override
@@ -114,7 +135,8 @@ class _$MenuItemModel extends MenuItemModel {
     return (newBuiltValueToStringHelper('MenuItemModel')
           ..add('title', title)
           ..add('codePoint', codePoint)
-          ..add('fontFamily', fontFamily))
+          ..add('fontFamily', fontFamily)
+          ..add('subMenuItems', subMenuItems))
         .toString();
   }
 }
@@ -135,6 +157,12 @@ class MenuItemModelBuilder
   String get fontFamily => _$this._fontFamily;
   set fontFamily(String fontFamily) => _$this._fontFamily = fontFamily;
 
+  MapBuilder<int, SubMenuItemModel> _subMenuItems;
+  MapBuilder<int, SubMenuItemModel> get subMenuItems =>
+      _$this._subMenuItems ??= new MapBuilder<int, SubMenuItemModel>();
+  set subMenuItems(MapBuilder<int, SubMenuItemModel> subMenuItems) =>
+      _$this._subMenuItems = subMenuItems;
+
   MenuItemModelBuilder() {
     MenuItemModel._initializeBuilder(this);
   }
@@ -144,6 +172,7 @@ class MenuItemModelBuilder
       _title = _$v.title;
       _codePoint = _$v.codePoint;
       _fontFamily = _$v.fontFamily;
+      _subMenuItems = _$v.subMenuItems?.toBuilder();
       _$v = null;
     }
     return this;
@@ -164,9 +193,25 @@ class MenuItemModelBuilder
 
   @override
   _$MenuItemModel build() {
-    final _$result = _$v ??
-        new _$MenuItemModel._(
-            title: title, codePoint: codePoint, fontFamily: fontFamily);
+    _$MenuItemModel _$result;
+    try {
+      _$result = _$v ??
+          new _$MenuItemModel._(
+              title: title,
+              codePoint: codePoint,
+              fontFamily: fontFamily,
+              subMenuItems: subMenuItems.build());
+    } catch (_) {
+      String _$failedField;
+      try {
+        _$failedField = 'subMenuItems';
+        subMenuItems.build();
+      } catch (e) {
+        throw new BuiltValueNestedFieldError(
+            'MenuItemModel', _$failedField, e.toString());
+      }
+      rethrow;
+    }
     replace(_$result);
     return _$result;
   }

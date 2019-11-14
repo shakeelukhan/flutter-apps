@@ -4,6 +4,7 @@ export 'datasources/remote_config_datasource.dart';
 export 'models/app_models/app_model.dart';
 export 'models/app_models/config_model.dart';
 export 'models/app_models/menu_item_model.dart';
+export 'models/app_models/sub_menu_item_model.dart';
 export 'models/base_model.dart';
 export 'models/serializers.dart';
 export 'repositories/app_repository.dart';

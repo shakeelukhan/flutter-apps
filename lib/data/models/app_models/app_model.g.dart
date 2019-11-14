@@ -36,14 +36,12 @@ class _$AppModelSerializer implements StructuredSerializer<AppModel> {
       'title',
       serializers.serialize(object.title,
           specifiedType: const FullType(String)),
+      'menuItems',
+      serializers.serialize(object.menuItems,
+          specifiedType: const FullType(BuiltMap,
+              const [const FullType(int), const FullType(MenuItemModel)])),
     ];
-    if (object.menu != null) {
-      result
-        ..add('menu')
-        ..add(serializers.serialize(object.menu,
-            specifiedType: const FullType(
-                BuiltList, const [const FullType(MenuItemModel)])));
-    }
+
     return result;
   }
 
@@ -82,11 +80,12 @@ class _$AppModelSerializer implements StructuredSerializer<AppModel> {
           result.title = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String;
           break;
-        case 'menu':
-          result.menu.replace(serializers.deserialize(value,
-                  specifiedType: const FullType(
-                      BuiltList, const [const FullType(MenuItemModel)]))
-              as BuiltList<dynamic>);
+        case 'menuItems':
+          result.menuItems.replace(serializers.deserialize(value,
+              specifiedType: const FullType(BuiltMap, const [
+                const FullType(int),
+                const FullType(MenuItemModel)
+              ])) as BuiltMap<dynamic, dynamic>);
           break;
       }
     }
@@ -109,7 +108,7 @@ class _$AppModel extends AppModel {
   @override
   final String title;
   @override
-  final BuiltList<MenuItemModel> menu;
+  final BuiltMap<int, MenuItemModel> menuItems;
 
   factory _$AppModel([void Function(AppModelBuilder) updates]) =>
       (new AppModelBuilder()..update(updates)).build();
@@ -121,7 +120,7 @@ class _$AppModel extends AppModel {
       this.showPerformanceOverlay,
       this.showSemanticsDebugger,
       this.title,
-      this.menu})
+      this.menuItems})
       : super._() {
     if (debugPaintPointersEnabled == null) {
       throw new BuiltValueNullFieldError(
@@ -143,6 +142,9 @@ class _$AppModel extends AppModel {
     if (title == null) {
       throw new BuiltValueNullFieldError('AppModel', 'title');
     }
+    if (menuItems == null) {
+      throw new BuiltValueNullFieldError('AppModel', 'menuItems');
+    }
   }
 
   @override
@@ -162,7 +164,7 @@ class _$AppModel extends AppModel {
         showPerformanceOverlay == other.showPerformanceOverlay &&
         showSemanticsDebugger == other.showSemanticsDebugger &&
         title == other.title &&
-        menu == other.menu;
+        menuItems == other.menuItems;
   }
 
   @override
@@ -178,7 +180,7 @@ class _$AppModel extends AppModel {
                     showPerformanceOverlay.hashCode),
                 showSemanticsDebugger.hashCode),
             title.hashCode),
-        menu.hashCode));
+        menuItems.hashCode));
   }
 
   @override
@@ -190,7 +192,7 @@ class _$AppModel extends AppModel {
           ..add('showPerformanceOverlay', showPerformanceOverlay)
           ..add('showSemanticsDebugger', showSemanticsDebugger)
           ..add('title', title)
-          ..add('menu', menu))
+          ..add('menuItems', menuItems))
         .toString();
   }
 }
@@ -227,10 +229,11 @@ class AppModelBuilder implements Builder<AppModel, AppModelBuilder> {
   String get title => _$this._title;
   set title(String title) => _$this._title = title;
 
-  ListBuilder<MenuItemModel> _menu;
-  ListBuilder<MenuItemModel> get menu =>
-      _$this._menu ??= new ListBuilder<MenuItemModel>();
-  set menu(ListBuilder<MenuItemModel> menu) => _$this._menu = menu;
+  MapBuilder<int, MenuItemModel> _menuItems;
+  MapBuilder<int, MenuItemModel> get menuItems =>
+      _$this._menuItems ??= new MapBuilder<int, MenuItemModel>();
+  set menuItems(MapBuilder<int, MenuItemModel> menuItems) =>
+      _$this._menuItems = menuItems;
 
   AppModelBuilder() {
     AppModel._initializeBuilder(this);
@@ -244,7 +247,7 @@ class AppModelBuilder implements Builder<AppModel, AppModelBuilder> {
       _showPerformanceOverlay = _$v.showPerformanceOverlay;
       _showSemanticsDebugger = _$v.showSemanticsDebugger;
       _title = _$v.title;
-      _menu = _$v.menu?.toBuilder();
+      _menuItems = _$v.menuItems?.toBuilder();
       _$v = null;
     }
     return this;
@@ -275,12 +278,12 @@ class AppModelBuilder implements Builder<AppModel, AppModelBuilder> {
               showPerformanceOverlay: showPerformanceOverlay,
               showSemanticsDebugger: showSemanticsDebugger,
               title: title,
-              menu: _menu?.build());
+              menuItems: menuItems.build());
     } catch (_) {
       String _$failedField;
       try {
-        _$failedField = 'menu';
-        _menu?.build();
+        _$failedField = 'menuItems';
+        menuItems.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
             'AppModel', _$failedField, e.toString());

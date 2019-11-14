@@ -7,6 +7,7 @@ import '../datasources/remote_config_datasource.dart';
 import 'app_models/app_model.dart';
 import 'app_models/config_model.dart';
 import 'app_models/menu_item_model.dart';
+import 'app_models/sub_menu_item_model.dart';
 part 'serializers.g.dart';
 
 @SerializersFor(const [
@@ -16,6 +17,7 @@ part 'serializers.g.dart';
   ConfigModel,
   RemoteConfigDatasource,
   MenuItemModel,
+  SubMenuItemModel,
 ])
 final Serializers serializers =
     (_$serializers.toBuilder()..addPlugin(StandardJsonPlugin())).build();

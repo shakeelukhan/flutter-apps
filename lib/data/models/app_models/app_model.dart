@@ -1,9 +1,9 @@
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
-import 'package:rishtaaunty/data/data.dart';
 import 'package:rishtaaunty/tools/tools.dart' as t;
 import '../base_model.dart';
+import 'menu_item_model.dart';
 part 'app_model.g.dart';
 
 abstract class AppModel extends BaseModel<AppModel>
@@ -14,7 +14,12 @@ abstract class AppModel extends BaseModel<AppModel>
     ..debugShowCheckedModeBanner = false
     ..showPerformanceOverlay = false
     ..showSemanticsDebugger = false
-    ..title = 'NULL_TITLE';
+    ..title = 'NULL_T'
+    ..menuItems = BuiltMap<int, MenuItemModel>({
+      0: MenuItemModel(),
+      1: MenuItemModel(),
+      2: MenuItemModel(),
+    }).toBuilder();
   static Serializer<AppModel> get serializer => _$appModelSerializer;
 
   bool get debugPaintPointersEnabled;
@@ -23,8 +28,7 @@ abstract class AppModel extends BaseModel<AppModel>
   bool get showPerformanceOverlay;
   bool get showSemanticsDebugger;
   String get title;
-  @nullable
-  BuiltList<MenuItemModel> get menu;
+  BuiltMap<int, MenuItemModel> get menuItems;
 
   AppModel._();
   factory AppModel([void Function(AppModelBuilder) updates]) = _$AppModel;

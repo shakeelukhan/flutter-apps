@@ -4,7 +4,7 @@ import 'package:rishtaaunty/ui/ui.dart' as u;
 
 void main() async {
   try {
-    runApp(u.AppPage.fromConfig('rishta_aunty_local'));
+    runApp(u.App.fromConfig('rishta_aunty_local'));
   } catch (err) {
     t.log.logger.e(err);
   }

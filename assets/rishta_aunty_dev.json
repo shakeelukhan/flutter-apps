@@ -6,26 +6,60 @@
   "showPerformanceOverlay": false,
   "showSemanticsDebugger": false,
   "title": "Rishta Aunty",
-  "menu": [
-    {
+  "menuItems": {
+    "0": {
       "title": "Home",
-      "codePoint": 59530
+      "codePoint": 59530,
+      "subMenuItems": {
+        "0": {
+          "title": "home",
+          "route": "/Home/home"
+        },
+        "1": {
+          "title": "home1",
+          "route": "/Home/home1"
+        }
+      }
     },
-    {
+    "1": {
       "title": "Profile",
-      "codePoint": 59475
+      "codePoint": 59475,
+      "subMenuItems": {
+        "0": {
+          "title": "profile",
+          "route": "/Profile/profile"
+        }
+      }
     },
-    {
+    "2": {
       "title": "Search",
-      "codePoint": 59574
+      "codePoint": 59574,
+      "subMenuItems": {
+        "0": {
+          "title": "search",
+          "route": "/Search/search"
+        }
+      }
     },
-    {
+    "3": {
       "title": "Rishtas",
-      "codePoint": 59517
+      "codePoint": 59517,
+      "subMenuItems": {
+        "0": {
+          "title": "rishtas",
+          "route": "/Rishtas/rishtas"
+        }
+      }
     },
-    {
+    "4": {
       "title": "About",
-      "codePoint": 59534
+      "codePoint": 59534,
+      "subMenuItems": {
+        "0": {
+          "title": "about",
+          "route": "/About/about"
+        }
+      }
     }
-  ]
+  }
 }
