@@ -20,17 +20,9 @@ class DataTableHelper {
   List<DataRow> getDataTableRows() {
     return tableRows
         .map(
-          (row) => DataRow(cells: [
-                DataCell(
-                  Text(row[0]),
-                ),
-                DataCell(
-                  Text(row[1]),
-                ),
-                DataCell(
-                  Text(row[2]),
-                ),
-              ]),
+          (row) => DataRow(
+            cells: row.map((cell) => DataCell(Text(cell))).toList(),
+          ),
         )
         .toList();
   }

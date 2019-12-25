@@ -4,16 +4,15 @@ import 'package:thebettingapp/utils/SettingsHelper.dart';
 import 'package:thebettingapp/utils/LoadingScreenHelper.dart';
 import 'package:thebettingapp/utils/DataTableHelper.dart';
 
-class MartingdaleScreen extends StatefulWidget {
+class MartingdaleScreen2 extends StatefulWidget {
   @override
-  _MartingdaleScreenState createState() => _MartingdaleScreenState();
+  _MartingdaleScreen2State createState() => _MartingdaleScreen2State();
 }
 
-class _MartingdaleScreenState extends State<MartingdaleScreen> {
+class _MartingdaleScreen2State extends State<MartingdaleScreen2> {
   LoadingScreenHelper loadingScreen;
   SettingsHelper settings;
   DataTableHelper dataTableHelper;
-  String _strategy;
   int _maxSequence;
   TextEditingController _balanceController;
   int _balance;
@@ -26,15 +25,7 @@ class _MartingdaleScreenState extends State<MartingdaleScreen> {
 
   _calculateMartingdale() async {
     await settings.initialized;
-
     dataTableHelper.tableRows.clear();
-    _strategy = "";
-    _strategy += "   #";
-    _strategy += "   Bet";
-    _strategy += "     LAB";
-    _strategy += "     WAB";
-    _strategy += "     %";
-    _strategy += "\n";
 
     int _betSize = _unitSize;
     int _lossAfterBet = _betSize;
@@ -42,19 +33,13 @@ class _MartingdaleScreenState extends State<MartingdaleScreen> {
     for (int i = 0; i < _maxSequence; i++) {
       List<String> row = [];
       row.add((i + 1).toString());
-      _strategy += _padString((i + 1).toString(), 4);
       row.add(_betSize.toString());
-      _strategy += _padString(_betSize.toString(), 7);
-      row.add(_lossAfterBet.toString());
-      _strategy += _padString(("-" + _lossAfterBet.toString()), 8);
+      row.add("-" + _lossAfterBet.toString());
       _winAfterBet = 2 * _betSize - _lossAfterBet;
       row.add(_winAfterBet.toString());
-      _strategy += _padString(_winAfterBet.toString(), 8);
       double lossStreakPercent =
           100 * pow((_betLoseProbability / 100), (i + 1));
       row.add(lossStreakPercent.toStringAsPrecision(2));
-      _strategy += _padString(lossStreakPercent.toStringAsPrecision(2), 10);
-      _strategy += "\n";
       dataTableHelper.tableRows.add(row);
       _betSize = _lossAfterBet;
       _lossAfterBet += _betSize;
@@ -70,10 +55,10 @@ class _MartingdaleScreenState extends State<MartingdaleScreen> {
     _balanceController = new TextEditingController();
     _maxSequence = 6;
     dataTableHelper = new DataTableHelper();
-    dataTableHelper.setDataTableHeaders(["#","Bet \$","LoseAB \$","WinAB \$","%"]);
+    dataTableHelper
+        .setDataTableHeaders(["#", "Bet \$", "LoseAB \$", "WinAB \$", "%"]);
     _loadSettings();
     _calculateMartingdale();
-    _strategy = "";
   }
 
   // Load settings
@@ -158,7 +143,6 @@ class _MartingdaleScreenState extends State<MartingdaleScreen> {
                       onChanged: (String newValue) {
                         setState(() {
                           _saveSettings();
-                          _strategy += "balance=" + _balance.toString() + "\n";
                         });
                       },
                       autocorrect: false,
@@ -177,19 +161,6 @@ class _MartingdaleScreenState extends State<MartingdaleScreen> {
                       rows: dataTableHelper.getDataTableRows(),
                     ),
                   )
-                ]),
-              ),
-              Divider(color: Colors.grey),
-              Expanded(
-                flex: 1,
-                child: ListView(children: <Widget>[
-                  Text(
-                    _strategy,
-                    textDirection: TextDirection.ltr,
-                    style: TextStyle(
-                      fontSize: 15.0,
-                    ),
-                  ),
                 ]),
               ),
             ],

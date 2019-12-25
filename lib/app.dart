@@ -4,6 +4,7 @@ import 'package:thebettingapp/screens/settings/game_screen.dart';
 import 'package:thebettingapp/screens/settings/session_screen.dart';
 import 'package:thebettingapp/screens/settings/all_screen.dart';
 import 'package:thebettingapp/screens/session/martingdale_screen.dart';
+import 'package:thebettingapp/screens/session/martingdale_screen2.dart';
 import 'package:thebettingapp/screens/session/simulation_screen.dart';
 import 'package:thebettingapp/screens/game/cointoss_screen.dart';
 import 'package:thebettingapp/utils/NavHelper.dart';
@@ -59,6 +60,7 @@ class _AppStatefulState extends State<_AppStateful>
     _appNavHelper.addMenuItem("Session", Icons.local_atm);
     _appNavHelper.addSubmenuItem("Session", "Simulation", SimulationScreen());
     _appNavHelper.addSubmenuItem("Session", "Martingdale", MartingdaleScreen());
+    _appNavHelper.addSubmenuItem("Session", "Martingdale2", MartingdaleScreen2());
     _appNavHelper.addMenuItem("Game", Icons.casino);
     _appNavHelper.addSubmenuItem("Game", "Coin Toss", CoinTossScreen());
     _appNavHelper.addSubmenuItem("Game", "Simulate", Center(child: Text("Simulate: ")));
