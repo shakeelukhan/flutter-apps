@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 class DialogWidget extends StatelessWidget {
-  final String text;
   final bool progress;
-  DialogWidget({this.text, this.progress, Key key}) : super(key: key);
+  final String text;
+  DialogWidget({this.progress, this.text, Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

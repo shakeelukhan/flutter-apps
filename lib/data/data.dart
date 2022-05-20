@@ -1,11 +1,9 @@
-export 'datasources/asset_datasource.dart';
-export 'datasources/base_datasource.dart';
-export 'datasources/remote_config_datasource.dart';
-export 'models/app_models/app_model.dart';
-export 'models/app_models/config_model.dart';
-export 'models/app_models/menu_item_model.dart';
-export 'models/app_models/sub_menu_item_model.dart';
+import 'repositories.dart';
+
+export 'models/app_models.dart';
 export 'models/base_model.dart';
+export 'models/datasource_models.dart';
 export 'models/serializers.dart';
-export 'repositories/app_repository.dart';
-export 'repositories/base_repository.dart';
+export 'repositories.dart' hide ConfigRepository, configRepository;
+
+ConfigRepository get config => configRepository;

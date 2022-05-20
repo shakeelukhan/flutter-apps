@@ -7,15 +7,10 @@ import 'package:rishtaaunty/data/data.dart' as d;
 class BlocWidget<M extends d.BaseModel> extends StatefulWidget {
   final b.BaseBloc<M> _bloc;
 
-  BlocWidget({Key key})
-      : _bloc = null,
-        super(key: key);
-  BlocWidget.fromBloc(this._bloc, {Key key}) : super(key: key);
+  BlocWidget(this._bloc, {Key key}) : super(key: key);
 
   @override
   BlocWidgetState<M> createState() => BlocWidgetState<M>();
-
-  Widget readyStateWidget(M data) => null;
 }
 
 class BlocWidgetState<M extends d.BaseModel> extends State<BlocWidget<M>> {
@@ -25,7 +20,6 @@ class BlocWidgetState<M extends d.BaseModel> extends State<BlocWidget<M>> {
   void initState() {
     super.initState();
     bloc = widget._bloc ?? BlocProvider.of<b.BaseBloc<M>>(context);
-    bloc.triggerUpdate();
   }
 
   @override
@@ -46,9 +40,11 @@ class BlocWidgetState<M extends d.BaseModel> extends State<BlocWidget<M>> {
           } else if (state is b.BaseStateUpdating<M>) {
             _widget = Center(child: Text('Updating...'));
           } else if (state is b.BaseStateReady<M>) {
-            _widget = widget.readyStateWidget(state.data);
+            _widget = readyStateWidget(state.data);
           }
           return _widget;
         });
   }
+
+  Widget readyStateWidget(M data) => null;
 }
