@@ -1,7 +1,7 @@
 package com.shakeelkhan.baccarat;
 
 import java.util.ArrayList;
-import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class Shoe {
 
@@ -37,7 +37,7 @@ public class Shoe {
 		}
 
 		int numCards = cards.size();
-		Random rng = new Random();
+		ThreadLocalRandom rng = ThreadLocalRandom.current();
 		for (int i = 0; i < numCards; i++) {
 			int randomNum = rng.nextInt(numCards - i);
 			temp = cards.remove(randomNum);
@@ -74,8 +74,7 @@ public class Shoe {
 		shuffle();
 //		info();
 
-		Random rng = new Random();
-		cutShoe(rng.nextInt(cards.size()));
+		cutShoe(ThreadLocalRandom.current().nextInt(cards.size()));
 //		info();
 
 		burnCardsForNewShoe();
