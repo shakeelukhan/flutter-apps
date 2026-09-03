@@ -35,7 +35,7 @@ This one needed more than a null-safety pass: the BLoC layer used the
 pre-rewrite `bloc` package API (`initialState`/`mapEventToState`/
 `dispatch`/`currentState`), which was completely replaced years ago by
 constructor-registered `on<Event>` handlers, `emit()`, `add()`, and
-`state` -- a real rewrite, not a mechanical migration. Also removed 21
+`state` -- a real rewrite, not a mechanical migration. Also removed 23
 of 25 dependencies that turned out to be entirely unused outside
 `lib/old_files/` (checked by grepping actual imports, not guessed),
 which eliminated the need to migrate Firebase Auth/Firestore/Analytics
@@ -44,10 +44,13 @@ at all. Full breakdown in the git history on this branch.
 Real result, not just "it compiles":
 
 ```
-$ flutter analyze         # 0 errors, 2 warnings (see "known constraint" below), 13 style infos
-$ flutter test            # 1/1 passing
-$ flutter build macos     # ✓ Built build/macos/Build/Products/Debug/rishtaaunty.app
-$ flutter build web --no-tree-shake-icons   # ✓ Built build/web
+$ flutter analyze                          # 0 errors, 2 warnings (see "known constraint" below), 13 style infos
+$ flutter test                             # 1/1 passing
+$ flutter build macos --debug              # ✓ Built build/macos/Build/Products/Debug/rishtaaunty.app
+$ flutter build macos --no-tree-shake-icons # ✓ release build (bare `flutter build macos` defaults to
+                                            #   release, which enforces icon tree-shaking and fails --
+                                            #   only --debug or this flag succeeds; verified both ways)
+$ flutter build web --no-tree-shake-icons  # ✓ Built build/web
 ```
 
 Both builds were actually launched, not just compiled -- `open` on the
@@ -84,7 +87,7 @@ test/
 
 ## Notes on this modernization pass
 
-- **21 of 25 dependencies were unused.** Checked by grepping actual
+- **23 of 25 dependencies were unused.** Checked by grepping actual
   imports in `lib/`, not assumed: `auth`, `cloud_firestore`,
   `firebase_analytics`, `firebase_auth`, `flutter_signin_button`,
   `package_info`, `sembast`, `country_pickers`, `flutter_radio`,
@@ -98,13 +101,19 @@ test/
   nothing outside it ever imports from it. Kept in place (not deleted)
   for provenance; excluded via `analysis_options.yaml` so it doesn't
   show as broken in `flutter analyze`.
-- **`RemoteConfigDatasourceModel` was dead code** -- never instantiated
-  anywhere; only `config.json`'s unused `"rishta_aunty_cloud"` entry
-  referenced it (the app always loads `"rishta_aunty_local"`, an
-  `AssetDatasourceModel`). Removed along with the `firebase_remote_config`
-  dependency and that config.json entry, rather than migrated -- keeping
-  a real Firebase dependency around for genuinely dead code would mean
-  needing live Firebase project credentials just to build.
+- **`RemoteConfigDatasourceModel` was dead code, more precisely: its
+  constructor ran (as a side effect of `ConfigModel` deserializing the
+  entire `apps` map in config.json, including the unused
+  `"rishta_aunty_cloud"` entry that referenced it), but its `getString()`/
+  `getJson()` were never called anywhere** -- the app always loads
+  `"rishta_aunty_local"`, an `AssetDatasourceModel`, as its actual
+  datasource. Removed along with the `firebase_remote_config` dependency
+  and that config.json entry, rather than migrated -- keeping a real
+  Firebase dependency around for a datasource that was never actually
+  read from would mean needing live Firebase project credentials just to
+  build. (Correction: an earlier version of this note said the class was
+  "never instantiated," which wasn't quite right -- caught during
+  independent review.)
 - **Known remaining constraint**: menu icons are built from a runtime
   `codePoint` in config JSON via `IconData(...)`, which conflicts with
   Flutter's default icon tree-shaking. `flutter analyze` shows 2
