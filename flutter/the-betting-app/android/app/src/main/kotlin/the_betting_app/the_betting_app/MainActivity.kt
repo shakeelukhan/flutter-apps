@@ -1,4 +1,4 @@
-package thebettingapp.thebettingapp
+package the_betting_app.the_betting_app
 
 import android.os.Bundle
 
