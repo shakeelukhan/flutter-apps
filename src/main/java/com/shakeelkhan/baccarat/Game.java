@@ -129,31 +129,16 @@ public class Game {
 		player_score = player_score % 10;
 		banker_score = banker_score % 10;
 
-		if (!(player_score == 8 || player_score == 9 || banker_score == 8 || banker_score == 9)) {
-			if (player_score <= 5) {
+		if (!(BaccaratRules.isNatural(player_score) || BaccaratRules.isNatural(banker_score))) {
+			if (BaccaratRules.playerDrawsThirdCard(player_score)) {
 				temp = gameShoe.draw();
 				player_score += temp.getRankValue();
-				// Card.getRankValue() returns 10 for ten/jack/queen/king, but the
-				// banker's draw table keys off the third card's *digit* value
-				// (ten/face = 0) -- without the %10 here, banker never draws
-				// when the player's third card is a ten or face card.
-				int thirdCardDigit = temp.getRankValue() % 10;
 
-				if ((thirdCardDigit == 0 || thirdCardDigit == 1) && banker_score <= 3) {
-					banker_score += gameShoe.draw().getRankValue();
-				} else if ((thirdCardDigit == 2 || thirdCardDigit == 3) && banker_score <= 4) {
-					banker_score += gameShoe.draw().getRankValue();
-				} else if ((thirdCardDigit == 4 || thirdCardDigit == 5) && banker_score <= 5) {
-					banker_score += gameShoe.draw().getRankValue();
-				} else if ((thirdCardDigit == 6 || thirdCardDigit == 7) && banker_score <= 6) {
-					banker_score += gameShoe.draw().getRankValue();
-				} else if (thirdCardDigit == 8 && banker_score <= 2) {
-					banker_score += gameShoe.draw().getRankValue();
-				} else if (thirdCardDigit == 9 && banker_score <= 3) {
+				if (BaccaratRules.bankerDrawsAfterPlayerThirdCard(temp.getRankValue(), banker_score)) {
 					banker_score += gameShoe.draw().getRankValue();
 				}
 			} else {
-				if (banker_score <= 5) {
+				if (BaccaratRules.bankerDrawsWhenPlayerStood(banker_score)) {
 					banker_score += gameShoe.draw().getRankValue();
 				}
 			}
