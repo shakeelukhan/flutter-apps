@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:thepakistaniapp/widgets/calendarView/calendarView.dart';
+import 'package:the_pakistani_app/widgets/calendarView/calendarView.dart';
 
 class EventsSummaryScreen extends StatefulWidget {
   @override

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:quiver/time.dart';
-import 'package:thepakistaniapp/widgets/calendarView/constants.dart';
+import 'package:the_pakistani_app/widgets/calendarView/constants.dart';
 
 class MonthView extends StatelessWidget {
   const MonthView(this.year, this.month, this.events,

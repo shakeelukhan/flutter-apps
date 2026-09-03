@@ -1,6 +1,6 @@
 {
-    "name": "thepakistaniapp",
-    "short_name": "thepakistaniapp",
+    "name": "the_pakistani_app",
+    "short_name": "the_pakistani_app",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:thepakistaniapp/screens/events/events_map_screen.dart';
-import 'package:thepakistaniapp/screens/events/events_summary_screen.dart';
-import 'package:thepakistaniapp/screens/home/auth_screen.dart';
-import 'package:thepakistaniapp/screens/home/counter_screen.dart';
-import 'package:thepakistaniapp/screens/home/firebase_screen.dart';
-import 'package:thepakistaniapp/screens/home/temp_screen.dart';
-import 'package:thepakistaniapp/screens/home/waiting_screen.dart';
-import 'package:thepakistaniapp/screens/news_screen.dart';
-import 'package:thepakistaniapp/utils/NavHelper.dart';
+import 'package:the_pakistani_app/screens/events/events_map_screen.dart';
+import 'package:the_pakistani_app/screens/events/events_summary_screen.dart';
+import 'package:the_pakistani_app/screens/home/auth_screen.dart';
+import 'package:the_pakistani_app/screens/home/counter_screen.dart';
+import 'package:the_pakistani_app/screens/home/firebase_screen.dart';
+import 'package:the_pakistani_app/screens/home/temp_screen.dart';
+import 'package:the_pakistani_app/screens/home/waiting_screen.dart';
+import 'package:the_pakistani_app/screens/news_screen.dart';
+import 'package:the_pakistani_app/utils/NavHelper.dart';
 
 class App extends StatelessWidget {
   // App title

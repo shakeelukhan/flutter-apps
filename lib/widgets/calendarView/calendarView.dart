@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:thepakistaniapp/widgets/calendarView/constants.dart';
-import 'package:thepakistaniapp/widgets/calendarView/eventsView.dart';
-import 'package:thepakistaniapp/widgets/calendarView/monthView.dart';
+import 'package:the_pakistani_app/widgets/calendarView/constants.dart';
+import 'package:the_pakistani_app/widgets/calendarView/eventsView.dart';
+import 'package:the_pakistani_app/widgets/calendarView/monthView.dart';
 
 class CalendarView extends StatefulWidget {
   const CalendarView({
