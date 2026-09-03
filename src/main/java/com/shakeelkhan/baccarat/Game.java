@@ -35,7 +35,6 @@ public class Game {
 		gameDataExclTie = new ArrayList<char[]>();
 		gameBets = new ArrayList<int[][]>();
 		gameStats = new ArrayList<int[]>();
-		new HashMap<String, Integer>();
 		patternDataExclTie = new HashMap<String, Integer>();
 
 		streakData = new int[3][35];
@@ -60,8 +59,6 @@ public class Game {
 		}
 
 		gameStats.add(new int[7]);
-		for (int i = 0; i < 7; i++)
-			gameData.get(gameIndex)[i] = 0;
 		pstreak = bstreak = fstreak = 0;
 
 		// [lastWinner,lastLoser,alternating,tbd][nextWinner/initial/min/max]
