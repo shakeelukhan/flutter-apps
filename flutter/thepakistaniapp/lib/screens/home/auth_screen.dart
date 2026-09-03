@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 
 class AuthScreen extends StatefulWidget {
   @override
@@ -7,8 +6,10 @@ class AuthScreen extends StatefulWidget {
 }
 
 class _AuthScreenState extends State<AuthScreen> {
-  GoogleSignInAccount googleAccount;
-  final GoogleSignIn googleSignIn = new GoogleSignIn();
+  // Was a GoogleSignInAccount field + a `final GoogleSignIn googleSignIn =
+  // GoogleSignIn()` here -- both declared, never read anywhere (the button
+  // below just prints, it never calls sign-in). Removed rather than
+  // migrated; see waiting_screen.dart for the same finding.
 
   @override
   Widget build(BuildContext context) {

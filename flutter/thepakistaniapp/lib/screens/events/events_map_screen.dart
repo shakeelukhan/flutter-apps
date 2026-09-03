@@ -7,7 +7,7 @@ class EventsMapScreen extends StatefulWidget {
 }
 
 class _EventsMapScreenState extends State<EventsMapScreen> {
-  GoogleMapController mapController;
+  GoogleMapController? mapController;
 
   final LatLng _center = const LatLng(45.521563, -122.677433);
 
@@ -17,13 +17,15 @@ class _EventsMapScreenState extends State<EventsMapScreen> {
 
   @override
   Widget build(BuildContext context) {
+    // No Google Maps API key is configured for this archived app (see
+    // README, and the security note about the original key that used to
+    // be here) -- the map tiles won't load without one, but the widget
+    // itself still builds and runs.
     return GoogleMap(
       onMapCreated: _onMapCreated,
-      options: GoogleMapOptions(
-        cameraPosition: CameraPosition(
-          target: _center,
-          zoom: 11.0,
-        ),
+      initialCameraPosition: CameraPosition(
+        target: _center,
+        zoom: 11.0,
       ),
     );
   }

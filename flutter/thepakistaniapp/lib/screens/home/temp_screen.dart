@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -7,21 +6,12 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  GoogleSignInAccount googleAccount;
-  final GoogleSignIn googleSignIn = new GoogleSignIn();
-  int _counter;
+  // Was a GoogleSignInAccount field + a `final GoogleSignIn googleSignIn =
+  // GoogleSignIn()` here -- both declared, never read anywhere (the button
+  // below just prints). Removed rather than migrated; the unused _counter
+  // field/_addCounter() method were the same story, also removed.
 
   @override
-  void initState() {
-    super.initState();
-    _counter = 0;
-  }
-
-  _addCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {

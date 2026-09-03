@@ -17,32 +17,27 @@ class _SubmenuItem {
 }
 
 class NavHelper {
-  List<_MenuItem> _menuItems; // List of menu items
-  Map<String, List<_SubmenuItem>> _submenuItemsMap; // Map of submenu items
-  int activeMenuIndex; // Active menu index
-
-  // Constructor
-  NavHelper() {
-    _menuItems = List<_MenuItem>();
-    _submenuItemsMap = Map<String, List<_SubmenuItem>>();
-  }
+  final List<_MenuItem> _menuItems = <_MenuItem>[]; // List of menu items
+  final Map<String, List<_SubmenuItem>> _submenuItemsMap =
+      <String, List<_SubmenuItem>>{}; // Map of submenu items
+  int activeMenuIndex = 0; // Active menu index
 
   // Add a menu item
   void addMenuItem(String title, IconData icon) {
     _menuItems.add(_MenuItem(title, icon));
-    _submenuItemsMap[title] = List<_SubmenuItem>();
+    _submenuItemsMap[title] = <_SubmenuItem>[];
   }
 
   // Add a submenu item
   void addSubmenuItem(String parent, String title, Widget widget) =>
-      _submenuItemsMap[parent].add(_SubmenuItem(title, widget));
+      _submenuItemsMap[parent]!.add(_SubmenuItem(title, widget));
 
   // Get active menu title
   String _getActiveMenuTitle() => _menuItems.elementAt(activeMenuIndex).title;
 
   // Get submenu list for active menu
   List<_SubmenuItem> _getActiveSubmenuItems() =>
-      _submenuItemsMap[_getActiveMenuTitle()].toList();
+      _submenuItemsMap[_getActiveMenuTitle()]!.toList();
 
   // Get count of submenu list for active menu
   int getActiveSubmenuItemsCount() => _getActiveSubmenuItems().length;
@@ -57,9 +52,9 @@ class NavHelper {
       _getActiveSubmenuItems().map((item) => item.widget).toList();
 
   // Get menu as BottomNavigationBar list
-  List<BottomNavigationBarItem>
-      getMenuAsBottomNavigationBarItemList() => _menuItems
-          .map((item) => BottomNavigationBarItem(
-              title: Text(item.title), icon: Icon(item.icon)))
+  List<BottomNavigationBarItem> getMenuAsBottomNavigationBarItemList() =>
+      _menuItems
+          .map((item) =>
+              BottomNavigationBarItem(label: item.title, icon: Icon(item.icon)))
           .toList();
 }

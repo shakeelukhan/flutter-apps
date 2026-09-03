@@ -15,19 +15,19 @@ class _TempPageState extends State<TempPage> {
   }
 
   @override
-  initState() {
+  void initState() {
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return new Row(
+    return Row(
       children: <Widget>[
-        new RaisedButton(
+        ElevatedButton(
           onPressed: _increment,
-          child: new Text('Increment'),
+          child: const Text('Increment'),
         ),
-        new Text('Count: ${widget._counter}'),
+        Text('Count: ${widget._counter}'),
       ],
     );
   }

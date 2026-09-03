@@ -1,14 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
-final dummySnapshot = [
-  {"name": "Filip", "votes": 15},
-  {"name": "Abraham", "votes": 14},
-  {"name": "Richard", "votes": 11},
-  {"name": "Ike", "votes": 10},
-  {"name": "Justin", "votes": 1},
-];
-
 class FirebaseScreen extends StatefulWidget {
   @override
   _FirebaseScreenState createState() => _FirebaseScreenState();
@@ -22,23 +14,29 @@ class _FirebaseScreenState extends State<FirebaseScreen> {
 
   Widget _buildBody(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
-      stream: Firestore.instance.collection('baby').snapshots(),
+      // No Firebase project is configured for this archived app (see
+      // README) -- this will show snapshot.hasError rather than data,
+      // which is expected and handled below rather than crashing.
+      stream: FirebaseFirestore.instance.collection('baby').snapshots(),
       builder: (context, snapshot) {
-        if (!snapshot.hasData) return LinearProgressIndicator();
+        if (snapshot.hasError) {
+          return Center(child: Text('Error: ${snapshot.error}'));
+        }
+        if (!snapshot.hasData) return const LinearProgressIndicator();
 
-        return _buildList(context, snapshot.data.documents);
+        return _buildList(context, snapshot.data!.docs);
       },
     );
   }
 
-  Widget _buildList(BuildContext context, List<DocumentSnapshot> snapshot) {
+  Widget _buildList(BuildContext context, List<QueryDocumentSnapshot> snapshot) {
     return ListView(
       padding: const EdgeInsets.only(top: 20.0),
       children: snapshot.map((data) => _buildListItem(context, data)).toList(),
     );
   }
 
-  Widget _buildListItem(BuildContext context, DocumentSnapshot data) {
+  Widget _buildListItem(BuildContext context, QueryDocumentSnapshot data) {
     final record = Record.fromSnapshot(data);
 
     return Padding(
@@ -52,12 +50,11 @@ class _FirebaseScreenState extends State<FirebaseScreen> {
         child: ListTile(
           title: Text(record.name),
           trailing: Text(record.votes.toString()),
-          onTap: () => Firestore.instance.runTransaction((transaction) async {
+          onTap: () => FirebaseFirestore.instance.runTransaction((transaction) async {
             final freshSnapshot = await transaction.get(record.reference);
             final fresh = Record.fromSnapshot(freshSnapshot);
 
-            await transaction
-                .update(record.reference, {'votes': fresh.votes + 1});
+            transaction.update(record.reference, {'votes': fresh.votes + 1});
           }),
         ),
       ),
@@ -70,14 +67,15 @@ class Record {
   final int votes;
   final DocumentReference reference;
 
-  Record.fromMap(Map<String, dynamic> map, {this.reference})
+  Record.fromMap(Map<String, dynamic> map, {required this.reference})
       : assert(map['name'] != null),
         assert(map['votes'] != null),
         name = map['name'],
         votes = map['votes'];
 
   Record.fromSnapshot(DocumentSnapshot snapshot)
-      : this.fromMap(snapshot.data, reference: snapshot.reference);
+      : this.fromMap(snapshot.data() as Map<String, dynamic>,
+            reference: snapshot.reference);
 
   @override
   String toString() => "Record<$name:$votes>";
