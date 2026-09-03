@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:rishtaaunty/ui/ui.dart';
+import 'package:rishta_aunty/ui/ui.dart';
 
 void main() {
   testWidgets('App loads config.json and shows the app title and menu',

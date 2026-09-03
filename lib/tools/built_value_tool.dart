@@ -1,5 +1,5 @@
 import 'package:built_value/serializer.dart';
-import 'package:rishtaaunty/data/data.dart' as d;
+import 'package:rishta_aunty/data/data.dart' as d;
 
 // Originally also had getStringCode()/getAssetCode()/printAssetCode()
 // dev-tooling helpers (via package:json2builtvalue) for generating

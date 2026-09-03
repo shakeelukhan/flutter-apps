@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:rishtaaunty/tools/tools.dart' as t;
-import 'package:rishtaaunty/ui/ui.dart' as u;
+import 'package:rishta_aunty/tools/tools.dart' as t;
+import 'package:rishta_aunty/ui/ui.dart' as u;
 
 void main() async {
   try {

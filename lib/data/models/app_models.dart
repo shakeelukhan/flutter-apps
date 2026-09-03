@@ -1,8 +1,8 @@
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
-import 'package:rishtaaunty/data/data.dart';
-import 'package:rishtaaunty/tools/tools.dart' as t;
+import 'package:rishta_aunty/data/data.dart';
+import 'package:rishta_aunty/tools/tools.dart' as t;
 import 'base_model.dart';
 part 'app_models.g.dart';
 

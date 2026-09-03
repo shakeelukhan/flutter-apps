@@ -1,8 +1,13 @@
-# rishtaaunty
+# rishta-aunty
 
-> You're on `app/rishtaaunty` -- one of the independent, self-contained
+> You're on `app/rishta-aunty` -- one of the independent, self-contained
 > project branches in the `flutter-apps` archive repo (see that repo's
-> `main` branch for the full index).
+> `main` branch for the full index). The Dart package itself is named
+> `rishta_aunty` (underscores, not hyphens -- Dart package names can't
+> contain hyphens); the hyphenated name is just this branch/repo path.
+> The Android/iOS/macOS bundle identifier (`com.thedesiproject.rishtaaunty`)
+> is untouched by this rename -- it's tied to a real historical Firebase
+> project registration (see Notes), not just a display name.
 
 A matchmaking-app prototype, and the most architecturally developed of
 the three Flutter apps in this archive: BLoC state management
@@ -46,7 +51,7 @@ Real result, not just "it compiles":
 ```
 $ flutter analyze                          # 0 errors, 2 warnings (see "known constraint" below), 13 style infos
 $ flutter test                             # 1/1 passing
-$ flutter build macos --debug              # ✓ Built build/macos/Build/Products/Debug/rishtaaunty.app
+$ flutter build macos --debug              # ✓ Built build/macos/Build/Products/Debug/rishta_aunty.app
 $ flutter build macos --no-tree-shake-icons # ✓ release build (bare `flutter build macos` defaults to
                                             #   release, which enforces icon tree-shaking and fails --
                                             #   only --debug or this flag succeeds; verified both ways)
@@ -123,6 +128,18 @@ test/
   hard error now instead of silently working.
 - Repo hygiene fixed: a locally-committed root `.gradle/` build cache
   (6 files) was removed.
+- **Rename**: the app was renamed from `rishtaaunty` to distinguish word
+  boundaries -- `rishta_aunty` for the Dart package (underscores; Dart
+  package names can't contain hyphens), `app/rishta-aunty` for the
+  branch/repo path (hyphens, matching this archive's convention). The
+  Android `applicationId`/`package` and the iOS/macOS
+  `PRODUCT_BUNDLE_IDENTIFIER` (`com.thedesiproject.rishtaaunty`) were
+  deliberately left unrenamed -- they're already registered against a
+  real (if long since retired) Firebase project (`rishtaaunty-463ca`, see
+  `google-services.json`/`GoogleService-Info.plist`), so this is
+  historical identity, not just a cosmetic display name. The macOS/iOS
+  `PRODUCT_NAME` (the actual `.app` file name) was renamed, since that's
+  purely cosmetic and unrelated to the bundle identifier.
 
 ## License
 

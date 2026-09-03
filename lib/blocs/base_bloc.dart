@@ -1,8 +1,8 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:rishtaaunty/data/data.dart' as d;
-import 'package:rishtaaunty/tools/tools.dart' as t;
+import 'package:rishta_aunty/data/data.dart' as d;
+import 'package:rishta_aunty/tools/tools.dart' as t;
 
 // Migrated from the pre-rewrite `bloc` package API (initialState getter,
 // mapEventToState()/yield, dispatch(), currentState) to the current

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:rishtaaunty/data/data.dart' as d;
+import 'package:rishta_aunty/data/data.dart' as d;
 import 'base_bloc.dart';
 
 class AppBloc extends BaseBloc<d.AppModel> {

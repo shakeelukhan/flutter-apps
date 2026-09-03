@@ -2,7 +2,7 @@ import 'dart:async';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
 import 'package:flutter/services.dart';
-import 'package:rishtaaunty/tools/tools.dart' as t;
+import 'package:rishta_aunty/tools/tools.dart' as t;
 part 'datasource_models.g.dart';
 
 abstract class BaseDatasourceModel {

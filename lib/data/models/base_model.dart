@@ -1,5 +1,5 @@
 import 'package:built_value/serializer.dart';
-import 'package:rishtaaunty/tools/tools.dart' as t;
+import 'package:rishta_aunty/tools/tools.dart' as t;
 
 abstract class BaseModel<M> {
   BaseModel();

@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:rishtaaunty/blocs/blocs.dart' as b;
-import 'package:rishtaaunty/data/data.dart' as d;
+import 'package:rishta_aunty/blocs/blocs.dart' as b;
+import 'package:rishta_aunty/data/data.dart' as d;
 
 class BlocWidget<M extends d.BaseModel> extends StatefulWidget {
   final b.BaseBloc<M>? bloc;
