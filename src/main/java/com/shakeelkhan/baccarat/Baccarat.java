@@ -9,12 +9,18 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+/**
+ * Simplest end-to-end shoe simulator: deals hands under standard baccarat
+ * tableau rules and tallies player/banker/tie counts across many shoes.
+ * See {@link Game} for the richer version that also tracks streaks and
+ * hand patterns.
+ */
 public class Baccarat {
-	private static Shoe gameShoe;
-	private static int gameIndex;
-	private static int handIndex;
-	private static ArrayList<char[]> gameData;
-	private static int bcount, pcount, tcount;
+	private final Shoe gameShoe;
+	private int gameIndex;
+	private int handIndex;
+	private final ArrayList<char[]> gameData;
+	private int bcount, pcount, tcount;
 
 	public Baccarat() {
 		gameShoe = new Shoe();
@@ -23,7 +29,7 @@ public class Baccarat {
 		bcount = pcount = tcount = 0;
 	}
 
-	public static void prepare() {
+	public void prepare() {
 		gameIndex++;
 		gameShoe.prepareNewShoe();
 		gameShoe.printCardsLeft();
@@ -58,7 +64,7 @@ public class Baccarat {
 		return sortedMap;
 	}
 
-	public static char playHand() {
+	public char playHand() {
 		int player_score = 0, banker_score = 0;
 		Card temp;
 
@@ -112,7 +118,7 @@ public class Baccarat {
 		return (winner);
 	}
 
-	public static void playShoe(int min) {
+	public void playShoe(int min) {
 		char prev, curr;
 		prev = curr = 'X';
 
@@ -132,13 +138,27 @@ public class Baccarat {
 		System.out.println();
 	}
 
+	public int getBankerCount() {
+		return bcount;
+	}
+
+	public int getPlayerCount() {
+		return pcount;
+	}
+
+	public int getTieCount() {
+		return tcount;
+	}
+
 	public static void main(String[] args) {
+		Baccarat baccarat = new Baccarat();
 		for (int i = 0; i < 10000; i++) {
-			prepare();
-			playShoe(6);
+			baccarat.prepare();
+			baccarat.playShoe(6);
 		}
-		int allcount = bcount + pcount + tcount;
-		System.out.println("b=" + bcount + "(" + 100 * bcount / allcount + "%)" + " p=" + pcount + "("
-				+ 100 * pcount / allcount + "%)" + " t=" + tcount + "(" + 100 * tcount / allcount + "%)");
+		int allcount = baccarat.getBankerCount() + baccarat.getPlayerCount() + baccarat.getTieCount();
+		System.out.println("b=" + baccarat.getBankerCount() + "(" + 100 * baccarat.getBankerCount() / allcount + "%)"
+				+ " p=" + baccarat.getPlayerCount() + "(" + 100 * baccarat.getPlayerCount() / allcount + "%)" + " t="
+				+ baccarat.getTieCount() + "(" + 100 * baccarat.getTieCount() / allcount + "%)");
 	}
 }
