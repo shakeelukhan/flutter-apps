@@ -1,30 +1,24 @@
-// This is a basic Flutter widget test.
-//
-// To perform an interaction with a widget in your test, use the WidgetTester
-// utility that Flutter provides. For example, you can send tap and scroll
-// gestures. You can also use WidgetTester to find child old_files.widgets in the widget
-// tree, read text, and verify that the values of widget properties are correct.
-
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:rishtaaunty/old_files/AppScreen.dart';
+import 'package:rishtaaunty/ui/ui.dart';
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(AppScreen(title: 'Test App'));
+  testWidgets('App loads config.json and shows the app title and menu',
+      (WidgetTester tester) async {
+    await tester.pumpWidget(App.fromConfig('rishta_aunty_local'));
+    // Config load -> asset read -> built_value deserialize -> bloc events
+    // all happen asynchronously; a few pumps let that chain settle without
+    // hitting pumpAndSettle()'s "never stops animating" trap (the submenu
+    // BlocBuilder's DialogWidget shows a CircularProgressIndicator).
+    for (var i = 0; i < 5; i++) {
+      await tester.pump(const Duration(milliseconds: 100));
+    }
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
-
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
-
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+    expect(find.text('Rishta Aunty'), findsOneWidget);
+    expect(find.text('Home'), findsOneWidget);
+    expect(find.text('Profile'), findsOneWidget);
+    expect(find.text('Search'), findsOneWidget);
+    expect(find.text('Rishtas'), findsOneWidget);
+    expect(find.text('About'), findsOneWidget);
   });
 }
