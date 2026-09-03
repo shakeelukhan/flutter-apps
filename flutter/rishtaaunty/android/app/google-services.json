@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "488932570069",
+    "firebase_url": "https://rishtaaunty-463ca.firebaseio.com",
+    "project_id": "rishtaaunty-463ca",
+    "storage_bucket": "rishtaaunty-463ca.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:488932570069:android:1dd8acd00a6384745b035c",
+        "android_client_info": {
+          "package_name": "com.thedesiproject.rishtaaunty"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "488932570069-g7vevs2e3qfaf7vt3pdphvb9kh4su893.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.thedesiproject.rishtaaunty",
+            "certificate_hash": "48868351df42d70d06b79fa35777ed05f6343604"
+          }
+        },
+        {
+          "client_id": "488932570069-oe39cp3te8q9bek18gtqpa9mboobi0u5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "REDACTED_GOOGLE_API_KEY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "488932570069-oe39cp3te8q9bek18gtqpa9mboobi0u5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
