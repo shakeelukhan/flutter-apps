@@ -31,8 +31,8 @@ class App extends StatelessWidget {
 }
 
 class _AppStateful extends StatefulWidget {
-  _AppStateful({Key key, this.title}) : super(key: key);
-  final String title;
+  _AppStateful({super.key, this.title});
+  final String? title;
 
   @override
   _AppStatefulState createState() => _AppStatefulState();
@@ -40,19 +40,20 @@ class _AppStateful extends StatefulWidget {
 
 class _AppStatefulState extends State<_AppStateful>
     with TickerProviderStateMixin {
-  NavHelper _appNavHelper;
-  AppBar _appBar;
-  TabController _submenuTabController; // TabController for submenu
-  TabBar _submenuTabBar; // TabBar for submenu
-  TabBarView _submenuTabBarView; // TabBarView for submenu
-  BottomNavigationBar _menuBottomNavigationBar; // BottomNavigationBar for menu
+  late NavHelper _appNavHelper;
+  late AppBar _appBar;
+  late TabController _submenuTabController; // TabController for submenu
+  late TabBar _submenuTabBar; // TabBar for submenu
+  late TabBarView _submenuTabBarView; // TabBarView for submenu
+  late BottomNavigationBar
+      _menuBottomNavigationBar; // BottomNavigationBar for menu
 
   @override
   void initState() {
     super.initState();
 
     // Build app navigation
-    _appNavHelper = new NavHelper();
+    _appNavHelper = NavHelper();
     _appNavHelper.addMenuItem("Settings", Icons.settings);
     _appNavHelper.addSubmenuItem("Settings", "Session", SessionScreen());
     _appNavHelper.addSubmenuItem("Settings", "Game", GameScreen());
@@ -114,7 +115,7 @@ class _AppStatefulState extends State<_AppStateful>
       items: _appNavHelper.getMenuAsBottomNavigationBarItemList(),
       type: BottomNavigationBarType.fixed,
       currentIndex: _appNavHelper.activeMenuIndex,
-      fixedColor: Theme.of(context).primaryColor,
+      selectedItemColor: Theme.of(context).primaryColor,
       onTap: _tapMenuItem,
     );
   }
