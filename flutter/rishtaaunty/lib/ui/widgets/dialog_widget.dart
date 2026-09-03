@@ -1,26 +1,26 @@
 import 'package:flutter/material.dart';
 
 class DialogWidget extends StatelessWidget {
-  final bool progress;
-  final String text;
-  DialogWidget({this.progress, this.text, Key key}) : super(key: key);
+  final bool? progress;
+  final String? text;
+  const DialogWidget({this.progress, this.text, super.key});
 
   @override
   Widget build(BuildContext context) {
-    List<Widget> _widgetList = List();
+    List<Widget> widgetList = [];
 
-    if (progress != null && progress == true) {
-      _widgetList.add(Container(
-          padding: const EdgeInsets.all(15.0),
-          child: CircularProgressIndicator()));
+    if (progress == true) {
+      widgetList.add(const Padding(
+          padding: EdgeInsets.all(15.0), child: CircularProgressIndicator()));
     }
 
+    final text = this.text;
     if (text != null && text.isNotEmpty) {
-      _widgetList.add(
-          Container(padding: const EdgeInsets.all(15.0), child: Text(text)));
+      widgetList
+          .add(Padding(padding: const EdgeInsets.all(15.0), child: Text(text)));
     }
 
     return Dialog(
-        child: Column(mainAxisSize: MainAxisSize.min, children: _widgetList));
+        child: Column(mainAxisSize: MainAxisSize.min, children: widgetList));
   }
 }

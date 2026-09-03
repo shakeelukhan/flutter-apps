@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
-import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:flutter/services.dart';
 import 'package:rishtaaunty/tools/tools.dart' as t;
 part 'datasource_models.g.dart';
@@ -24,12 +23,12 @@ abstract class AssetDatasourceModel extends BaseDatasourceModel
 
   AssetDatasourceModel._();
   factory AssetDatasourceModel(
-          [void Function(AssetDatasourceModelBuilder) updates]) =
+          [void Function(AssetDatasourceModelBuilder)? updates]) =
       _$AssetDatasourceModel;
   factory AssetDatasourceModel.fromArgs(String key, {bool cache = true}) =>
       _$AssetDatasourceModel._(key: key, cache: cache);
   factory AssetDatasourceModel.fromJson(Map json) =>
-      t.builtValue.deserialize(json, FullType(AssetDatasourceModel));
+      t.builtValue.deserialize(json, FullType(AssetDatasourceModel)) as AssetDatasourceModel;
 
   @override
   Future<String> getString() async =>
@@ -39,43 +38,13 @@ abstract class AssetDatasourceModel extends BaseDatasourceModel
   Future<dynamic> getJson() async => t.io.stringToJson(await getString());
 }
 
-abstract class RemoteConfigDatasourceModel extends BaseDatasourceModel
-    implements
-        Built<RemoteConfigDatasourceModel, RemoteConfigDatasourceModelBuilder> {
-  static Future<RemoteConfig> remoteConfig = RemoteConfig.instance;
-  static Serializer<RemoteConfigDatasourceModel> get serializer =>
-      _$remoteConfigDatasourceModelSerializer;
-  static void _initializeBuilder(RemoteConfigDatasourceModelBuilder b) =>
-      b..cache = true;
-
-  String get key;
-  bool get cache;
-
-  RemoteConfigDatasourceModel._() {
-    setDebug(this.cache == false ? true : false);
-  }
-  factory RemoteConfigDatasourceModel(
-          [void Function(RemoteConfigDatasourceModelBuilder) updates]) =
-      _$RemoteConfigDatasourceModel;
-  factory RemoteConfigDatasourceModel.fromArgs(String key,
-          {bool cache = true}) =>
-      _$RemoteConfigDatasourceModel._(key: key, cache: cache);
-  factory RemoteConfigDatasourceModel.fromJson(Map json) =>
-      t.builtValue.deserialize(json, FullType(RemoteConfigDatasourceModel));
-
-  Future<void> setDebug(bool debugMode) async => (await remoteConfig)
-      .setConfigSettings(RemoteConfigSettings(debugMode: debugMode));
-
-  @override
-  Future<String> getString() async {
-    RemoteConfig remoteConfigInstance = (await remoteConfig);
-    this.cache == false
-        ? await remoteConfigInstance.fetch(expiration: Duration(seconds: 0))
-        : await remoteConfigInstance.fetch();
-    await remoteConfigInstance.activateFetched();
-    return remoteConfigInstance.getString(key);
-  }
-
-  @override
-  Future<dynamic> getJson() async => t.io.stringToJson(await getString());
-}
+// RemoteConfigDatasourceModel (a Firebase Remote Config-backed datasource)
+// used to live here. It was never actually instantiated anywhere in the
+// app -- config.json's "rishta_aunty_local" entry (the one main.dart
+// actually loads) uses AssetDatasourceModel; only the unused
+// "rishta_aunty_cloud" entry referenced it. Removed along with the
+// firebase_remote_config dependency rather than migrated, since keeping
+// a real Firebase dependency around for genuinely dead code would mean
+// this app needs live Firebase project credentials just to compile/run,
+// contradicting the point of this modernization pass (UI-only, no
+// backend wiring).

@@ -13,10 +13,10 @@ abstract class ConfigModel extends BaseModel<ConfigModel>
   BuiltMap<String, BaseDatasourceModel> get apps;
 
   ConfigModel._();
-  factory ConfigModel([void Function(ConfigModelBuilder) updates]) =
+  factory ConfigModel([void Function(ConfigModelBuilder)? updates]) =
       _$ConfigModel;
   factory ConfigModel.fromJson(Map json) =>
-      t.builtValue.deserialize(json, FullType(ConfigModel));
+      t.builtValue.deserialize(json, FullType(ConfigModel)) as ConfigModel;
 }
 
 abstract class AppModel extends BaseModel<AppModel>
@@ -40,9 +40,9 @@ abstract class AppModel extends BaseModel<AppModel>
   MenuModel get menu;
 
   AppModel._();
-  factory AppModel([void Function(AppModelBuilder) updates]) = _$AppModel;
+  factory AppModel([void Function(AppModelBuilder)? updates]) = _$AppModel;
   factory AppModel.fromJson(Map json) =>
-      t.builtValue.deserialize(json, FullType(AppModel));
+      t.builtValue.deserialize(json, FullType(AppModel)) as AppModel;
 }
 
 abstract class MenuModel extends BaseModel<MenuModel>
@@ -56,9 +56,9 @@ abstract class MenuModel extends BaseModel<MenuModel>
   BuiltMap<int, MenuItemModel> get items;
 
   MenuModel._();
-  factory MenuModel([void Function(MenuModelBuilder) updates]) = _$MenuModel;
+  factory MenuModel([void Function(MenuModelBuilder)? updates]) = _$MenuModel;
   factory MenuModel.fromJson(Map json) =>
-      t.builtValue.deserialize(json, FullType(MenuModel));
+      t.builtValue.deserialize(json, FullType(MenuModel)) as MenuModel;
 }
 
 abstract class MenuItemModel extends BaseModel<MenuItemModel>
@@ -76,10 +76,10 @@ abstract class MenuItemModel extends BaseModel<MenuItemModel>
   SubmenuModel get submenu;
 
   MenuItemModel._();
-  factory MenuItemModel([void Function(MenuItemModelBuilder) updates]) =
+  factory MenuItemModel([void Function(MenuItemModelBuilder)? updates]) =
       _$MenuItemModel;
   factory MenuItemModel.fromJson(Map json) =>
-      t.builtValue.deserialize(json, FullType(MenuItemModel));
+      t.builtValue.deserialize(json, FullType(MenuItemModel)) as MenuItemModel;
 }
 
 abstract class SubmenuModel extends BaseModel<SubmenuModel>
@@ -93,10 +93,10 @@ abstract class SubmenuModel extends BaseModel<SubmenuModel>
   BuiltMap<int, SubmenuItemModel> get items;
 
   SubmenuModel._();
-  factory SubmenuModel([void Function(SubmenuModelBuilder) updates]) =
+  factory SubmenuModel([void Function(SubmenuModelBuilder)? updates]) =
       _$SubmenuModel;
   factory SubmenuModel.fromJson(Map json) =>
-      t.builtValue.deserialize(json, FullType(SubmenuModel));
+      t.builtValue.deserialize(json, FullType(SubmenuModel)) as SubmenuModel;
 }
 
 abstract class SubmenuItemModel extends BaseModel<SubmenuItemModel>
@@ -111,8 +111,8 @@ abstract class SubmenuItemModel extends BaseModel<SubmenuItemModel>
   String get route;
 
   SubmenuItemModel._();
-  factory SubmenuItemModel([void Function(SubmenuItemModelBuilder) updates]) =
+  factory SubmenuItemModel([void Function(SubmenuItemModelBuilder)? updates]) =
       _$SubmenuItemModel;
   factory SubmenuItemModel.fromJson(Map json) =>
-      t.builtValue.deserialize(json, FullType(SubmenuItemModel));
+      t.builtValue.deserialize(json, FullType(SubmenuItemModel)) as SubmenuItemModel;
 }

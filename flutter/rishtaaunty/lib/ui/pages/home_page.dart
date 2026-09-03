@@ -1,13 +1,12 @@
-import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
 
 class Home extends StatefulWidget {
-  static const String PATH = '/Home.dialog';
+  static const String path = '/Home.dialog';
   final String text;
-  Home({this.text = 'Please wait...', Key key}) : super(key: key);
+  const Home({this.text = 'Please wait...', super.key});
 
   @override
-  _HomeState createState() => _HomeState();
+  State<Home> createState() => _HomeState();
 }
 
 class _HomeState extends State<Home> {
@@ -15,12 +14,19 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: Center(
-            child: RaisedButton(
+            child: ElevatedButton(
+      // No onPressed in the original RaisedButton either -- this button
+      // has always been visually present but non-interactive (null
+      // onPressed renders a disabled button). Preserved as-is; this
+      // page isn't reachable from the running app's actual UI anyway
+      // (see routes.dart -- fluro is configured but MaterialApp never
+      // consults it via onGenerateRoute).
+      onPressed: null,
+      style: ElevatedButton.styleFrom(backgroundColor: Colors.blue),
       child: Text(
         widget.text,
-        style: TextStyle(color: Colors.white),
+        style: const TextStyle(color: Colors.white),
       ),
-      color: Colors.blue,
     )));
   }
 }

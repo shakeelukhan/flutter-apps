@@ -1,32 +1,27 @@
 import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'pages/home_page.dart';
 
-final router = Router();
+final router = FluroRouter();
 
 class Routes {
-  static void configureRoutes(Router router) {
+  static void configureRoutes(FluroRouter router) {
     router.notFoundHandler = Handler(
-        handlerFunc: (BuildContext context, Map<String, List<String>> params) {
-      print("ROUTE WAS NOT FOUND !!!");
+        handlerFunc: (BuildContext? context, Map<String, List<String>> params) {
+      debugPrint("ROUTE WAS NOT FOUND !!!");
+      return null;
     });
     router.define('/', handler: rootHandler);
-    router.define(Home.PATH, handler: homeHandler);
+    router.define(Home.path, handler: homeHandler);
   }
 }
 
 var rootHandler = Handler(
-    handlerFunc: (BuildContext context, Map<String, List<String>> params) {
-      return Home();
-    });
+    handlerFunc: (BuildContext? context, Map<String, List<String>> params) {
+  return const Home();
+});
 
 var homeHandler = Handler(
-    handlerFunc: (BuildContext context, Map<String, List<String>> params) {
-      return Home(text: 'FROM HOME');
-    });
-
-var homeHandler2 = Handler(type: HandlerType.function,
-    handlerFunc: (BuildContext context, Map<String, List<String>> params) {
-      print('abc');
-    });
+    handlerFunc: (BuildContext? context, Map<String, List<String>> params) {
+  return const Home(text: 'FROM HOME');
+});

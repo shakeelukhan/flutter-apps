@@ -6,21 +6,27 @@ import 'models/datasource_models.dart';
 final ConfigRepository configRepository = ConfigRepository();
 
 abstract class BaseRepository<M extends BaseModel> {
-  final String name;
-  final FutureOr<BaseDatasourceModel> datasource;
-  FutureOr<M> data;
+  final String? name;
+  final FutureOr<BaseDatasourceModel>? datasource;
+  M? data;
 
   BaseRepository(this.name, this.datasource);
 
-  FutureOr<M> getData() async => data = datasource == null
-      ? null
-      : BaseModel.fromJson<M>(await (await datasource).getJson());
+  Future<M?> getData() async {
+    final ds = datasource;
+    if (ds == null) return null;
+    return data = BaseModel.fromJson<M>(await (await ds).getJson());
+  }
 }
 
 class ConfigRepository extends BaseRepository<ConfigModel> {
-  ConfigRepository([BaseDatasourceModel datasource])
-      : super(null, datasource ?? _getDefaultDatasource()) {
-    this.getData();
+  ConfigRepository([BaseDatasourceModel? datasource])
+      : super(
+            null,
+            datasource != null
+                ? Future<BaseDatasourceModel>.value(datasource)
+                : _getDefaultDatasource()) {
+    getData();
   }
 
   static Future<AssetDatasourceModel> _getDefaultDatasource() async =>
@@ -31,6 +37,10 @@ class AppRepository extends BaseRepository<AppModel> {
   AppRepository(String name) : super(name, null);
 
   @override
-  Future<AppModel> getData() async => data = AppModel.fromJson(
-      await (await configRepository.getData()).apps[name].getJson());
+  Future<AppModel?> getData() async {
+    final config = await configRepository.getData();
+    final appDatasource = config?.apps[name];
+    if (appDatasource == null) return null;
+    return data = AppModel.fromJson(await appDatasource.getJson());
+  }
 }
