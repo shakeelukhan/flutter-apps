@@ -10,20 +10,16 @@ class MartingdaleScreen2 extends StatefulWidget {
 }
 
 class _MartingdaleScreen2State extends State<MartingdaleScreen2> {
-  LoadingScreenHelper loadingScreen;
-  SettingsHelper settings;
-  DataTableHelper dataTableHelper;
-  int _maxSequence;
-  TextEditingController _balanceController;
-  int _balance;
-  int _unitSize;
-  int _betLoseProbability;
+  late LoadingScreenHelper loadingScreen;
+  late SettingsHelper settings;
+  late DataTableHelper dataTableHelper;
+  int _maxSequence = 6;
+  late TextEditingController _balanceController;
+  int _balance = 0;
+  int _unitSize = 0;
+  int _betLoseProbability = 0;
 
-  _padString(String str, int width) {
-    return str.padLeft(width);
-  }
-
-  _calculateMartingdale() async {
+  Future<void> _calculateMartingdale() async {
     await settings.initialized;
     dataTableHelper.tableRows.clear();
 
@@ -38,7 +34,7 @@ class _MartingdaleScreen2State extends State<MartingdaleScreen2> {
       _winAfterBet = 2 * _betSize - _lossAfterBet;
       row.add(_winAfterBet.toString());
       double lossStreakPercent =
-          100 * pow((_betLoseProbability / 100), (i + 1));
+          100 * pow((_betLoseProbability / 100), (i + 1)).toDouble();
       row.add(lossStreakPercent.toStringAsPrecision(2));
       dataTableHelper.tableRows.add(row);
       _betSize = _lossAfterBet;
@@ -50,11 +46,11 @@ class _MartingdaleScreen2State extends State<MartingdaleScreen2> {
   @override
   void initState() {
     super.initState();
-    settings = new SettingsHelper();
-    loadingScreen = new LoadingScreenHelper(true);
-    _balanceController = new TextEditingController();
+    settings = SettingsHelper();
+    loadingScreen = LoadingScreenHelper(true);
+    _balanceController = TextEditingController();
     _maxSequence = 6;
-    dataTableHelper = new DataTableHelper();
+    dataTableHelper = DataTableHelper();
     dataTableHelper
         .setDataTableHeaders(["#", "Bet \$", "LoseAB \$", "WinAB \$", "%"]);
     _loadSettings();
@@ -62,11 +58,11 @@ class _MartingdaleScreen2State extends State<MartingdaleScreen2> {
   }
 
   // Load settings
-  _loadSettings() async {
+  Future<void> _loadSettings() async {
     await settings.initialized;
-    _betLoseProbability = settings.get().getInt('game.bet_lose_probabiity');
-    _unitSize = settings.get().getInt('session.unit_size');
-    _balance = settings.get().getInt('session.balance');
+    _betLoseProbability = settings.get().getInt('game.bet_lose_probabiity')!;
+    _unitSize = settings.get().getInt('session.unit_size')!;
+    _balance = settings.get().getInt('session.balance')!;
     _balanceController.text = _balance.toString();
 
     if (this.mounted) {
@@ -77,7 +73,7 @@ class _MartingdaleScreen2State extends State<MartingdaleScreen2> {
   }
 
   // Save settings
-  _saveSettings() async {
+  void _saveSettings() {
     _balance = int.parse(_balanceController.text);
     settings.get().setInt('session.balance', int.parse(_balance.toString()));
   }
@@ -111,9 +107,9 @@ class _MartingdaleScreen2State extends State<MartingdaleScreen2> {
                     padding: EdgeInsets.fromLTRB(10, 5, 10, 5),
                     child: DropdownButton<String>(
                       value: _maxSequence.toString(),
-                      onChanged: (String newValue) {
+                      onChanged: (String? newValue) {
                         setState(() {
-                          _maxSequence = int.parse(newValue);
+                          _maxSequence = int.parse(newValue!);
                           _calculateMartingdale();
                         });
                       },
