@@ -1,4 +1,4 @@
-
+package com.shakeelkhan.baccarat;
 
 public class Card {
 
