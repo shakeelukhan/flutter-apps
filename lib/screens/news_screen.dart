@@ -83,9 +83,15 @@ class _NewsScreenState extends State<NewsScreen> {
       backgroundColor: Colors.grey[200],
       body: Column(children: <Widget>[
         Expanded(
-          child: articles == null
+          // `data == null` means the fetch hasn't completed yet (show the
+          // spinner). Once it has, a response with no "articles" key --
+          // e.g. a 401 error body, which is what this always gets without
+          // a real NewsAPI key -- must fall through to the empty state,
+          // not spin forever. (Was `articles == null` here, which doesn't
+          // distinguish "still loading" from "loaded, but no articles".)
+          child: data == null
               ? const Center(child: CircularProgressIndicator())
-              : articles.isNotEmpty
+              : articles != null && articles.isNotEmpty
                   ? ListView.builder(
                       itemCount: articles.length,
                       padding: const EdgeInsets.all(8.0),
