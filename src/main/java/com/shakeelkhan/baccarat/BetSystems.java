@@ -103,6 +103,14 @@ public class BetSystems {
 			}
 
 			while (balance >= minBet && balance < target) {
+				// "martindale"/"martindale2" recover only the outstanding hole
+				// (lossValue) after a loss, not 2x the previous bet -- e.g. a
+				// string of unitSize=10 losses bets 10, 10, 20, 40..., not
+				// 10, 20, 40, 80... like textbook Martingale doubling. Left
+				// as-is rather than "corrected" since this is a deliberate
+				// custom recovery variant being backtested, not a typo -- if
+				// you want real doubling, track lastBetAmount and double it
+				// on loss instead of tracking lossValue.
 				if (bettingSystem.equalsIgnoreCase("martindale")) {
 					if (lossValue == 0) {
 						betAmount = unitSize;
