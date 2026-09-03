@@ -1,8 +1,10 @@
-# thebettingapp
+# the-betting-app
 
-> You're on `app/thebettingapp` -- one of the independent, self-contained
+> You're on `app/the-betting-app` -- one of the independent, self-contained
 > project branches in the `flutter-apps` archive repo (see that repo's
-> `main` branch for the full index).
+> `main` branch for the full index). The Dart package itself is named
+> `the_betting_app` (underscores, not hyphens -- Dart package names can't
+> contain hyphens); the hyphenated name is just this branch/repo path.
 
 A Flutter mobile UI for the same betting-system experiments as
 [baccarat](../../tree/app/baccarat) (a Java prototype in this same
@@ -38,7 +40,7 @@ file-by-file breakdown). Real result, not just "it compiles":
 ```
 $ flutter analyze         # 0 errors, 0 warnings (a handful of style-only infos)
 $ flutter test            # 2/2 passing
-$ flutter build macos     # ✓ Built build/macos/Build/Products/Debug/thebettingapp.app
+$ flutter build macos     # ✓ Built build/macos/Build/Products/Debug/the_betting_app.app
 $ flutter build web       # ✓ Built build/web
 ```
 
