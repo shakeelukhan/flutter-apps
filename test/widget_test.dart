@@ -1,7 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'package:thebettingapp/app.dart';
+import 'package:the_betting_app/app.dart';
 
 void main() {
   // A screen's LoadingScreenHelper shows an indeterminate

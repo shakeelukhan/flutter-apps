@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'dart:math';
-import 'package:thebettingapp/utils/SettingsHelper.dart';
-import 'package:thebettingapp/utils/LoadingScreenHelper.dart';
-import 'package:thebettingapp/utils/DataTableHelper.dart';
+import 'package:the_betting_app/utils/SettingsHelper.dart';
+import 'package:the_betting_app/utils/LoadingScreenHelper.dart';
+import 'package:the_betting_app/utils/DataTableHelper.dart';
 
 class MartingdaleScreen2 extends StatefulWidget {
   @override

@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="thebettingapp.thebettingapp">
+    package="the_betting_app.the_betting_app">
 
     <!-- io.flutter.app.FlutterApplication is an android.app.Application that
          calls FlutterMain.startInitialization(this); in its onCreate method.
@@ -8,7 +8,7 @@
          FlutterApplication and put your custom class here. -->
     <application
         android:name="io.flutter.app.FlutterApplication"
-        android:label="thebettingapp"
+        android:label="the_betting_app"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"

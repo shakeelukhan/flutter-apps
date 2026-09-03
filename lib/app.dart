@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-import 'package:thebettingapp/screens/settings/game_screen.dart';
-import 'package:thebettingapp/screens/settings/session_screen.dart';
-import 'package:thebettingapp/screens/settings/all_screen.dart';
-import 'package:thebettingapp/screens/session/martingdale_screen.dart';
-import 'package:thebettingapp/screens/session/martingdale_screen2.dart';
-import 'package:thebettingapp/screens/session/simulation_screen.dart';
-import 'package:thebettingapp/screens/game/cointoss_screen.dart';
-import 'package:thebettingapp/utils/NavHelper.dart';
+import 'package:the_betting_app/screens/settings/game_screen.dart';
+import 'package:the_betting_app/screens/settings/session_screen.dart';
+import 'package:the_betting_app/screens/settings/all_screen.dart';
+import 'package:the_betting_app/screens/session/martingdale_screen.dart';
+import 'package:the_betting_app/screens/session/martingdale_screen2.dart';
+import 'package:the_betting_app/screens/session/simulation_screen.dart';
+import 'package:the_betting_app/screens/game/cointoss_screen.dart';
+import 'package:the_betting_app/utils/NavHelper.dart';
 
 class App extends StatelessWidget {
   // App title

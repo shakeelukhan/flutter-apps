@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:thebettingapp/utils/SettingsHelper.dart';
-import 'package:thebettingapp/utils/LoadingScreenHelper.dart';
-import 'package:thebettingapp/utils/GameHelper.dart';
+import 'package:the_betting_app/utils/SettingsHelper.dart';
+import 'package:the_betting_app/utils/LoadingScreenHelper.dart';
+import 'package:the_betting_app/utils/GameHelper.dart';
 
 class SimulationScreen extends StatefulWidget {
   @override
