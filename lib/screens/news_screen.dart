@@ -1,11 +1,10 @@
-import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
 import 'package:http/http.dart' as http;
-import 'package:share/share.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:timeago/timeago.dart' as timeago;
+import 'package:webview_flutter/webview_flutter.dart';
 
 class NewsScreen extends StatefulWidget {
   @override
@@ -13,29 +12,35 @@ class NewsScreen extends StatefulWidget {
 }
 
 class _NewsScreenState extends State<NewsScreen> {
-  var data;
+  Map<String, dynamic>? data;
   var newsSelection = "ary-news";
-  final FlutterWebviewPlugin flutterWebviewPlugin = new FlutterWebviewPlugin();
 
-  Future getData() async {
+  Future<String> getData() async {
     var response = await http.get(
-        Uri.encodeFull(
-            'https://newsapi.org/v2/top-headlines?sources=' + newsSelection),
+        Uri.parse(Uri.encodeFull(
+            'https://newsapi.org/v2/top-headlines?sources=' + newsSelection)),
         headers: {
           "Accept": "application/json",
+          // No live NewsAPI.org key is configured for this archived app
+          // (the original key was redacted -- see repo security history).
+          // This request will 401; the empty/error response is handled
+          // below rather than crashing.
           "X-Api-Key": "REDACTED_NEWSAPI_KEY"
         });
     var localData = json.decode(response.body);
-    if (localData != null && localData["articles"] != null) {
-      localData["articles"].sort((a, b) =>
-          a["publishedAt"] != null && b["publishedAt"] != null
-              ? DateTime.parse(b["publishedAt"])
-                  .compareTo(DateTime.parse(a["publishedAt"]))
-              : null);
+    if (localData is Map<String, dynamic> && localData["articles"] != null) {
+      localData["articles"].sort((a, b) {
+        // Was `: null` in the missing-timestamp branch -- a comparator
+        // must always return an int; a null return would throw the
+        // first time this code path was actually exercised.
+        if (a["publishedAt"] == null || b["publishedAt"] == null) return 0;
+        return DateTime.parse(b["publishedAt"])
+            .compareTo(DateTime.parse(a["publishedAt"]));
+      });
     }
     if (mounted) {
-      this.setState(() {
-        data = localData;
+      setState(() {
+        data = localData is Map<String, dynamic> ? localData : null;
       });
     }
     return "Success!";
@@ -44,66 +49,72 @@ class _NewsScreenState extends State<NewsScreen> {
   @override
   void initState() {
     super.initState();
-    this.getData();
+    getData();
   }
 
-  @override
-  void dispose() {
-    flutterWebviewPlugin.dispose();
-    super.dispose();
+  void _openArticle(String url) {
+    Navigator.of(context).push(MaterialPageRoute(
+      builder: (context) => Scaffold(
+        appBar: AppBar(),
+        body: WebViewWidget(
+          controller: WebViewController()
+            ..setJavaScriptMode(JavaScriptMode.unrestricted)
+            ..loadRequest(Uri.parse(url)),
+        ),
+      ),
+    ));
   }
 
   Column buildButtonColumn(IconData icon) {
     Color color = Theme.of(context).primaryColor;
-    return new Column(
+    return Column(
       mainAxisSize: MainAxisSize.min,
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        new Icon(icon, color: color),
+        Icon(icon, color: color),
       ],
     );
   }
 
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
-      resizeToAvoidBottomPadding: false,
+    final articles = data?["articles"] as List?;
+    return Scaffold(
       backgroundColor: Colors.grey[200],
-      body: new Column(children: <Widget>[
-        new Expanded(
-          child: data == null
-              ? const Center(child: const CircularProgressIndicator())
-              : data["articles"].length != 0
-                  ? new ListView.builder(
-                      itemCount: data == null ? 0 : data["articles"].length,
-                      padding: new EdgeInsets.all(8.0),
+      body: Column(children: <Widget>[
+        Expanded(
+          child: articles == null
+              ? const Center(child: CircularProgressIndicator())
+              : articles.isNotEmpty
+                  ? ListView.builder(
+                      itemCount: articles.length,
+                      padding: const EdgeInsets.all(8.0),
                       itemBuilder: (BuildContext context, int index) {
-                        return new Card(
+                        final article = articles[index];
+                        return Card(
                           elevation: 1.7,
-                          child: new Padding(
-                            padding: new EdgeInsets.all(10.0),
-                            child: new Column(
+                          child: Padding(
+                            padding: const EdgeInsets.all(10.0),
+                            child: Column(
                               children: [
-                                new Row(
+                                Row(
                                   children: <Widget>[
-                                    new Padding(
-                                      padding: new EdgeInsets.only(left: 4.0),
-                                      child: new Text(
+                                    Padding(
+                                      padding: const EdgeInsets.only(left: 4.0),
+                                      child: Text(
                                         timeago.format(DateTime.parse(
-                                            data["articles"][index]
-                                                ["publishedAt"])),
-                                        style: new TextStyle(
+                                            article["publishedAt"])),
+                                        style: TextStyle(
                                           fontWeight: FontWeight.w400,
                                           color: Colors.grey[600],
                                         ),
                                       ),
                                     ),
-                                    new Padding(
-                                      padding: new EdgeInsets.all(5.0),
-                                      child: new Text(
-                                        data["articles"][index]["source"]
-                                            ["name"],
-                                        style: new TextStyle(
+                                    Padding(
+                                      padding: const EdgeInsets.all(5.0),
+                                      child: Text(
+                                        article["source"]["name"],
+                                        style: TextStyle(
                                           fontWeight: FontWeight.w500,
                                           color: Colors.grey[700],
                                         ),
@@ -111,109 +122,76 @@ class _NewsScreenState extends State<NewsScreen> {
                                     ),
                                   ],
                                 ),
-                                new Row(
+                                Row(
                                   children: [
-                                    new Expanded(
-                                      child: new GestureDetector(
-                                        child: new Column(
+                                    Expanded(
+                                      child: GestureDetector(
+                                        onTap: () {
+                                          _openArticle(article["url"]);
+                                        },
+                                        child: Column(
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
                                           children: [
-                                            new Padding(
-                                              padding: new EdgeInsets.only(
+                                            Padding(
+                                              padding: const EdgeInsets.only(
                                                   left: 4.0,
                                                   right: 8.0,
                                                   bottom: 8.0,
                                                   top: 8.0),
-                                              child: new Text(
-                                                data["articles"][index]
-                                                    ["title"],
-                                                style: new TextStyle(
+                                              child: Text(
+                                                article["title"],
+                                                style: const TextStyle(
                                                   fontWeight: FontWeight.bold,
                                                 ),
                                               ),
                                             ),
-                                            new Padding(
-                                              padding: new EdgeInsets.only(
+                                            Padding(
+                                              padding: const EdgeInsets.only(
                                                   left: 4.0,
                                                   right: 4.0,
                                                   bottom: 4.0),
-                                              child: new Text(
-                                                data["articles"][index]
-                                                    ["description"],
-                                                style: new TextStyle(
+                                              child: Text(
+                                                article["description"] ?? '',
+                                                style: TextStyle(
                                                   color: Colors.grey[500],
                                                 ),
                                               ),
                                             ),
                                           ],
                                         ),
-                                        onTap: () {
-                                          flutterWebviewPlugin.launch(
-                                              data["articles"][index]["url"]);
-                                        },
                                       ),
                                     ),
-                                    new Column(
+                                    Column(
                                       children: <Widget>[
-                                        new Padding(
+                                        Padding(
                                           padding:
-                                              new EdgeInsets.only(top: 8.0),
-                                          child: new SizedBox(
+                                              const EdgeInsets.only(top: 8.0),
+                                          child: SizedBox(
                                             height: 100.0,
                                             width: 100.0,
-                                            child: new Image.network(
-                                              data["articles"][index]
-                                                  ["urlToImage"],
-                                              fit: BoxFit.cover,
-                                            ),
+                                            child: article["urlToImage"] != null
+                                                ? Image.network(
+                                                    article["urlToImage"],
+                                                    fit: BoxFit.cover,
+                                                  )
+                                                : null,
                                           ),
                                         ),
-                                        new Row(
+                                        Row(
                                           children: <Widget>[
-                                            new GestureDetector(
-                                              child: new Padding(
+                                            GestureDetector(
+                                              onTap: () {
+                                                Share.share(article["url"]);
+                                              },
+                                              child: Padding(
                                                   padding:
-                                                      new EdgeInsets.symmetric(
+                                                      const EdgeInsets.symmetric(
                                                           vertical: 10.0,
                                                           horizontal: 5.0),
                                                   child: buildButtonColumn(
                                                       Icons.share)),
-                                              onTap: () {
-                                                Share.share(data["articles"]
-                                                    [index]["url"]);
-                                              },
                                             ),
-                                            /*          new GestureDetector(
-                                              child: new Padding(
-                                                  padding:
-                                                      new EdgeInsets.all(5.0),
-                                                  child: _hasArticle(
-                                                          data["articles"]
-                                                              [index])
-                                                      ? buildButtonColumn(
-                                                          Icons.bookmark)
-                                                      : buildButtonColumn(Icons
-                                                          .bookmark_border) ),
-                                              onTap: () {
-                                                _onBookmarkTap(
-                                                    data["articles"][index]);
-                                              },
-                                            ),
-                                            new GestureDetector(
-                                              child: new Padding(
-                                                  padding:
-                                                      new EdgeInsets.all(5.0),
-                                                  child: buildButtonColumn(
-                                                      Icons.not_interested)),
-                                              onTap: () {
-                                                _onRemoveSource(
-                                                    data["articles"][index]
-                                                        ["source"]["id"],
-                                                    data["articles"][index]
-                                                        ["source"]["name"]);
-                                              },
-                                            ), */
                                           ],
                                         ),
                                       ],
@@ -221,21 +199,21 @@ class _NewsScreenState extends State<NewsScreen> {
                                   ],
                                 )
                               ],
-                            ), ////
+                            ),
                           ),
                         );
                       },
                     )
-                  : new Center(
-                      child: new Column(
+                  : Center(
+                      child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          new Icon(Icons.chrome_reader_mode,
+                          const Icon(Icons.chrome_reader_mode,
                               color: Colors.grey, size: 60.0),
-                          new Text(
+                          Text(
                             "No articles saved",
-                            style: new TextStyle(
-                                fontSize: 24.0, color: Colors.grey),
+                            style: TextStyle(
+                                fontSize: 24.0, color: Colors.grey[500]),
                           ),
                         ],
                       ),
