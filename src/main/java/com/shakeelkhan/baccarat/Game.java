@@ -104,17 +104,17 @@ public class Game {
 	// http://javarevisited.blogspot.com/2012/12/how-to-sort-hashmap-java-by-key-and-value.html#ixzz358HOUXhN
 
 	private void addStreakData(int streakp, int streakb, int streakf) {
-		if (pstreak > 0) {
+		if (streakp > 0) {
 			streakData[0][0]++;
-			streakData[0][pstreak]++;
+			streakData[0][Math.min(streakp, streakData[0].length - 1)]++;
 		}
 		if (streakb > 0) {
 			streakData[1][0]++;
-			streakData[1][streakb]++;
+			streakData[1][Math.min(streakb, streakData[1].length - 1)]++;
 		}
 		if (streakf > 0) {
 			streakData[2][0]++;
-			streakData[2][streakf]++;
+			streakData[2][Math.min(streakf, streakData[2].length - 1)]++;
 		}
 	}
 
