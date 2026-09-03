@@ -12,12 +12,13 @@ see below), and a simulation screen that runs flat/Martingale/
 Martingale-variant strategies against randomized outcomes and shows the
 results.
 
-Written 2019, last touched December 2019 (the final commit is literally
-titled "Broken changes").
+Written 2019, last touched December 2019 (the final commit was literally
+titled "Broken changes"). Since modernized to build and run on a current
+Flutter SDK -- see below.
 
-## This does NOT build on a current Flutter/Dart SDK
+## This builds and runs on a current Flutter/Dart SDK
 
-Verified directly, not assumed:
+Verified directly, not assumed. `flutter pub get` originally failed:
 
 ```
 $ flutter pub get
@@ -28,18 +29,27 @@ or higher to enable null safety.
 The current Dart SDK (3.13.2) only supports null safety.
 ```
 
-Dart made null safety mandatory in 3.0. This app's `pubspec.yaml`
-predates null safety entirely (2019), and every `.dart` file uses
-pre-null-safety syntax throughout (nullable-by-default types, no `?`/`!`
-anywhere). Reviving this would mean a real null-safety migration across
-every file plus updating `shared_preferences` and `cupertino_icons` past
-their pre-null-safety major versions -- not a quick fix, and not
-something to guess at without a working toolchain to verify against
-(this modernization pass has Flutter 3.47.2 / Dart 3.13.2 available, but
-running the migration tool and manually verifying ~10 files' worth of
-UI/state logic actually behaves the same afterward is a bigger job than
-this archival pass is scoped for). This branch is preserved as-is:
-buildable history and hygiene fixes only, source logic untouched.
+Migrated to null safety (SDK constraint bumped to `>=3.0.0 <4.0.0`,
+`shared_preferences`/`cupertino_icons` bumped to current major versions,
+every `.dart` file updated for sound null safety and a handful of
+Flutter API changes -- see the git history on this branch for the
+file-by-file breakdown). Real result, not just "it compiles":
+
+```
+$ flutter analyze         # 0 errors, 0 warnings (a handful of style-only infos)
+$ flutter test            # 2/2 passing
+$ flutter build macos     # ✓ Built build/macos/Build/Products/Debug/thebettingapp.app
+$ flutter build web       # ✓ Built build/web
+```
+
+Both builds were actually launched, not just compiled -- `open` on the
+macOS `.app` produced a running process. No iOS Simulator runtime or
+Android SDK was available in this environment, so macOS desktop and web
+are the verified targets here; nothing about the Dart/Flutter code is
+platform-specific, so `flutter build ios`/`apk` should work the same way
+given those toolchains.
+
+One real bug surfaced by the migration: see "Notes" below.
 
 ## Structure
 
@@ -62,26 +72,37 @@ lib/
     NavHelper.dart                   builds the tab/bottom-nav structure
     DataTableHelper.dart             generic DataTable row builder
     LoadingScreenHelper.dart         loading-state widget helper
+test/
+  widget_test.dart                  launches the app, checks the 3 tabs render
 ```
 
-## Notes on this archival pass
+## Notes on this modernization pass
 
+- **Real bug fixed**: `martingdale_screen.dart` read a settings key
+  called `session.end_goal`, which is never set anywhere --
+  `SettingsHelper` only defines `session.goal` (the same key
+  `session_screen.dart`'s Goal field uses). Pre-null-safety, this
+  silently read `null` and would have thrown the first time `_endGoal`
+  was used in a comparison; null safety's static checking surfaced it
+  immediately. Fixed to read `session.goal`.
 - **"Martingdale" is a typo for "Martingale"** that's used consistently
   as a class/file name throughout (`MartingdaleScreen`, the "Session"
-  tab label, etc.). Left uncorrected rather than renamed: renaming
-  touches multiple files' class names and imports, and there's no
-  working build to verify the rename didn't break anything.
-- **The final commit ("Broken changes", 2019-12-25)** actually looks
-  like legitimate in-progress work, not an accidental break: it
-  finishes wiring up `MartingdaleScreen2` (previously a copy-pasted file
-  that still declared a duplicate `MartingdaleScreen` class -- would not
-  have compiled) and generalizes `DataTableHelper.getDataTableRows()` to
-  handle a variable number of columns instead of a hardcoded 3. The
-  commit message suggests the author knew it wasn't finished. Not
-  completed here, for the same reason as above.
+  tab label, etc.). Left uncorrected: renaming would touch multiple
+  files' class names and imports for a purely cosmetic fix, unrelated
+  to the migration.
+- **The "Broken changes" commit (2019-12-25, the branch's last original
+  commit)** actually looks like legitimate in-progress work, not an
+  accidental break: it finishes wiring up `MartingdaleScreen2`
+  (previously a copy-pasted file that still declared a duplicate
+  `MartingdaleScreen` class -- would not have compiled) and generalizes
+  `DataTableHelper.getDataTableRows()` to handle a variable number of
+  columns instead of a hardcoded 3. Both are kept as-is; no further
+  work was needed to make either one compile under null safety.
 - Repo hygiene fixed: a locally-committed root `.gradle/` build cache
-  (6 files, a gap in the original `.gitignore` which only excluded
-  `**/android/.gradle`) was removed and the gap closed.
+  (6 files) and a locally-committed `ios/Flutter/flutter_export_environment.sh`
+  (a generated file whose own header says not to check it into version
+  control -- it had another machine's absolute paths baked in) were
+  both removed, with matching `.gitignore` rules added.
 
 ## License
 
