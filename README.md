@@ -1,8 +1,14 @@
-# thepakistaniapp
+# the-pakistani-app
 
-> You're on `app/thepakistaniapp` -- one of the independent,
+> You're on `app/the-pakistani-app` -- one of the independent,
 > self-contained project branches in the `flutter-apps` archive repo
-> (see that repo's `main` branch for the full index).
+> (see that repo's `main` branch for the full index). The Dart package
+> itself is named `the_pakistani_app` (underscores, not hyphens -- Dart
+> package names can't contain hyphens); the hyphenated name is just this
+> branch/repo path. The Android/iOS/macOS bundle identifier
+> (`com.thedesiproject.thepakistaniapp`) is untouched by this rename --
+> it's tied to a real historical Firebase project registration, not just
+> a display name.
 
 An early-stage Flutter prototype for a Pakistani community app: a tabbed
 shell (Home / Events / News / Dramas / Recipes / About) with Google
@@ -34,7 +40,7 @@ in this archive (`>=2.0.0-dev.68.0` targets a pre-release Dart 2.0 dev
 build) and pinned several now-abandoned packages: `cloud_firestore
 0.8.2`, `google_maps_flutter ^0.0.3`, `flutter_webview_plugin`
 (long-abandoned, superseded by `webview_flutter`), `share` (deprecated,
-superseded by `share_plus`). Unlike `rishtaaunty`, none of these could
+superseded by `share_plus`). Unlike `rishta-aunty`, none of these could
 be removed as dead code -- every one of them is exercised by a real,
 reachable screen. `google_sign_in`/`firebase_auth` *were* removable
 though -- see Notes.
@@ -44,7 +50,7 @@ Real result, not just "it compiles":
 ```
 $ flutter analyze                          # 0 errors, 1 warning (unrelated to migration -- see Notes), 76 style infos
 $ flutter test                             # 1/1 passing
-$ flutter build macos --debug              # ✓ Built build/macos/Build/Products/Debug/thepakistaniapp.app
+$ flutter build macos --debug              # ✓ Built build/macos/Build/Products/Debug/the_pakistani_app.app
 $ flutter build macos                      # ✓ release build also succeeds (79.4MB)
 $ flutter build web --no-tree-shake-icons  # ✓ Built build/web
 ```
@@ -149,6 +155,32 @@ test/
   in its `State` object -- a real Flutter anti-pattern, but pre-existing
   and harmless since nothing renders this widget. Not fixed, to avoid
   restructuring code with zero live usage to verify against.
+- **Two more real bugs found during independent review (Grok 4.6 /
+  ai-nepo), both fixed**: the `ThemeData` remapping above initially
+  pointed 3 sites (`calendarView`'s year text, `eventsView`'s detail and
+  time text) at the wrong slot -- they read `bodyLarge` (black, the
+  slot for `accentTextTheme.body1`) instead of `bodyMedium` (blueGrey,
+  the slot for the original `subhead`), and `monthView`'s non-event day
+  numbers had the same mixup. And `news_screen.dart`'s loading/empty
+  logic was keyed off `articles == null`, which doesn't distinguish
+  "fetch still in progress" from "fetch completed with no articles key"
+  -- a 401 response (what this always gets without a real API key) has
+  no `articles` key at all, so the screen span its `CircularProgressIndicator`
+  forever instead of showing "No articles saved". Now keyed off
+  `data == null` instead.
+- **Rename**: the app was renamed from `thepakistaniapp` to distinguish
+  word boundaries -- `the_pakistani_app` for the Dart package
+  (underscores; Dart package names can't contain hyphens),
+  `app/the-pakistani-app` for the branch/repo path (hyphens, matching
+  this archive's convention). The Android `applicationId`/`package` and
+  the iOS/macOS `PRODUCT_BUNDLE_IDENTIFIER`
+  (`com.thedesiproject.thepakistaniapp`) were deliberately left
+  unrenamed -- registered against a real (if long since retired)
+  Firebase project (`tthepakistaniapp-1547719565335`, see
+  `google-services.json`), so this is historical identity, not just a
+  cosmetic display name. The Android `android:label`, macOS/iOS
+  `PRODUCT_NAME`, and web manifest name were renamed, since those are
+  purely cosmetic and unrelated to the bundle identifier.
 
 ## License
 
