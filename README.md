@@ -19,8 +19,8 @@ java/
   baccarat/           <- app/baccarat
 flutter/
   thebettingapp/      <- app/thebettingapp
-  thepakistaniapp/    <- app/thepakistaniapp
   rishtaaunty/        <- app/rishtaaunty
+  thepakistaniapp/    <- app/thepakistaniapp
 ```
 
 To share or work on one project in isolation, push its branch to a fresh
@@ -33,20 +33,24 @@ since each branch was already born independent.
 |---|---|---|---|---|
 | baccarat | Java statistics tool | `app/baccarat` | `java/baccarat` | done -- modernized, bugs fixed, tested, CI added |
 | thebettingapp | Flutter app | `app/thebettingapp` | `flutter/thebettingapp` | done -- migrated to null safety, builds/runs (macOS + web verified), 1 real bug fixed |
-| rishtaaunty | Flutter app | `app/rishtaaunty` | `flutter/rishtaaunty` | done -- BLoC layer rewritten to current API, 21 unused deps removed, null-safety migrated, builds/runs (macOS + web verified) |
-| thepakistaniapp | Flutter app | `app/thepakistaniapp` | `flutter/thepakistaniapp` | in progress -- hardest of the 3 (Firebase 0.x + Maps + abandoned webview plugin) |
+| rishtaaunty | Flutter app | `app/rishtaaunty` | `flutter/rishtaaunty` | done -- BLoC layer rewritten to current API, 23 unused deps removed, null-safety migrated, builds/runs (macOS + web verified) |
+| thepakistaniapp | Flutter app | `app/thepakistaniapp` | `flutter/thepakistaniapp` | done -- hardest of the 3 (real Firebase/Maps/webview migrations, not removable as dead code), 2 real bugs fixed, builds/runs (macOS + web verified) |
 
-The three Flutter apps were legacy, pre-null-safety projects (Dart SDK
-constraints from ~2018-2019, several now-abandoned or breaking-API-changed
-packages) -- all originally verified to fail `flutter pub get` outright
-against a real Flutter 3.47.2 / Dart 3.13.2 install. They're being
-modernized one at a time, easiest first, with each fix verified against
-that real toolchain rather than guessed at -- see each branch's own
-README for exactly what changed and what was verified.
+All four projects were legacy, pre-null-safety code (Dart SDK constraints
+from ~2018-2019, several now-abandoned or breaking-API-changed
+dependencies) -- all originally verified to fail to build outright
+against a real, locally-installed toolchain (Java 17/Maven for baccarat;
+Flutter 3.47.2/Dart 3.13.2 for the three Flutter apps). Every one is now
+modernized, with each fix verified against that real toolchain rather
+than guessed at -- see each branch's own README for exactly what changed,
+what was found along the way (several real bugs, and in rishtaaunty's/
+thepakistaniapp's cases, large amounts of dead/unused code that didn't
+need migrating at all), and what was verified.
 
-`baccarat` (Java) got the fuller treatment (bug fixes, unit tests, CI)
-since it has a real, locally-available toolchain to verify changes against
--- see [java/baccarat/README.md](java/baccarat/README.md) for details.
+No iOS Simulator runtime or Android SDK was available in this
+environment, so macOS desktop and web are the verified run targets for
+all three Flutter apps -- nothing about the code is platform-specific,
+so mobile builds should work the same way given those toolchains.
 
 ## License
 
