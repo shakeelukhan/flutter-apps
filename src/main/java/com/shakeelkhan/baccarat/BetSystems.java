@@ -23,24 +23,70 @@ public class BetSystems {
 
 	public void simulate(int numBets) {
 		int betWinCount = 0, betLoseCount = 0;
-		int streakCount = 0;
-		int lastWinStatus = -1;
-		int winStreak[] = new int[100];
-		int loseStreak[] = new int[100];
+		int[] outcomes = new int[numBets];
 
 		for (int i = 0; i < numBets; i++) {
 			int bet = makeBet();
+			outcomes[i] = bet;
 			if (bet == 1) {
 				betWinCount += 1;
 			} else {
 				betLoseCount += 1;
 			}
+		}
+
+		int[][] streaks = computeStreaks(outcomes);
+		int[] winStreak = streaks[0];
+		int[] loseStreak = streaks[1];
+
+		System.out.println("CONSECUTIVE BETS (COUNT=" + numBets + ")");
+		System.out.println("W=" + betWinCount + " L=" + betLoseCount + " betCount=" + (betWinCount + betLoseCount));
+		for (int i = 0; i < winStreak.length; i++) {
+			if (winStreak[i] != 0) {
+				System.out.print("W" + (i + 1) + "=" + winStreak[i] + "("
+						+ df2.format(100 * ((double) winStreak[i] / (double) (betWinCount + betLoseCount))) + "%) ");
+			}
+			if (loseStreak[i] != 0) {
+				System.out.print("L" + (i + 1) + "=" + loseStreak[i] + "("
+						+ df2.format(100 * ((double) loseStreak[i] / (double) (betWinCount + betLoseCount))) + "%) ");
+			}
+		}
+		System.out.println();
+	}
+
+	/**
+	 * Streak bookkeeping extracted out of simulate() so it's directly
+	 * testable against a fixed sequence instead of only through
+	 * randomized simulation -- that gap in coverage is exactly why the
+	 * off-by-one bug below slipped through the first review round.
+	 *
+	 * outcomes[i] is 1 for a win, 0 for a loss. Returns {winStreak,
+	 * loseStreak}, each indexed by (streak length - 1) -- e.g. a streak
+	 * of 3 consecutive wins increments winStreak[2], matching simulate()'s
+	 * print loop which labels index i as "length i+1". A streak still in
+	 * progress when outcomes ends is not recorded (matches the original,
+	 * unreviewed behavior -- negligible over the large bet counts this
+	 * is actually run with).
+	 */
+	static int[][] computeStreaks(int[] outcomes) {
+		int streakCount = 0;
+		int lastWinStatus = -1;
+		int[] winStreak = new int[100];
+		int[] loseStreak = new int[100];
+
+		for (int bet : outcomes) {
 			if (lastWinStatus == -1) {
-				// First bet has no prior outcome to compare against -- without
-				// this, it always took the "streak changed" branch below and
-				// logged a phantom length-1 streak for whichever outcome did
-				// NOT happen on the first bet.
+				// First bet has no prior outcome to compare against. Record
+				// it and move on without touching streakCount or either
+				// array -- falling through to the bookkeeping below would
+				// either log a phantom length-1 streak for the opposite
+				// outcome (the original bug), or, if merged into the "same
+				// streak" branch, double-count bet #1 into streakCount and
+				// shift every subsequent streak-length index off by one
+				// (found by Grok 4.6 / ai-nepo review of the first fix
+				// attempt for this same bug).
 				lastWinStatus = bet;
+				continue;
 			}
 			if (lastWinStatus == bet) {
 				streakCount++;
@@ -54,19 +100,7 @@ public class BetSystems {
 			}
 			lastWinStatus = bet;
 		}
-		System.out.println("CONSECUTIVE BETS (COUNT=" + numBets + ")");
-		System.out.println("W=" + betWinCount + " L=" + betLoseCount + " betCount=" + (betWinCount + betLoseCount));
-		for (int i = 0; i < 100; i++) {
-			if (winStreak[i] != 0) {
-				System.out.print("W" + (i + 1) + "=" + winStreak[i] + "("
-						+ df2.format(100 * ((double) winStreak[i] / (double) (betWinCount + betLoseCount))) + "%) ");
-			}
-			if (loseStreak[i] != 0) {
-				System.out.print("L" + (i + 1) + "=" + loseStreak[i] + "("
-						+ df2.format(100 * ((double) loseStreak[i] / (double) (betWinCount + betLoseCount))) + "%) ");
-			}
-		}
-		System.out.println();
+		return new int[][] { winStreak, loseStreak };
 	}
 
 	public void system(String bettingSystem, int startingBalance, int minBet, int sessionCount, int target,
