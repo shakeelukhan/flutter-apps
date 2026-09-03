@@ -9,20 +9,18 @@ class EventsSummaryScreen extends StatefulWidget {
 }
 
 class _EventsSummaryScreenState extends State<EventsSummaryScreen> {
-
-  StreamController<List<Map<String, String>>> eventsController =
-      new StreamController();
+  StreamController<List<Map<String, String?>>> eventsController =
+      StreamController();
 
   @override
   void dispose() {
     eventsController.close();
-    // TODO: implement dispose
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    const eventList = [
+    const List<Map<String, String?>> eventList = [
       // null location, so location will not be displayed
       // but event will be visible in calendar
       {
@@ -87,42 +85,53 @@ class _EventsSummaryScreenState extends State<EventsSummaryScreen> {
       },
     ];
 
+    // Was ThemeData.accentColor/accentTextTheme/backgroundColor and old
+    // (pre-2018) textTheme property names (display1/subhead/headline/title,
+    // body1) -- all removed from current Flutter. Reconstructed with
+    // colorScheme.secondary for the accent color and 6 distinct current
+    // textTheme slots (this ThemeData is only ever read directly by
+    // CalendarView/MonthView/EventsView as a plain settings object, never
+    // applied as the ambient Theme, so slot choice can't collide with
+    // anything else) standing in for the 4 original textTheme + 2 actually-
+    // used accentTextTheme overrides:
+    //   display1 (21, default color)         -> displaySmall
+    //   subhead  (14, blueGrey)               -> bodyMedium
+    //   headline (18, blueGrey, bold)         -> headlineSmall
+    //   title    (14, blueGrey, bold)         -> titleSmall
+    //   accentTextTheme.body1  (14, black)    -> bodyLarge
+    //   accentTextTheme.title  (21, black, bold) -> titleLarge
     final theme = ThemeData.dark().copyWith(
       primaryColor: Colors.grey,
-      accentColor: Colors.green,
+      colorScheme: ThemeData.dark().colorScheme.copyWith(
+            secondary: Colors.green,
+            onSecondary: Colors.black,
+            surface: Colors.green,
+          ),
       canvasColor: Colors.white,
-      backgroundColor: Colors.green,
       dividerColor: Colors.blueGrey,
       textTheme: ThemeData.dark().textTheme.copyWith(
-            display1: TextStyle(
+            displaySmall: const TextStyle(
               fontSize: 21.0,
             ),
-            subhead: TextStyle(
+            bodyMedium: const TextStyle(
               fontSize: 14.0,
               color: Colors.blueGrey,
             ),
-            headline: TextStyle(
+            headlineSmall: const TextStyle(
               fontSize: 18.0,
               color: Colors.blueGrey,
               fontWeight: FontWeight.bold,
             ),
-            title: TextStyle(
+            titleSmall: const TextStyle(
               fontSize: 14.0,
               color: Colors.blueGrey,
               fontWeight: FontWeight.bold,
             ),
-          ),
-      accentTextTheme: ThemeData.dark().accentTextTheme.copyWith(
-            body1: TextStyle(
+            bodyLarge: const TextStyle(
               fontSize: 14.0,
               color: Colors.black,
             ),
-            title: TextStyle(
-              fontSize: 21.0,
-              color: Colors.black,
-              fontWeight: FontWeight.bold,
-            ),
-            display1: TextStyle(
+            titleLarge: const TextStyle(
               fontSize: 21.0,
               color: Colors.black,
               fontWeight: FontWeight.bold,
@@ -130,40 +139,19 @@ class _EventsSummaryScreenState extends State<EventsSummaryScreen> {
           ),
     );
 
-    void onEventTapped(Map<String, String> event) {
-      print(event);
+    void onEventTapped(Map<String, String?> event) {
+      debugPrint(event.toString());
     }
 
     eventsController.add(eventList);
 
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
-    return new Scaffold(
-      body: new Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: new Column(
-          // Column is also layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Invoke "debug paint" (press "p" in the console where you ran
-          // "flutter run", or select "Toggle Debug Paint" from the Flutter tool
-          // window in IntelliJ) to see the wireframe for each widget.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
+    return Scaffold(
+      body: Center(
+        child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             // default String parameter values used below as example
-            new CalendarView(
+            CalendarView(
               onEventTapped: onEventTapped,
               titleField: 'name',
               detailField: 'location',
