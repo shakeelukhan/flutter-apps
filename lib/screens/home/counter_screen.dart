@@ -7,16 +7,11 @@ class CounterScreen extends StatefulWidget {
 
 class _CounterScreenState extends State<CounterScreen>
     with AutomaticKeepAliveClientMixin<CounterScreen> {
-  int _counter;
+  int _counter = 0;
+  @override
   bool get wantKeepAlive => true;
 
-  @override
-  void initState() {
-    super.initState();
-    _counter = 0;
-  }
-
-  _addCounter() {
+  void _addCounter() {
     setState(() {
       _counter++;
     });
@@ -24,16 +19,20 @@ class _CounterScreenState extends State<CounterScreen>
 
   @override
   Widget build(BuildContext context) {
+    // Required by AutomaticKeepAliveClientMixin -- missing before, which
+    // throws an assertion failure in debug mode the first time this
+    // widget actually builds. Pre-existing bug, unrelated to null safety.
+    super.build(context);
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
-        new Row(
+        Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             MaterialButton(
               color: Theme.of(context).primaryColor,
-              child: Text("Counter = " + _counter.toString()),
               onPressed: () => _addCounter(),
+              child: Text("Counter = " + _counter.toString()),
             ),
           ],
         ),
