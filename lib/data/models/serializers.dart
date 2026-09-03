@@ -10,7 +10,6 @@ part 'serializers.g.dart';
   AssetDatasourceModel,
   BaseDatasourceModel,
   ConfigModel,
-  RemoteConfigDatasourceModel,
   MenuModel,
   MenuItemModel,
   SubmenuModel,
