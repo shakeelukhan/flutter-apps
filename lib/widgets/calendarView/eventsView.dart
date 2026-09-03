@@ -68,11 +68,11 @@ class EventsView extends StatelessWidget {
                     ),
                     Text(
                       event[detailField] ?? "",
-                      style: theme.textTheme.bodyLarge,
+                      style: theme.textTheme.bodyMedium,
                     ),
                     Text(
                       timeString(event),
-                      style: theme.textTheme.bodyLarge,
+                      style: theme.textTheme.bodyMedium,
                     )
                   ],
                 ),

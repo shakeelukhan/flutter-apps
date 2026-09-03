@@ -175,7 +175,7 @@ class _CalendarState extends State<CalendarView> {
               ),
               Text(
                 _currentYear.toString(),
-                style: _theme.textTheme.bodyLarge
+                style: _theme.textTheme.bodyMedium
                     ?.copyWith(fontWeight: FontWeight.bold),
               )
             ],

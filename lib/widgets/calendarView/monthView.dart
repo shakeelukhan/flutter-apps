@@ -26,10 +26,15 @@ class MonthView extends StatelessWidget {
             child: Center(
                 child: Text(
               day.toString(),
+              // hasEvent: accentTextTheme.body1 (14, black) -> bodyLarge.
+              // !hasEvent: the original used the *unmodified* textTheme.body1
+              // (never overridden) -- titleMedium is the one slot this
+              // ThemeData genuinely leaves untouched, so it stands in for
+              // "whatever the base dark theme's default text style is."
               style: hasEvent
                   ? theme.textTheme.bodyLarge
                       ?.copyWith(color: theme.colorScheme.onSecondary)
-                  : theme.textTheme.bodyLarge,
+                  : theme.textTheme.titleMedium,
             )),
           ),
         ),
