@@ -1,7 +1,7 @@
 package com.shakeelkhan.baccarat;
 
 import java.util.Arrays;
-import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 import java.text.DecimalFormat;
 
 public class BetSystems {
@@ -14,8 +14,7 @@ public class BetSystems {
 	}
 
 	public int makeBet() {
-		Random rng = new Random();
-		if (rng.nextInt(100) < betLoseProbablyPercent) {
+		if (ThreadLocalRandom.current().nextInt(100) < betLoseProbablyPercent) {
 			return 0;
 		} else {
 			return 1;
@@ -35,6 +34,13 @@ public class BetSystems {
 				betWinCount += 1;
 			} else {
 				betLoseCount += 1;
+			}
+			if (lastWinStatus == -1) {
+				// First bet has no prior outcome to compare against -- without
+				// this, it always took the "streak changed" branch below and
+				// logged a phantom length-1 streak for whichever outcome did
+				// NOT happen on the first bet.
+				lastWinStatus = bet;
 			}
 			if (lastWinStatus == bet) {
 				streakCount++;
@@ -226,16 +232,25 @@ public class BetSystems {
 				+ minBet + " sessions=" + sessionCount + " target=$" + target + " unitSize=$" + unitSize + " parts="
 				+ parts + " betArray=" + Arrays.toString(origBetArray));
 		if (totalHitTargetSessionCount != 0) {
+			// A session can hit target with zero bets placed (e.g.
+			// startingBalance already >= target), so totalHitTargetBetCount
+			// can be 0 even though totalHitTargetSessionCount isn't.
+			String avgBetAmount = totalHitTargetBetCount != 0
+					? df2.format((totalHitTargetBetAmount / totalHitTargetBetCount))
+					: "n/a";
 			System.out.println("HitTarget: sessionCount=" + totalHitTargetSessionCount + "("
 					+ df2.format(100 * ((double) totalHitTargetSessionCount / (double) sessionCount))
 					+ "%) avgBetCount=" + df2.format((totalHitTargetBetCount / totalHitTargetSessionCount))
-					+ " avgBetAmount=$" + df2.format((totalHitTargetBetAmount / totalHitTargetBetCount)));
+					+ " avgBetAmount=$" + avgBetAmount);
 		}
 		if (totalMissTargetSessionCount != 0) {
+			String avgBetAmount = totalMissTargetBetCount != 0
+					? String.valueOf(totalMissTargetBetAmount / totalMissTargetBetCount)
+					: "n/a";
 			System.out.println("MissTarget: sessionCount=" + totalMissTargetSessionCount + "("
 					+ df2.format(100 * ((double) totalMissTargetSessionCount / (double) sessionCount))
 					+ "%) avgBetCount=" + df2.format((totalMissTargetBetCount / totalMissTargetSessionCount))
-					+ " avgBetAmount=$" + (totalMissTargetBetAmount / (totalMissTargetBetCount)));
+					+ " avgBetAmount=$" + avgBetAmount);
 		}
 		int totalStreakCount = 0;
 		for (int j = 0; j < 100; j++) {
