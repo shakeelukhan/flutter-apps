@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:thebettingapp/utils/SettingsHelper.dart';
 import 'package:thebettingapp/utils/LoadingScreenHelper.dart';
 
@@ -9,31 +8,31 @@ class SessionScreen extends StatefulWidget {
 }
 
 class _SessionScreenState extends State<SessionScreen> {
-  LoadingScreenHelper _loadingScreen;
-  SettingsHelper _settings;
-  TextEditingController _startAmountController;
-  TextEditingController _balanceController;
-  TextEditingController _goalController;
-  TextEditingController _unitSizeController;
-  TextEditingController _positiveProgressionPartsController;
-  TextEditingController _simulationCountController;
+  late LoadingScreenHelper _loadingScreen;
+  late SettingsHelper _settings;
+  late TextEditingController _startAmountController;
+  late TextEditingController _balanceController;
+  late TextEditingController _goalController;
+  late TextEditingController _unitSizeController;
+  late TextEditingController _positiveProgressionPartsController;
+  late TextEditingController _simulationCountController;
 
   @override
   void initState() {
     super.initState();
-    _settings = new SettingsHelper();
-    _loadingScreen = new LoadingScreenHelper(true);
-    _startAmountController = new TextEditingController();
-    _balanceController = new TextEditingController();
-    _goalController = new TextEditingController();
-    _unitSizeController = new TextEditingController();
-    _positiveProgressionPartsController = new TextEditingController();
-    _simulationCountController = new TextEditingController();
+    _settings = SettingsHelper();
+    _loadingScreen = LoadingScreenHelper(true);
+    _startAmountController = TextEditingController();
+    _balanceController = TextEditingController();
+    _goalController = TextEditingController();
+    _unitSizeController = TextEditingController();
+    _positiveProgressionPartsController = TextEditingController();
+    _simulationCountController = TextEditingController();
     _displaySettings();
   }
 
   // Load settings
-  _displaySettings() async {
+  Future<void> _displaySettings() async {
     await _settings.initialized;
     _startAmountController.text =
         _settings.get().getInt('session.start_amount').toString();
@@ -54,7 +53,7 @@ class _SessionScreenState extends State<SessionScreen> {
   }
 
   // Save settings
-  _saveSettings() {
+  void _saveSettings() {
     _settings
         .get()
         .setInt('session.start_amount', int.parse(_startAmountController.text));

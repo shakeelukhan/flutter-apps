@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
 class DataTableHelper {
-  List<String> tableHeaders = List<String>();
-  List<List<String>> tableRows = List<List<String>>();
+  List<String> tableHeaders = <String>[];
+  List<List<String>> tableRows = <List<String>>[];
 
-  List<DataColumn> setDataTableHeaders(List<String> tableHeaders) {
+  void setDataTableHeaders(List<String> tableHeaders) {
     this.tableHeaders = tableHeaders;
   }
 

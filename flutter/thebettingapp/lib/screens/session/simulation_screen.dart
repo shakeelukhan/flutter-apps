@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:thebettingapp/utils/SettingsHelper.dart';
 import 'package:thebettingapp/utils/LoadingScreenHelper.dart';
@@ -10,38 +9,38 @@ class SimulationScreen extends StatefulWidget {
 }
 
 class _SimulationScreenState extends State<SimulationScreen> {
-  LoadingScreenHelper _loadingScreen;
-  SettingsHelper _settings;
-  GameHelper _gameHelper;
-  TextEditingController _balanceController,
+  late LoadingScreenHelper _loadingScreen;
+  late SettingsHelper _settings;
+  late GameHelper _gameHelper;
+  late TextEditingController _balanceController,
       _goalController,
       _positiveProgressionPartsController;
 
-  int _simulationCount;
+  int _simulationCount = 1;
 
   @override
   void initState() {
     super.initState();
-    _settings = new SettingsHelper();
-    _loadingScreen = new LoadingScreenHelper(true);
-    _balanceController = new TextEditingController();
-    _goalController = new TextEditingController();
-    _positiveProgressionPartsController = new TextEditingController();
+    _settings = SettingsHelper();
+    _loadingScreen = LoadingScreenHelper(true);
+    _balanceController = TextEditingController();
+    _goalController = TextEditingController();
+    _positiveProgressionPartsController = TextEditingController();
     _loadSettings();
   }
 
   // Load settings
-  _loadSettings() async {
+  Future<void> _loadSettings() async {
     await _settings.initialized;
     _balanceController.text =
         _settings.get().getInt('session.balance').toString();
     _goalController.text = _settings.get().getInt('session.goal').toString();
     _positiveProgressionPartsController.text =
         _settings.get().getInt('session.positive_progression_parts').toString();
-    _simulationCount = _settings.get().getInt('session.simulation_count');
-    _gameHelper = new GameHelper(
-        _settings.get().getInt('game.bet_lose_probabiity'),
-        _settings.get().getInt('game.min_bet_size'));
+    _simulationCount = _settings.get().getInt('session.simulation_count')!;
+    _gameHelper = GameHelper(
+        _settings.get().getInt('game.bet_lose_probabiity')!,
+        _settings.get().getInt('game.min_bet_size')!);
 
     if (this.mounted) {
       setState(() {
@@ -51,7 +50,7 @@ class _SimulationScreenState extends State<SimulationScreen> {
   }
 
   // Save settings
-  _saveSettings() async {
+  void _saveSettings() {
     _settings
         .get()
         .setInt('session.balance', int.parse(_balanceController.text));
@@ -62,7 +61,7 @@ class _SimulationScreenState extends State<SimulationScreen> {
   }
 
   // Run simulation
-  _runSimulation() async {
+  Future<void> _runSimulation() async {
     List<String> systems = ["flat", "mart", "mart2"];
     int i = 0;
     do {
@@ -78,7 +77,7 @@ class _SimulationScreenState extends State<SimulationScreen> {
       if (this.mounted) {
         setState(() {});
       }
-      sleep(const Duration(seconds: 1));
+      await Future.delayed(const Duration(seconds: 1));
       i++;
     } while (_gameHelper.isProcessing || i < systems.length);
   }
@@ -154,9 +153,9 @@ class _SimulationScreenState extends State<SimulationScreen> {
                     padding: EdgeInsets.fromLTRB(10, 5, 10, 5),
                     child: DropdownButton<String>(
                       value: _simulationCount.toString(),
-                      onChanged: (String newValue) {
+                      onChanged: (String? newValue) {
                         setState(() {
-                          _simulationCount = int.parse(newValue);
+                          _simulationCount = int.parse(newValue!);
                           _saveSettings();
                         });
                       },

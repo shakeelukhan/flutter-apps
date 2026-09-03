@@ -4,15 +4,12 @@ class LoadingScreenHelper {
   bool isActive;
 
   // Constructor
-  LoadingScreenHelper(bool isActive) {
-    this.isActive = isActive;
-  }
+  LoadingScreenHelper(this.isActive);
 
   // Loading screen
   Widget loadingScreenWidget() {
     return CircularProgressIndicator(
-      valueColor: new AlwaysStoppedAnimation<Color>(
-          Colors.blue),
+      valueColor: AlwaysStoppedAnimation<Color>(Colors.blue),
     );
   }
 }

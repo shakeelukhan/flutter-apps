@@ -10,16 +10,20 @@ class MartingdaleScreen extends StatefulWidget {
 }
 
 class _MartingdaleScreenState extends State<MartingdaleScreen> {
-  LoadingScreenHelper _loadingScreen;
-  SettingsHelper _settings;
-  DataTableHelper _dataTableHelper;
-  TextEditingController _balanceController;
-  int _startAmount, _balance, _endGoal, _unitSize, _positiveProgressionParts;
-  int _betLoseProbability, _minBetSize;
-  int _nextBetSize, _loseStreakValue;
-  double _betsToWin;
+  late LoadingScreenHelper _loadingScreen;
+  late SettingsHelper _settings;
+  late DataTableHelper _dataTableHelper;
+  late TextEditingController _balanceController;
+  int _startAmount = 0,
+      _balance = 0,
+      _endGoal = 0,
+      _unitSize = 0,
+      _positiveProgressionParts = 0;
+  int _betLoseProbability = 0, _minBetSize = 0;
+  int _nextBetSize = 0, _loseStreakValue = 0;
+  double _betsToWin = 0;
 
-  _calculateMartingdale() async {
+  Future<void> _calculateMartingdale() async {
     await _settings.initialized;
     _dataTableHelper.tableRows.clear();
 
@@ -45,7 +49,7 @@ class _MartingdaleScreenState extends State<MartingdaleScreen> {
     while (_betSize >= _minBetSize) {
       int _winAfterBet = 2 * _betSize - _lossAfterBet;
       double lossStreakPercent =
-          100 * pow((_betLoseProbability / 100), (i + 1));
+          100 * pow((_betLoseProbability / 100), (i + 1)).toDouble();
 
       List<String> row = [];
       row.add(lossStreakPercent.toStringAsPrecision(2) + "%");
@@ -66,10 +70,10 @@ class _MartingdaleScreenState extends State<MartingdaleScreen> {
   @override
   void initState() {
     super.initState();
-    _settings = new SettingsHelper();
-    _loadingScreen = new LoadingScreenHelper(true);
-    _balanceController = new TextEditingController();
-    _dataTableHelper = new DataTableHelper();
+    _settings = SettingsHelper();
+    _loadingScreen = LoadingScreenHelper(true);
+    _balanceController = TextEditingController();
+    _dataTableHelper = DataTableHelper();
     _dataTableHelper.setDataTableHeaders(["Prob L", "Bet L", "Net L/W"]);
     _loseStreakValue = 0;
     _loadSettings();
@@ -77,16 +81,20 @@ class _MartingdaleScreenState extends State<MartingdaleScreen> {
   }
 
   // Load settings
-  _loadSettings() async {
+  Future<void> _loadSettings() async {
     await _settings.initialized;
-    _startAmount = _settings.get().getInt('session.start_amount');
-    _balance = _settings.get().getInt('session.balance');
-    _endGoal = _settings.get().getInt('session.end_goal');
-    _unitSize = _settings.get().getInt('session.unit_size');
+    _startAmount = _settings.get().getInt('session.start_amount')!;
+    _balance = _settings.get().getInt('session.balance')!;
+    // NB: was 'session.end_goal' -- no such settings key exists (only
+    // 'session.goal', set by SessionScreen); the mismatch meant this always
+    // read null and would throw at runtime the first time _endGoal was
+    // used in a comparison. Fixed to read the key that's actually set.
+    _endGoal = _settings.get().getInt('session.goal')!;
+    _unitSize = _settings.get().getInt('session.unit_size')!;
     _positiveProgressionParts =
-        _settings.get().getInt('session.positive_progression_parts');
-    _betLoseProbability = _settings.get().getInt('game.bet_lose_probabiity');
-    _minBetSize = _settings.get().getInt('game.min_bet_size');
+        _settings.get().getInt('session.positive_progression_parts')!;
+    _betLoseProbability = _settings.get().getInt('game.bet_lose_probabiity')!;
+    _minBetSize = _settings.get().getInt('game.min_bet_size')!;
     _balanceController.text = _balance.toString();
 
     if (this.mounted) {
@@ -97,7 +105,7 @@ class _MartingdaleScreenState extends State<MartingdaleScreen> {
   }
 
   // Save settings
-  _saveSettings() async {
+  void _saveSettings() {
     _balance = int.parse(_balanceController.text);
     _settings.get().setInt('session.balance', int.parse(_balance.toString()));
   }

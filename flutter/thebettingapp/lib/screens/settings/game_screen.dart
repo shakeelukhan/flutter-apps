@@ -8,24 +8,24 @@ class GameScreen extends StatefulWidget {
 }
 
 class _GameScreenState extends State<GameScreen> {
-  LoadingScreenHelper _loadingScreen;
-  SettingsHelper _settings;
-  int _betLoseProbability;
-  TextEditingController _minBetSizeController;
+  late LoadingScreenHelper _loadingScreen;
+  late SettingsHelper _settings;
+  int _betLoseProbability = 0;
+  late TextEditingController _minBetSizeController;
 
   @override
   void initState() {
     super.initState();
-    _settings = new SettingsHelper();
-    _loadingScreen = new LoadingScreenHelper(true);
-    _minBetSizeController = new TextEditingController();
+    _settings = SettingsHelper();
+    _loadingScreen = LoadingScreenHelper(true);
+    _minBetSizeController = TextEditingController();
     _displaySettings();
   }
 
   // Load settings
-  _displaySettings() async {
+  Future<void> _displaySettings() async {
     await _settings.initialized;
-    _betLoseProbability = _settings.get().getInt('game.bet_lose_probabiity');
+    _betLoseProbability = _settings.get().getInt('game.bet_lose_probabiity')!;
     _minBetSizeController.text =
         _settings.get().getInt('game.min_bet_size').toString();
 
@@ -37,7 +37,7 @@ class _GameScreenState extends State<GameScreen> {
   }
 
   // Save settings
-  _saveSettings() async {
+  void _saveSettings() {
     _settings.get().setInt('game.bet_lose_probabiity', _betLoseProbability);
     _settings
         .get()
