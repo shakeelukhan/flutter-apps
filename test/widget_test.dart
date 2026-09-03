@@ -17,7 +17,7 @@ void main() {
     await tester.pumpWidget(App());
     await tester.pump(const Duration(seconds: 1));
 
-    expect(find.text('TheBettingApp'), findsOneWidget);
+    expect(find.text('The Betting App'), findsOneWidget);
   });
 
   testWidgets('Settings/Session/Game tabs are reachable from the bottom nav',

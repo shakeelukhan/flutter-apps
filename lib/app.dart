@@ -11,7 +11,7 @@ import 'package:the_betting_app/utils/NavHelper.dart';
 
 class App extends StatelessWidget {
   // App title
-  static String appTitle = 'TheBettingApp';
+  static String appTitle = 'The Betting App';
 
   // App theme
   static ThemeData _appThemeData() => ThemeData(
