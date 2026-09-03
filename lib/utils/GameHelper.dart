@@ -1,21 +1,21 @@
 import 'dart:math';
 
 class GameHelper {
-  int _betLoseProbability, _minBetSize;
+  final int _betLoseProbability;
+  final int _minBetSize;
   String results;
   bool isProcessing;
-  var rng;
+  final Random rng;
 
   // Constructor
-  GameHelper(int betLoseProbability, int minBetSize) {
-    _betLoseProbability = betLoseProbability;
-    _minBetSize = minBetSize;
-    results = "";
-    isProcessing = false;
-    rng = new Random();
-  }
+  GameHelper(int betLoseProbability, int minBetSize)
+      : _betLoseProbability = betLoseProbability,
+        _minBetSize = minBetSize,
+        results = "",
+        isProcessing = false,
+        rng = Random();
 
-  simulate(String system, bool printGame, int balance, int goal,
+  void simulate(String system, bool printGame, int balance, int goal,
       int simulationCount, int parts) {
     isProcessing = true;
     String resultsPartial = results;
@@ -27,7 +27,7 @@ class GameHelper {
       for (int i = 0; i < simulationCount; i++) {
         int gameBalance = balance;
         int betCount = 0;
-        int nextBetSize;
+        int nextBetSize = unitSize;
         int loseStreakValue = 0;
         results = resultsPartial + resultsRow + gameRow;
 

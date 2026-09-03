@@ -1,10 +1,10 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SettingsHelper {
-  static SharedPreferences _prefs;
-  Future _loadSettingsFuture;
-  Future get initialized => _loadSettingsFuture;
-  SharedPreferences get () => _prefs;
+  static late SharedPreferences _prefs;
+  late Future<void> _loadSettingsFuture;
+  Future<void> get initialized => _loadSettingsFuture;
+  SharedPreferences get() => _prefs;
 
   // Constructor
   SettingsHelper() {
@@ -12,7 +12,7 @@ class SettingsHelper {
   }
 
   // Retrieve settings
-  loadSettings(bool setDefaults) async {
+  Future<void> loadSettings(bool setDefaults) async {
     _prefs = await SharedPreferences.getInstance();
     if (setDefaults) {
       setDefaultValuesIfNotSet();
