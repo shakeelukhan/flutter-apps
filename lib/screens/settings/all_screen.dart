@@ -8,20 +8,20 @@ class AllScreen extends StatefulWidget {
 }
 
 class _AllScreenState extends State<AllScreen> {
-  LoadingScreenHelper _loadingScreen;
-  SettingsHelper _settings;
+  late LoadingScreenHelper _loadingScreen;
+  late SettingsHelper _settings;
   String _allSettings = "";
 
   @override
   void initState() {
     super.initState();
-    _settings = new SettingsHelper();
-    _loadingScreen = new LoadingScreenHelper(true);
+    _settings = SettingsHelper();
+    _loadingScreen = LoadingScreenHelper(true);
     _displayAllSettings();
   }
 
   // Read all settings
-  _displayAllSettings() async {
+  Future<void> _displayAllSettings() async {
     await _settings.initialized;
     _settings.get().getKeys().forEach((key) =>
         _allSettings += key + '=' + _settings.get().get(key).toString() + '\n');
