@@ -24,15 +24,14 @@ class App extends StatelessWidget {
     return MaterialApp(
       title: appTitle,
       theme: _appThemeData(),
-      home: _AppStateful(),
+      home: const _AppStateful(),
       debugShowCheckedModeBanner: false,
     );
   }
 }
 
 class _AppStateful extends StatefulWidget {
-  _AppStateful({super.key, this.title});
-  final String? title;
+  const _AppStateful();
 
   @override
   _AppStatefulState createState() => _AppStatefulState();
