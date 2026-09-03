@@ -1,6 +1,6 @@
 {
-    "name": "the_betting_app",
-    "short_name": "the_betting_app",
+    "name": "The Betting App",
+    "short_name": "The Betting App",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
