@@ -6,15 +6,14 @@ part of 'app_models.dart';
 // BuiltValueGenerator
 // **************************************************************************
 
-Serializer<ConfigModel> _$configModelSerializer = new _$ConfigModelSerializer();
-Serializer<AppModel> _$appModelSerializer = new _$AppModelSerializer();
-Serializer<MenuModel> _$menuModelSerializer = new _$MenuModelSerializer();
+Serializer<ConfigModel> _$configModelSerializer = _$ConfigModelSerializer();
+Serializer<AppModel> _$appModelSerializer = _$AppModelSerializer();
+Serializer<MenuModel> _$menuModelSerializer = _$MenuModelSerializer();
 Serializer<MenuItemModel> _$menuItemModelSerializer =
-    new _$MenuItemModelSerializer();
-Serializer<SubmenuModel> _$submenuModelSerializer =
-    new _$SubmenuModelSerializer();
+    _$MenuItemModelSerializer();
+Serializer<SubmenuModel> _$submenuModelSerializer = _$SubmenuModelSerializer();
 Serializer<SubmenuItemModel> _$submenuItemModelSerializer =
-    new _$SubmenuItemModelSerializer();
+    _$SubmenuItemModelSerializer();
 
 class _$ConfigModelSerializer implements StructuredSerializer<ConfigModel> {
   @override
@@ -23,9 +22,9 @@ class _$ConfigModelSerializer implements StructuredSerializer<ConfigModel> {
   final String wireName = 'ConfigModel';
 
   @override
-  Iterable<Object> serialize(Serializers serializers, ConfigModel object,
+  Iterable<Object?> serialize(Serializers serializers, ConfigModel object,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = <Object>[
+    final result = <Object?>[
       'apps',
       serializers.serialize(object.apps,
           specifiedType: const FullType(BuiltMap, const [
@@ -38,22 +37,22 @@ class _$ConfigModelSerializer implements StructuredSerializer<ConfigModel> {
   }
 
   @override
-  ConfigModel deserialize(Serializers serializers, Iterable<Object> serialized,
+  ConfigModel deserialize(Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = new ConfigModelBuilder();
+    final result = ConfigModelBuilder();
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
-      final key = iterator.current as String;
+      final key = iterator.current! as String;
       iterator.moveNext();
-      final dynamic value = iterator.current;
+      final Object? value = iterator.current;
       switch (key) {
         case 'apps':
           result.apps.replace(serializers.deserialize(value,
               specifiedType: const FullType(BuiltMap, const [
                 const FullType(String),
                 const FullType(BaseDatasourceModel)
-              ])) as BuiltMap<dynamic, dynamic>);
+              ]))!);
           break;
       }
     }
@@ -69,9 +68,9 @@ class _$AppModelSerializer implements StructuredSerializer<AppModel> {
   final String wireName = 'AppModel';
 
   @override
-  Iterable<Object> serialize(Serializers serializers, AppModel object,
+  Iterable<Object?> serialize(Serializers serializers, AppModel object,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = <Object>[
+    final result = <Object?>[
       'debugPaintPointersEnabled',
       serializers.serialize(object.debugPaintPointersEnabled,
           specifiedType: const FullType(bool)),
@@ -99,43 +98,43 @@ class _$AppModelSerializer implements StructuredSerializer<AppModel> {
   }
 
   @override
-  AppModel deserialize(Serializers serializers, Iterable<Object> serialized,
+  AppModel deserialize(Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = new AppModelBuilder();
+    final result = AppModelBuilder();
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
-      final key = iterator.current as String;
+      final key = iterator.current! as String;
       iterator.moveNext();
-      final dynamic value = iterator.current;
+      final Object? value = iterator.current;
       switch (key) {
         case 'debugPaintPointersEnabled':
           result.debugPaintPointersEnabled = serializers.deserialize(value,
-              specifiedType: const FullType(bool)) as bool;
+              specifiedType: const FullType(bool))! as bool;
           break;
         case 'debugPaintSizeEnabled':
           result.debugPaintSizeEnabled = serializers.deserialize(value,
-              specifiedType: const FullType(bool)) as bool;
+              specifiedType: const FullType(bool))! as bool;
           break;
         case 'debugShowCheckedModeBanner':
           result.debugShowCheckedModeBanner = serializers.deserialize(value,
-              specifiedType: const FullType(bool)) as bool;
+              specifiedType: const FullType(bool))! as bool;
           break;
         case 'showPerformanceOverlay':
           result.showPerformanceOverlay = serializers.deserialize(value,
-              specifiedType: const FullType(bool)) as bool;
+              specifiedType: const FullType(bool))! as bool;
           break;
         case 'showSemanticsDebugger':
           result.showSemanticsDebugger = serializers.deserialize(value,
-              specifiedType: const FullType(bool)) as bool;
+              specifiedType: const FullType(bool))! as bool;
           break;
         case 'title':
           result.title = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String))! as String;
           break;
         case 'menu':
           result.menu.replace(serializers.deserialize(value,
-              specifiedType: const FullType(MenuModel)) as MenuModel);
+              specifiedType: const FullType(MenuModel))! as MenuModel);
           break;
       }
     }
@@ -151,9 +150,9 @@ class _$MenuModelSerializer implements StructuredSerializer<MenuModel> {
   final String wireName = 'MenuModel';
 
   @override
-  Iterable<Object> serialize(Serializers serializers, MenuModel object,
+  Iterable<Object?> serialize(Serializers serializers, MenuModel object,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = <Object>[
+    final result = <Object?>[
       'activeIndex',
       serializers.serialize(object.activeIndex,
           specifiedType: const FullType(int)),
@@ -167,26 +166,26 @@ class _$MenuModelSerializer implements StructuredSerializer<MenuModel> {
   }
 
   @override
-  MenuModel deserialize(Serializers serializers, Iterable<Object> serialized,
+  MenuModel deserialize(Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = new MenuModelBuilder();
+    final result = MenuModelBuilder();
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
-      final key = iterator.current as String;
+      final key = iterator.current! as String;
       iterator.moveNext();
-      final dynamic value = iterator.current;
+      final Object? value = iterator.current;
       switch (key) {
         case 'activeIndex':
           result.activeIndex = serializers.deserialize(value,
-              specifiedType: const FullType(int)) as int;
+              specifiedType: const FullType(int))! as int;
           break;
         case 'items':
           result.items.replace(serializers.deserialize(value,
               specifiedType: const FullType(BuiltMap, const [
                 const FullType(int),
                 const FullType(MenuItemModel)
-              ])) as BuiltMap<dynamic, dynamic>);
+              ]))!);
           break;
       }
     }
@@ -202,9 +201,9 @@ class _$MenuItemModelSerializer implements StructuredSerializer<MenuItemModel> {
   final String wireName = 'MenuItemModel';
 
   @override
-  Iterable<Object> serialize(Serializers serializers, MenuItemModel object,
+  Iterable<Object?> serialize(Serializers serializers, MenuItemModel object,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = <Object>[
+    final result = <Object?>[
       'title',
       serializers.serialize(object.title,
           specifiedType: const FullType(String)),
@@ -224,31 +223,31 @@ class _$MenuItemModelSerializer implements StructuredSerializer<MenuItemModel> {
 
   @override
   MenuItemModel deserialize(
-      Serializers serializers, Iterable<Object> serialized,
+      Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = new MenuItemModelBuilder();
+    final result = MenuItemModelBuilder();
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
-      final key = iterator.current as String;
+      final key = iterator.current! as String;
       iterator.moveNext();
-      final dynamic value = iterator.current;
+      final Object? value = iterator.current;
       switch (key) {
         case 'title':
           result.title = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String))! as String;
           break;
         case 'codePoint':
           result.codePoint = serializers.deserialize(value,
-              specifiedType: const FullType(int)) as int;
+              specifiedType: const FullType(int))! as int;
           break;
         case 'fontFamily':
           result.fontFamily = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String))! as String;
           break;
         case 'submenu':
           result.submenu.replace(serializers.deserialize(value,
-              specifiedType: const FullType(SubmenuModel)) as SubmenuModel);
+              specifiedType: const FullType(SubmenuModel))! as SubmenuModel);
           break;
       }
     }
@@ -264,9 +263,9 @@ class _$SubmenuModelSerializer implements StructuredSerializer<SubmenuModel> {
   final String wireName = 'SubmenuModel';
 
   @override
-  Iterable<Object> serialize(Serializers serializers, SubmenuModel object,
+  Iterable<Object?> serialize(Serializers serializers, SubmenuModel object,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = <Object>[
+    final result = <Object?>[
       'activeIndex',
       serializers.serialize(object.activeIndex,
           specifiedType: const FullType(int)),
@@ -280,26 +279,27 @@ class _$SubmenuModelSerializer implements StructuredSerializer<SubmenuModel> {
   }
 
   @override
-  SubmenuModel deserialize(Serializers serializers, Iterable<Object> serialized,
+  SubmenuModel deserialize(
+      Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = new SubmenuModelBuilder();
+    final result = SubmenuModelBuilder();
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
-      final key = iterator.current as String;
+      final key = iterator.current! as String;
       iterator.moveNext();
-      final dynamic value = iterator.current;
+      final Object? value = iterator.current;
       switch (key) {
         case 'activeIndex':
           result.activeIndex = serializers.deserialize(value,
-              specifiedType: const FullType(int)) as int;
+              specifiedType: const FullType(int))! as int;
           break;
         case 'items':
           result.items.replace(serializers.deserialize(value,
               specifiedType: const FullType(BuiltMap, const [
                 const FullType(int),
                 const FullType(SubmenuItemModel)
-              ])) as BuiltMap<dynamic, dynamic>);
+              ]))!);
           break;
       }
     }
@@ -316,9 +316,9 @@ class _$SubmenuItemModelSerializer
   final String wireName = 'SubmenuItemModel';
 
   @override
-  Iterable<Object> serialize(Serializers serializers, SubmenuItemModel object,
+  Iterable<Object?> serialize(Serializers serializers, SubmenuItemModel object,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = <Object>[
+    final result = <Object?>[
       'title',
       serializers.serialize(object.title,
           specifiedType: const FullType(String)),
@@ -332,23 +332,23 @@ class _$SubmenuItemModelSerializer
 
   @override
   SubmenuItemModel deserialize(
-      Serializers serializers, Iterable<Object> serialized,
+      Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = new SubmenuItemModelBuilder();
+    final result = SubmenuItemModelBuilder();
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
-      final key = iterator.current as String;
+      final key = iterator.current! as String;
       iterator.moveNext();
-      final dynamic value = iterator.current;
+      final Object? value = iterator.current;
       switch (key) {
         case 'title':
           result.title = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String))! as String;
           break;
         case 'route':
           result.route = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String))! as String;
           break;
       }
     }
@@ -361,21 +361,16 @@ class _$ConfigModel extends ConfigModel {
   @override
   final BuiltMap<String, BaseDatasourceModel> apps;
 
-  factory _$ConfigModel([void Function(ConfigModelBuilder) updates]) =>
-      (new ConfigModelBuilder()..update(updates)).build();
+  factory _$ConfigModel([void Function(ConfigModelBuilder)? updates]) =>
+      (ConfigModelBuilder()..update(updates))._build();
 
-  _$ConfigModel._({this.apps}) : super._() {
-    if (apps == null) {
-      throw new BuiltValueNullFieldError('ConfigModel', 'apps');
-    }
-  }
-
+  _$ConfigModel._({required this.apps}) : super._();
   @override
   ConfigModel rebuild(void Function(ConfigModelBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
-  ConfigModelBuilder toBuilder() => new ConfigModelBuilder()..replace(this);
+  ConfigModelBuilder toBuilder() => ConfigModelBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
@@ -385,29 +380,34 @@ class _$ConfigModel extends ConfigModel {
 
   @override
   int get hashCode {
-    return $jf($jc(0, apps.hashCode));
+    var _$hash = 0;
+    _$hash = $jc(_$hash, apps.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
   }
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper('ConfigModel')..add('apps', apps))
+    return (newBuiltValueToStringHelper(r'ConfigModel')..add('apps', apps))
         .toString();
   }
 }
 
 class ConfigModelBuilder implements Builder<ConfigModel, ConfigModelBuilder> {
-  _$ConfigModel _$v;
+  _$ConfigModel? _$v;
 
-  MapBuilder<String, BaseDatasourceModel> _apps;
+  MapBuilder<String, BaseDatasourceModel>? _apps;
   MapBuilder<String, BaseDatasourceModel> get apps =>
-      _$this._apps ??= new MapBuilder<String, BaseDatasourceModel>();
-  set apps(MapBuilder<String, BaseDatasourceModel> apps) => _$this._apps = apps;
+      _$this._apps ??= MapBuilder<String, BaseDatasourceModel>();
+  set apps(MapBuilder<String, BaseDatasourceModel>? apps) =>
+      _$this._apps = apps;
 
   ConfigModelBuilder();
 
   ConfigModelBuilder get _$this {
-    if (_$v != null) {
-      _apps = _$v.apps?.toBuilder();
+    final $v = _$v;
+    if ($v != null) {
+      _apps = $v.apps.toBuilder();
       _$v = null;
     }
     return this;
@@ -415,30 +415,32 @@ class ConfigModelBuilder implements Builder<ConfigModel, ConfigModelBuilder> {
 
   @override
   void replace(ConfigModel other) {
-    if (other == null) {
-      throw new ArgumentError.notNull('other');
-    }
     _$v = other as _$ConfigModel;
   }
 
   @override
-  void update(void Function(ConfigModelBuilder) updates) {
+  void update(void Function(ConfigModelBuilder)? updates) {
     if (updates != null) updates(this);
   }
 
   @override
-  _$ConfigModel build() {
+  ConfigModel build() => _build();
+
+  _$ConfigModel _build() {
     _$ConfigModel _$result;
     try {
-      _$result = _$v ?? new _$ConfigModel._(apps: apps.build());
+      _$result = _$v ??
+          _$ConfigModel._(
+            apps: apps.build(),
+          );
     } catch (_) {
-      String _$failedField;
+      late String _$failedField;
       try {
         _$failedField = 'apps';
         apps.build();
       } catch (e) {
-        throw new BuiltValueNestedFieldError(
-            'ConfigModel', _$failedField, e.toString());
+        throw BuiltValueNestedFieldError(
+            r'ConfigModel', _$failedField, e.toString());
       }
       rethrow;
     }
@@ -463,49 +465,24 @@ class _$AppModel extends AppModel {
   @override
   final MenuModel menu;
 
-  factory _$AppModel([void Function(AppModelBuilder) updates]) =>
-      (new AppModelBuilder()..update(updates)).build();
+  factory _$AppModel([void Function(AppModelBuilder)? updates]) =>
+      (AppModelBuilder()..update(updates))._build();
 
   _$AppModel._(
-      {this.debugPaintPointersEnabled,
-      this.debugPaintSizeEnabled,
-      this.debugShowCheckedModeBanner,
-      this.showPerformanceOverlay,
-      this.showSemanticsDebugger,
-      this.title,
-      this.menu})
-      : super._() {
-    if (debugPaintPointersEnabled == null) {
-      throw new BuiltValueNullFieldError(
-          'AppModel', 'debugPaintPointersEnabled');
-    }
-    if (debugPaintSizeEnabled == null) {
-      throw new BuiltValueNullFieldError('AppModel', 'debugPaintSizeEnabled');
-    }
-    if (debugShowCheckedModeBanner == null) {
-      throw new BuiltValueNullFieldError(
-          'AppModel', 'debugShowCheckedModeBanner');
-    }
-    if (showPerformanceOverlay == null) {
-      throw new BuiltValueNullFieldError('AppModel', 'showPerformanceOverlay');
-    }
-    if (showSemanticsDebugger == null) {
-      throw new BuiltValueNullFieldError('AppModel', 'showSemanticsDebugger');
-    }
-    if (title == null) {
-      throw new BuiltValueNullFieldError('AppModel', 'title');
-    }
-    if (menu == null) {
-      throw new BuiltValueNullFieldError('AppModel', 'menu');
-    }
-  }
-
+      {required this.debugPaintPointersEnabled,
+      required this.debugPaintSizeEnabled,
+      required this.debugShowCheckedModeBanner,
+      required this.showPerformanceOverlay,
+      required this.showSemanticsDebugger,
+      required this.title,
+      required this.menu})
+      : super._();
   @override
   AppModel rebuild(void Function(AppModelBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
-  AppModelBuilder toBuilder() => new AppModelBuilder()..replace(this);
+  AppModelBuilder toBuilder() => AppModelBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
@@ -522,23 +499,21 @@ class _$AppModel extends AppModel {
 
   @override
   int get hashCode {
-    return $jf($jc(
-        $jc(
-            $jc(
-                $jc(
-                    $jc(
-                        $jc($jc(0, debugPaintPointersEnabled.hashCode),
-                            debugPaintSizeEnabled.hashCode),
-                        debugShowCheckedModeBanner.hashCode),
-                    showPerformanceOverlay.hashCode),
-                showSemanticsDebugger.hashCode),
-            title.hashCode),
-        menu.hashCode));
+    var _$hash = 0;
+    _$hash = $jc(_$hash, debugPaintPointersEnabled.hashCode);
+    _$hash = $jc(_$hash, debugPaintSizeEnabled.hashCode);
+    _$hash = $jc(_$hash, debugShowCheckedModeBanner.hashCode);
+    _$hash = $jc(_$hash, showPerformanceOverlay.hashCode);
+    _$hash = $jc(_$hash, showSemanticsDebugger.hashCode);
+    _$hash = $jc(_$hash, title.hashCode);
+    _$hash = $jc(_$hash, menu.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
   }
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper('AppModel')
+    return (newBuiltValueToStringHelper(r'AppModel')
           ..add('debugPaintPointersEnabled', debugPaintPointersEnabled)
           ..add('debugPaintSizeEnabled', debugPaintSizeEnabled)
           ..add('debugShowCheckedModeBanner', debugShowCheckedModeBanner)
@@ -551,54 +526,55 @@ class _$AppModel extends AppModel {
 }
 
 class AppModelBuilder implements Builder<AppModel, AppModelBuilder> {
-  _$AppModel _$v;
+  _$AppModel? _$v;
 
-  bool _debugPaintPointersEnabled;
-  bool get debugPaintPointersEnabled => _$this._debugPaintPointersEnabled;
-  set debugPaintPointersEnabled(bool debugPaintPointersEnabled) =>
+  bool? _debugPaintPointersEnabled;
+  bool? get debugPaintPointersEnabled => _$this._debugPaintPointersEnabled;
+  set debugPaintPointersEnabled(bool? debugPaintPointersEnabled) =>
       _$this._debugPaintPointersEnabled = debugPaintPointersEnabled;
 
-  bool _debugPaintSizeEnabled;
-  bool get debugPaintSizeEnabled => _$this._debugPaintSizeEnabled;
-  set debugPaintSizeEnabled(bool debugPaintSizeEnabled) =>
+  bool? _debugPaintSizeEnabled;
+  bool? get debugPaintSizeEnabled => _$this._debugPaintSizeEnabled;
+  set debugPaintSizeEnabled(bool? debugPaintSizeEnabled) =>
       _$this._debugPaintSizeEnabled = debugPaintSizeEnabled;
 
-  bool _debugShowCheckedModeBanner;
-  bool get debugShowCheckedModeBanner => _$this._debugShowCheckedModeBanner;
-  set debugShowCheckedModeBanner(bool debugShowCheckedModeBanner) =>
+  bool? _debugShowCheckedModeBanner;
+  bool? get debugShowCheckedModeBanner => _$this._debugShowCheckedModeBanner;
+  set debugShowCheckedModeBanner(bool? debugShowCheckedModeBanner) =>
       _$this._debugShowCheckedModeBanner = debugShowCheckedModeBanner;
 
-  bool _showPerformanceOverlay;
-  bool get showPerformanceOverlay => _$this._showPerformanceOverlay;
-  set showPerformanceOverlay(bool showPerformanceOverlay) =>
+  bool? _showPerformanceOverlay;
+  bool? get showPerformanceOverlay => _$this._showPerformanceOverlay;
+  set showPerformanceOverlay(bool? showPerformanceOverlay) =>
       _$this._showPerformanceOverlay = showPerformanceOverlay;
 
-  bool _showSemanticsDebugger;
-  bool get showSemanticsDebugger => _$this._showSemanticsDebugger;
-  set showSemanticsDebugger(bool showSemanticsDebugger) =>
+  bool? _showSemanticsDebugger;
+  bool? get showSemanticsDebugger => _$this._showSemanticsDebugger;
+  set showSemanticsDebugger(bool? showSemanticsDebugger) =>
       _$this._showSemanticsDebugger = showSemanticsDebugger;
 
-  String _title;
-  String get title => _$this._title;
-  set title(String title) => _$this._title = title;
+  String? _title;
+  String? get title => _$this._title;
+  set title(String? title) => _$this._title = title;
 
-  MenuModelBuilder _menu;
-  MenuModelBuilder get menu => _$this._menu ??= new MenuModelBuilder();
-  set menu(MenuModelBuilder menu) => _$this._menu = menu;
+  MenuModelBuilder? _menu;
+  MenuModelBuilder get menu => _$this._menu ??= MenuModelBuilder();
+  set menu(MenuModelBuilder? menu) => _$this._menu = menu;
 
   AppModelBuilder() {
     AppModel._initializeBuilder(this);
   }
 
   AppModelBuilder get _$this {
-    if (_$v != null) {
-      _debugPaintPointersEnabled = _$v.debugPaintPointersEnabled;
-      _debugPaintSizeEnabled = _$v.debugPaintSizeEnabled;
-      _debugShowCheckedModeBanner = _$v.debugShowCheckedModeBanner;
-      _showPerformanceOverlay = _$v.showPerformanceOverlay;
-      _showSemanticsDebugger = _$v.showSemanticsDebugger;
-      _title = _$v.title;
-      _menu = _$v.menu?.toBuilder();
+    final $v = _$v;
+    if ($v != null) {
+      _debugPaintPointersEnabled = $v.debugPaintPointersEnabled;
+      _debugPaintSizeEnabled = $v.debugPaintSizeEnabled;
+      _debugShowCheckedModeBanner = $v.debugShowCheckedModeBanner;
+      _showPerformanceOverlay = $v.showPerformanceOverlay;
+      _showSemanticsDebugger = $v.showSemanticsDebugger;
+      _title = $v.title;
+      _menu = $v.menu.toBuilder();
       _$v = null;
     }
     return this;
@@ -606,38 +582,48 @@ class AppModelBuilder implements Builder<AppModel, AppModelBuilder> {
 
   @override
   void replace(AppModel other) {
-    if (other == null) {
-      throw new ArgumentError.notNull('other');
-    }
     _$v = other as _$AppModel;
   }
 
   @override
-  void update(void Function(AppModelBuilder) updates) {
+  void update(void Function(AppModelBuilder)? updates) {
     if (updates != null) updates(this);
   }
 
   @override
-  _$AppModel build() {
+  AppModel build() => _build();
+
+  _$AppModel _build() {
     _$AppModel _$result;
     try {
       _$result = _$v ??
-          new _$AppModel._(
-              debugPaintPointersEnabled: debugPaintPointersEnabled,
-              debugPaintSizeEnabled: debugPaintSizeEnabled,
-              debugShowCheckedModeBanner: debugShowCheckedModeBanner,
-              showPerformanceOverlay: showPerformanceOverlay,
-              showSemanticsDebugger: showSemanticsDebugger,
-              title: title,
-              menu: menu.build());
+          _$AppModel._(
+            debugPaintPointersEnabled: BuiltValueNullFieldError.checkNotNull(
+                debugPaintPointersEnabled,
+                r'AppModel',
+                'debugPaintPointersEnabled'),
+            debugPaintSizeEnabled: BuiltValueNullFieldError.checkNotNull(
+                debugPaintSizeEnabled, r'AppModel', 'debugPaintSizeEnabled'),
+            debugShowCheckedModeBanner: BuiltValueNullFieldError.checkNotNull(
+                debugShowCheckedModeBanner,
+                r'AppModel',
+                'debugShowCheckedModeBanner'),
+            showPerformanceOverlay: BuiltValueNullFieldError.checkNotNull(
+                showPerformanceOverlay, r'AppModel', 'showPerformanceOverlay'),
+            showSemanticsDebugger: BuiltValueNullFieldError.checkNotNull(
+                showSemanticsDebugger, r'AppModel', 'showSemanticsDebugger'),
+            title: BuiltValueNullFieldError.checkNotNull(
+                title, r'AppModel', 'title'),
+            menu: menu.build(),
+          );
     } catch (_) {
-      String _$failedField;
+      late String _$failedField;
       try {
         _$failedField = 'menu';
         menu.build();
       } catch (e) {
-        throw new BuiltValueNestedFieldError(
-            'AppModel', _$failedField, e.toString());
+        throw BuiltValueNestedFieldError(
+            r'AppModel', _$failedField, e.toString());
       }
       rethrow;
     }
@@ -652,24 +638,16 @@ class _$MenuModel extends MenuModel {
   @override
   final BuiltMap<int, MenuItemModel> items;
 
-  factory _$MenuModel([void Function(MenuModelBuilder) updates]) =>
-      (new MenuModelBuilder()..update(updates)).build();
+  factory _$MenuModel([void Function(MenuModelBuilder)? updates]) =>
+      (MenuModelBuilder()..update(updates))._build();
 
-  _$MenuModel._({this.activeIndex, this.items}) : super._() {
-    if (activeIndex == null) {
-      throw new BuiltValueNullFieldError('MenuModel', 'activeIndex');
-    }
-    if (items == null) {
-      throw new BuiltValueNullFieldError('MenuModel', 'items');
-    }
-  }
-
+  _$MenuModel._({required this.activeIndex, required this.items}) : super._();
   @override
   MenuModel rebuild(void Function(MenuModelBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
-  MenuModelBuilder toBuilder() => new MenuModelBuilder()..replace(this);
+  MenuModelBuilder toBuilder() => MenuModelBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
@@ -681,12 +659,16 @@ class _$MenuModel extends MenuModel {
 
   @override
   int get hashCode {
-    return $jf($jc($jc(0, activeIndex.hashCode), items.hashCode));
+    var _$hash = 0;
+    _$hash = $jc(_$hash, activeIndex.hashCode);
+    _$hash = $jc(_$hash, items.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
   }
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper('MenuModel')
+    return (newBuiltValueToStringHelper(r'MenuModel')
           ..add('activeIndex', activeIndex)
           ..add('items', items))
         .toString();
@@ -694,25 +676,26 @@ class _$MenuModel extends MenuModel {
 }
 
 class MenuModelBuilder implements Builder<MenuModel, MenuModelBuilder> {
-  _$MenuModel _$v;
+  _$MenuModel? _$v;
 
-  int _activeIndex;
-  int get activeIndex => _$this._activeIndex;
-  set activeIndex(int activeIndex) => _$this._activeIndex = activeIndex;
+  int? _activeIndex;
+  int? get activeIndex => _$this._activeIndex;
+  set activeIndex(int? activeIndex) => _$this._activeIndex = activeIndex;
 
-  MapBuilder<int, MenuItemModel> _items;
+  MapBuilder<int, MenuItemModel>? _items;
   MapBuilder<int, MenuItemModel> get items =>
-      _$this._items ??= new MapBuilder<int, MenuItemModel>();
-  set items(MapBuilder<int, MenuItemModel> items) => _$this._items = items;
+      _$this._items ??= MapBuilder<int, MenuItemModel>();
+  set items(MapBuilder<int, MenuItemModel>? items) => _$this._items = items;
 
   MenuModelBuilder() {
     MenuModel._initializeBuilder(this);
   }
 
   MenuModelBuilder get _$this {
-    if (_$v != null) {
-      _activeIndex = _$v.activeIndex;
-      _items = _$v.items?.toBuilder();
+    final $v = _$v;
+    if ($v != null) {
+      _activeIndex = $v.activeIndex;
+      _items = $v.items.toBuilder();
       _$v = null;
     }
     return this;
@@ -720,31 +703,34 @@ class MenuModelBuilder implements Builder<MenuModel, MenuModelBuilder> {
 
   @override
   void replace(MenuModel other) {
-    if (other == null) {
-      throw new ArgumentError.notNull('other');
-    }
     _$v = other as _$MenuModel;
   }
 
   @override
-  void update(void Function(MenuModelBuilder) updates) {
+  void update(void Function(MenuModelBuilder)? updates) {
     if (updates != null) updates(this);
   }
 
   @override
-  _$MenuModel build() {
+  MenuModel build() => _build();
+
+  _$MenuModel _build() {
     _$MenuModel _$result;
     try {
       _$result = _$v ??
-          new _$MenuModel._(activeIndex: activeIndex, items: items.build());
+          _$MenuModel._(
+            activeIndex: BuiltValueNullFieldError.checkNotNull(
+                activeIndex, r'MenuModel', 'activeIndex'),
+            items: items.build(),
+          );
     } catch (_) {
-      String _$failedField;
+      late String _$failedField;
       try {
         _$failedField = 'items';
         items.build();
       } catch (e) {
-        throw new BuiltValueNestedFieldError(
-            'MenuModel', _$failedField, e.toString());
+        throw BuiltValueNestedFieldError(
+            r'MenuModel', _$failedField, e.toString());
       }
       rethrow;
     }
@@ -763,31 +749,21 @@ class _$MenuItemModel extends MenuItemModel {
   @override
   final SubmenuModel submenu;
 
-  factory _$MenuItemModel([void Function(MenuItemModelBuilder) updates]) =>
-      (new MenuItemModelBuilder()..update(updates)).build();
+  factory _$MenuItemModel([void Function(MenuItemModelBuilder)? updates]) =>
+      (MenuItemModelBuilder()..update(updates))._build();
 
-  _$MenuItemModel._({this.title, this.codePoint, this.fontFamily, this.submenu})
-      : super._() {
-    if (title == null) {
-      throw new BuiltValueNullFieldError('MenuItemModel', 'title');
-    }
-    if (codePoint == null) {
-      throw new BuiltValueNullFieldError('MenuItemModel', 'codePoint');
-    }
-    if (fontFamily == null) {
-      throw new BuiltValueNullFieldError('MenuItemModel', 'fontFamily');
-    }
-    if (submenu == null) {
-      throw new BuiltValueNullFieldError('MenuItemModel', 'submenu');
-    }
-  }
-
+  _$MenuItemModel._(
+      {required this.title,
+      required this.codePoint,
+      required this.fontFamily,
+      required this.submenu})
+      : super._();
   @override
   MenuItemModel rebuild(void Function(MenuItemModelBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
-  MenuItemModelBuilder toBuilder() => new MenuItemModelBuilder()..replace(this);
+  MenuItemModelBuilder toBuilder() => MenuItemModelBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
@@ -801,15 +777,18 @@ class _$MenuItemModel extends MenuItemModel {
 
   @override
   int get hashCode {
-    return $jf($jc(
-        $jc($jc($jc(0, title.hashCode), codePoint.hashCode),
-            fontFamily.hashCode),
-        submenu.hashCode));
+    var _$hash = 0;
+    _$hash = $jc(_$hash, title.hashCode);
+    _$hash = $jc(_$hash, codePoint.hashCode);
+    _$hash = $jc(_$hash, fontFamily.hashCode);
+    _$hash = $jc(_$hash, submenu.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
   }
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper('MenuItemModel')
+    return (newBuiltValueToStringHelper(r'MenuItemModel')
           ..add('title', title)
           ..add('codePoint', codePoint)
           ..add('fontFamily', fontFamily)
@@ -820,35 +799,35 @@ class _$MenuItemModel extends MenuItemModel {
 
 class MenuItemModelBuilder
     implements Builder<MenuItemModel, MenuItemModelBuilder> {
-  _$MenuItemModel _$v;
+  _$MenuItemModel? _$v;
 
-  String _title;
-  String get title => _$this._title;
-  set title(String title) => _$this._title = title;
+  String? _title;
+  String? get title => _$this._title;
+  set title(String? title) => _$this._title = title;
 
-  int _codePoint;
-  int get codePoint => _$this._codePoint;
-  set codePoint(int codePoint) => _$this._codePoint = codePoint;
+  int? _codePoint;
+  int? get codePoint => _$this._codePoint;
+  set codePoint(int? codePoint) => _$this._codePoint = codePoint;
 
-  String _fontFamily;
-  String get fontFamily => _$this._fontFamily;
-  set fontFamily(String fontFamily) => _$this._fontFamily = fontFamily;
+  String? _fontFamily;
+  String? get fontFamily => _$this._fontFamily;
+  set fontFamily(String? fontFamily) => _$this._fontFamily = fontFamily;
 
-  SubmenuModelBuilder _submenu;
-  SubmenuModelBuilder get submenu =>
-      _$this._submenu ??= new SubmenuModelBuilder();
-  set submenu(SubmenuModelBuilder submenu) => _$this._submenu = submenu;
+  SubmenuModelBuilder? _submenu;
+  SubmenuModelBuilder get submenu => _$this._submenu ??= SubmenuModelBuilder();
+  set submenu(SubmenuModelBuilder? submenu) => _$this._submenu = submenu;
 
   MenuItemModelBuilder() {
     MenuItemModel._initializeBuilder(this);
   }
 
   MenuItemModelBuilder get _$this {
-    if (_$v != null) {
-      _title = _$v.title;
-      _codePoint = _$v.codePoint;
-      _fontFamily = _$v.fontFamily;
-      _submenu = _$v.submenu?.toBuilder();
+    final $v = _$v;
+    if ($v != null) {
+      _title = $v.title;
+      _codePoint = $v.codePoint;
+      _fontFamily = $v.fontFamily;
+      _submenu = $v.submenu.toBuilder();
       _$v = null;
     }
     return this;
@@ -856,35 +835,38 @@ class MenuItemModelBuilder
 
   @override
   void replace(MenuItemModel other) {
-    if (other == null) {
-      throw new ArgumentError.notNull('other');
-    }
     _$v = other as _$MenuItemModel;
   }
 
   @override
-  void update(void Function(MenuItemModelBuilder) updates) {
+  void update(void Function(MenuItemModelBuilder)? updates) {
     if (updates != null) updates(this);
   }
 
   @override
-  _$MenuItemModel build() {
+  MenuItemModel build() => _build();
+
+  _$MenuItemModel _build() {
     _$MenuItemModel _$result;
     try {
       _$result = _$v ??
-          new _$MenuItemModel._(
-              title: title,
-              codePoint: codePoint,
-              fontFamily: fontFamily,
-              submenu: submenu.build());
+          _$MenuItemModel._(
+            title: BuiltValueNullFieldError.checkNotNull(
+                title, r'MenuItemModel', 'title'),
+            codePoint: BuiltValueNullFieldError.checkNotNull(
+                codePoint, r'MenuItemModel', 'codePoint'),
+            fontFamily: BuiltValueNullFieldError.checkNotNull(
+                fontFamily, r'MenuItemModel', 'fontFamily'),
+            submenu: submenu.build(),
+          );
     } catch (_) {
-      String _$failedField;
+      late String _$failedField;
       try {
         _$failedField = 'submenu';
         submenu.build();
       } catch (e) {
-        throw new BuiltValueNestedFieldError(
-            'MenuItemModel', _$failedField, e.toString());
+        throw BuiltValueNestedFieldError(
+            r'MenuItemModel', _$failedField, e.toString());
       }
       rethrow;
     }
@@ -899,24 +881,17 @@ class _$SubmenuModel extends SubmenuModel {
   @override
   final BuiltMap<int, SubmenuItemModel> items;
 
-  factory _$SubmenuModel([void Function(SubmenuModelBuilder) updates]) =>
-      (new SubmenuModelBuilder()..update(updates)).build();
+  factory _$SubmenuModel([void Function(SubmenuModelBuilder)? updates]) =>
+      (SubmenuModelBuilder()..update(updates))._build();
 
-  _$SubmenuModel._({this.activeIndex, this.items}) : super._() {
-    if (activeIndex == null) {
-      throw new BuiltValueNullFieldError('SubmenuModel', 'activeIndex');
-    }
-    if (items == null) {
-      throw new BuiltValueNullFieldError('SubmenuModel', 'items');
-    }
-  }
-
+  _$SubmenuModel._({required this.activeIndex, required this.items})
+      : super._();
   @override
   SubmenuModel rebuild(void Function(SubmenuModelBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
-  SubmenuModelBuilder toBuilder() => new SubmenuModelBuilder()..replace(this);
+  SubmenuModelBuilder toBuilder() => SubmenuModelBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
@@ -928,12 +903,16 @@ class _$SubmenuModel extends SubmenuModel {
 
   @override
   int get hashCode {
-    return $jf($jc($jc(0, activeIndex.hashCode), items.hashCode));
+    var _$hash = 0;
+    _$hash = $jc(_$hash, activeIndex.hashCode);
+    _$hash = $jc(_$hash, items.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
   }
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper('SubmenuModel')
+    return (newBuiltValueToStringHelper(r'SubmenuModel')
           ..add('activeIndex', activeIndex)
           ..add('items', items))
         .toString();
@@ -942,25 +921,26 @@ class _$SubmenuModel extends SubmenuModel {
 
 class SubmenuModelBuilder
     implements Builder<SubmenuModel, SubmenuModelBuilder> {
-  _$SubmenuModel _$v;
+  _$SubmenuModel? _$v;
 
-  int _activeIndex;
-  int get activeIndex => _$this._activeIndex;
-  set activeIndex(int activeIndex) => _$this._activeIndex = activeIndex;
+  int? _activeIndex;
+  int? get activeIndex => _$this._activeIndex;
+  set activeIndex(int? activeIndex) => _$this._activeIndex = activeIndex;
 
-  MapBuilder<int, SubmenuItemModel> _items;
+  MapBuilder<int, SubmenuItemModel>? _items;
   MapBuilder<int, SubmenuItemModel> get items =>
-      _$this._items ??= new MapBuilder<int, SubmenuItemModel>();
-  set items(MapBuilder<int, SubmenuItemModel> items) => _$this._items = items;
+      _$this._items ??= MapBuilder<int, SubmenuItemModel>();
+  set items(MapBuilder<int, SubmenuItemModel>? items) => _$this._items = items;
 
   SubmenuModelBuilder() {
     SubmenuModel._initializeBuilder(this);
   }
 
   SubmenuModelBuilder get _$this {
-    if (_$v != null) {
-      _activeIndex = _$v.activeIndex;
-      _items = _$v.items?.toBuilder();
+    final $v = _$v;
+    if ($v != null) {
+      _activeIndex = $v.activeIndex;
+      _items = $v.items.toBuilder();
       _$v = null;
     }
     return this;
@@ -968,31 +948,34 @@ class SubmenuModelBuilder
 
   @override
   void replace(SubmenuModel other) {
-    if (other == null) {
-      throw new ArgumentError.notNull('other');
-    }
     _$v = other as _$SubmenuModel;
   }
 
   @override
-  void update(void Function(SubmenuModelBuilder) updates) {
+  void update(void Function(SubmenuModelBuilder)? updates) {
     if (updates != null) updates(this);
   }
 
   @override
-  _$SubmenuModel build() {
+  SubmenuModel build() => _build();
+
+  _$SubmenuModel _build() {
     _$SubmenuModel _$result;
     try {
       _$result = _$v ??
-          new _$SubmenuModel._(activeIndex: activeIndex, items: items.build());
+          _$SubmenuModel._(
+            activeIndex: BuiltValueNullFieldError.checkNotNull(
+                activeIndex, r'SubmenuModel', 'activeIndex'),
+            items: items.build(),
+          );
     } catch (_) {
-      String _$failedField;
+      late String _$failedField;
       try {
         _$failedField = 'items';
         items.build();
       } catch (e) {
-        throw new BuiltValueNestedFieldError(
-            'SubmenuModel', _$failedField, e.toString());
+        throw BuiltValueNestedFieldError(
+            r'SubmenuModel', _$failedField, e.toString());
       }
       rethrow;
     }
@@ -1008,25 +991,17 @@ class _$SubmenuItemModel extends SubmenuItemModel {
   final String route;
 
   factory _$SubmenuItemModel(
-          [void Function(SubmenuItemModelBuilder) updates]) =>
-      (new SubmenuItemModelBuilder()..update(updates)).build();
+          [void Function(SubmenuItemModelBuilder)? updates]) =>
+      (SubmenuItemModelBuilder()..update(updates))._build();
 
-  _$SubmenuItemModel._({this.title, this.route}) : super._() {
-    if (title == null) {
-      throw new BuiltValueNullFieldError('SubmenuItemModel', 'title');
-    }
-    if (route == null) {
-      throw new BuiltValueNullFieldError('SubmenuItemModel', 'route');
-    }
-  }
-
+  _$SubmenuItemModel._({required this.title, required this.route}) : super._();
   @override
   SubmenuItemModel rebuild(void Function(SubmenuItemModelBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
   SubmenuItemModelBuilder toBuilder() =>
-      new SubmenuItemModelBuilder()..replace(this);
+      SubmenuItemModelBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
@@ -1038,12 +1013,16 @@ class _$SubmenuItemModel extends SubmenuItemModel {
 
   @override
   int get hashCode {
-    return $jf($jc($jc(0, title.hashCode), route.hashCode));
+    var _$hash = 0;
+    _$hash = $jc(_$hash, title.hashCode);
+    _$hash = $jc(_$hash, route.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
   }
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper('SubmenuItemModel')
+    return (newBuiltValueToStringHelper(r'SubmenuItemModel')
           ..add('title', title)
           ..add('route', route))
         .toString();
@@ -1052,24 +1031,25 @@ class _$SubmenuItemModel extends SubmenuItemModel {
 
 class SubmenuItemModelBuilder
     implements Builder<SubmenuItemModel, SubmenuItemModelBuilder> {
-  _$SubmenuItemModel _$v;
+  _$SubmenuItemModel? _$v;
 
-  String _title;
-  String get title => _$this._title;
-  set title(String title) => _$this._title = title;
+  String? _title;
+  String? get title => _$this._title;
+  set title(String? title) => _$this._title = title;
 
-  String _route;
-  String get route => _$this._route;
-  set route(String route) => _$this._route = route;
+  String? _route;
+  String? get route => _$this._route;
+  set route(String? route) => _$this._route = route;
 
   SubmenuItemModelBuilder() {
     SubmenuItemModel._initializeBuilder(this);
   }
 
   SubmenuItemModelBuilder get _$this {
-    if (_$v != null) {
-      _title = _$v.title;
-      _route = _$v.route;
+    final $v = _$v;
+    if ($v != null) {
+      _title = $v.title;
+      _route = $v.route;
       _$v = null;
     }
     return this;
@@ -1077,24 +1057,28 @@ class SubmenuItemModelBuilder
 
   @override
   void replace(SubmenuItemModel other) {
-    if (other == null) {
-      throw new ArgumentError.notNull('other');
-    }
     _$v = other as _$SubmenuItemModel;
   }
 
   @override
-  void update(void Function(SubmenuItemModelBuilder) updates) {
+  void update(void Function(SubmenuItemModelBuilder)? updates) {
     if (updates != null) updates(this);
   }
 
   @override
-  _$SubmenuItemModel build() {
-    final _$result =
-        _$v ?? new _$SubmenuItemModel._(title: title, route: route);
+  SubmenuItemModel build() => _build();
+
+  _$SubmenuItemModel _build() {
+    final _$result = _$v ??
+        _$SubmenuItemModel._(
+          title: BuiltValueNullFieldError.checkNotNull(
+              title, r'SubmenuItemModel', 'title'),
+          route: BuiltValueNullFieldError.checkNotNull(
+              route, r'SubmenuItemModel', 'route'),
+        );
     replace(_$result);
     return _$result;
   }
 }
 
-// ignore_for_file: always_put_control_body_on_new_line,always_specify_types,annotate_overrides,avoid_annotating_with_dynamic,avoid_as,avoid_catches_without_on_clauses,avoid_returning_this,lines_longer_than_80_chars,omit_local_variable_types,prefer_expression_function_bodies,sort_constructors_first,test_types_in_equals,unnecessary_const,unnecessary_new
+// ignore_for_file: deprecated_member_use_from_same_package,type=lint

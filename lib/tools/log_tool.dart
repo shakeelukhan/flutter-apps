@@ -1,10 +1,10 @@
 import 'package:logger/logger.dart';
 
 class LogUtil {
-  Logger _logger;
+  late Logger _logger;
   Logger get logger => _logger;
 
-  LogUtil({Logger logger, Level level}) {
+  LogUtil({Logger? logger, Level? level}) {
     _logger = logger ?? setLoggerToPretty();
     Logger.level = level ?? setLevelToWarning();
   }

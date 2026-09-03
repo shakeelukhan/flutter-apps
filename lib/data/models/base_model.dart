@@ -6,9 +6,10 @@ abstract class BaseModel<M> {
 
   FullType getSpecifiedType() => FullType(M);
 
-  Map toJson() => t.builtValue.serialize(this, getSpecifiedType());
+  Object toJson() => t.builtValue.serialize(this, getSpecifiedType())!;
 
   String toJsonString() => t.io.jsonToString(toJson());
 
-  static T fromJson<T>(Map json) => t.builtValue.deserialize(json, FullType(T));
+  static T fromJson<T>(Map json) =>
+      t.builtValue.deserialize(json, FullType(T)) as T;
 }
