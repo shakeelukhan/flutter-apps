@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>488932570069-qt36am310lv3deadlq6eovn7bmd7orhg.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.488932570069-qt36am310lv3deadlq6eovn7bmd7orhg</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>488932570069-g7vevs2e3qfaf7vt3pdphvb9kh4su893.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>REDACTED_GOOGLE_API_KEY</string>
+	<key>GCM_SENDER_ID</key>
+	<string>488932570069</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.thedesiproject.rishtaaunty</string>
+	<key>PROJECT_ID</key>
+	<string>rishtaaunty-463ca</string>
+	<key>STORAGE_BUCKET</key>
+	<string>rishtaaunty-463ca.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:488932570069:ios:d6be3ead0b1cfd015b035c</string>
+	<key>DATABASE_URL</key>
+	<string>https://rishtaaunty-463ca.firebaseio.com</string>
+</dict>
+</plist>
