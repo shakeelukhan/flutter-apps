@@ -1,37 +1,51 @@
 import 'dart:async';
+
 import 'package:bloc/bloc.dart';
 import 'package:rishtaaunty/data/data.dart' as d;
 import 'package:rishtaaunty/tools/tools.dart' as t;
 
+// Migrated from the pre-rewrite `bloc` package API (initialState getter,
+// mapEventToState()/yield, dispatch(), currentState) to the current
+// on<Event> handler API (constructor-registered handlers, emit(), add(),
+// state). Behavior preserved: fetch -> updating -> ready/error, with the
+// same logging line after each event.
 abstract class BaseBloc<M extends d.BaseModel>
     extends Bloc<BaseEvent<M>, BaseState<M>> {
-  @override
-  BaseState<M> get initialState => BaseStateNew<M>();
-
-  @override
-  Stream<BaseState<M>> mapEventToState(BaseEvent<M> event) async* {
-    final BaseState<M> oldState = currentState;
-
-    try {
-      if (event is BaseEventFetchData<M>) {
-        yield BaseStateUpdating<M>();
-        dispatch(BaseEventProcessData<M>(await fetchData()));
-      } else if (event is BaseEventProcessData<M>) {
-        yield BaseStateUpdating<M>();
-        processData(event.data);
-        yield BaseStateReady<M>(event.data);
-      }
-    } on Exception catch (error) {
-      yield BaseStateError<M>(error);
-    }
-
-    t.log.logger.i(
-        '${event?.toString()}: ${oldState?.runtimeType} -> ${currentState?.runtimeType}');
+  BaseBloc() : super(BaseStateNew<M>()) {
+    on<BaseEventFetchData<M>>(_onFetchData);
+    on<BaseEventProcessData<M>>(_onProcessData);
   }
 
-  FutureOr<M> fetchData() => null;
+  Future<void> _onFetchData(
+      BaseEventFetchData<M> event, Emitter<BaseState<M>> emit) async {
+    final oldState = state;
+    try {
+      emit(BaseStateUpdating<M>());
+      add(BaseEventProcessData<M>(await fetchData()));
+    } on Exception catch (error) {
+      emit(BaseStateError<M>(error));
+    }
+    t.log.logger
+        .i('$event: ${oldState.runtimeType} -> ${state.runtimeType}');
+  }
 
-  void processData(M _data) => null;
+  Future<void> _onProcessData(
+      BaseEventProcessData<M> event, Emitter<BaseState<M>> emit) async {
+    final oldState = state;
+    try {
+      emit(BaseStateUpdating<M>());
+      processData(event.data);
+      emit(BaseStateReady<M>(event.data));
+    } on Exception catch (error) {
+      emit(BaseStateError<M>(error));
+    }
+    t.log.logger
+        .i('$event: ${oldState.runtimeType} -> ${state.runtimeType}');
+  }
+
+  FutureOr<M?> fetchData() => null;
+
+  void processData(M? data) {}
 }
 
 abstract class BaseEvent<M extends d.BaseModel> {}
@@ -39,7 +53,7 @@ abstract class BaseEvent<M extends d.BaseModel> {}
 class BaseEventFetchData<M extends d.BaseModel> extends BaseEvent<M> {}
 
 class BaseEventProcessData<M extends d.BaseModel> extends BaseEvent<M> {
-  final M data;
+  final M? data;
   BaseEventProcessData(this.data);
 }
 
@@ -50,12 +64,12 @@ class BaseStateNew<M extends d.BaseModel> extends BaseState<M> {}
 class BaseStateUpdating<M extends d.BaseModel> extends BaseState<M> {}
 
 class BaseStateReady<M extends d.BaseModel> extends BaseState<M> {
-  final M data;
+  final M? data;
   BaseStateReady(this.data);
 }
 
 class BaseStateError<M extends d.BaseModel> extends BaseState<M> {
-  Exception error;
+  final Exception error;
 
   BaseStateError(this.error) {
     t.log.logger.e('WidgetStateError: $error');
