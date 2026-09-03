@@ -33,8 +33,8 @@ since each branch was already born independent.
 |---|---|---|---|---|
 | baccarat | Java statistics tool | `app/baccarat` | `java/baccarat` | done -- modernized, bugs fixed, tested, CI added |
 | thebettingapp | Flutter app | `app/thebettingapp` | `flutter/thebettingapp` | done -- migrated to null safety, builds/runs (macOS + web verified), 1 real bug fixed |
+| rishtaaunty | Flutter app | `app/rishtaaunty` | `flutter/rishtaaunty` | done -- BLoC layer rewritten to current API, 21 unused deps removed, null-safety migrated, builds/runs (macOS + web verified) |
 | thepakistaniapp | Flutter app | `app/thepakistaniapp` | `flutter/thepakistaniapp` | in progress -- hardest of the 3 (Firebase 0.x + Maps + abandoned webview plugin) |
-| rishtaaunty | Flutter app | `app/rishtaaunty` | `flutter/rishtaaunty` | in progress |
 
 The three Flutter apps were legacy, pre-null-safety projects (Dart SDK
 constraints from ~2018-2019, several now-abandoned or breaking-API-changed
